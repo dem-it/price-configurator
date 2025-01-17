@@ -1,4 +1,7 @@
 body {
   margin: 0;
-  background-color: #f00;
+}
+
+h2 {
+  margin-top: 0px;
 }

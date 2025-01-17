@@ -5,13 +5,9 @@ import {
   Avatar,
   Box,
   IconButton,
-  ListItemIcon,
-  ListItemText,
   Menu,
-  MenuItem,
   Typography
 } from "@mui/material"
-import { IconListCheck, IconMail, IconUser } from "@tabler/icons-react"
 import { useState } from "react"
 
 const Profile = () => {
@@ -77,24 +73,6 @@ const Profile = () => {
             {user!.name}
           </Typography>
         </Box>
-        <MenuItem>
-          <ListItemIcon>
-            <IconUser width={20} />
-          </ListItemIcon>
-          <ListItemText>My Profile</ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <IconMail width={20} />
-          </ListItemIcon>
-          <ListItemText>My Account</ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <IconListCheck width={20} />
-          </ListItemIcon>
-          <ListItemText>My Tasks</ListItemText>
-        </MenuItem>
         <Box mt={1} py={1} px={2}>
           <LogoutButton />
         </Box>
