@@ -1,13 +1,10 @@
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material"
 
 type Props = {
-  title?: string;
+  title?: JSX.Element | string;
   subtitle?: string;
-  action?: JSX.Element | any;
+  action?: JSX.Element;
   footer?: JSX.Element;
-  cardheading?: string | JSX.Element;
-  headtitle?: string | JSX.Element;
-  headsubtitle?: string | JSX.Element;
   children?: JSX.Element;
   middlecontent?: string | JSX.Element;
 };
@@ -17,24 +14,14 @@ const DashboardCard = ({
   subtitle,
   children,
   action,
-  footer,
-  cardheading,
-  headtitle,
-  headsubtitle,
   middlecontent,
+  footer
 }: Props) => {
   return (
     <Card sx={{ padding: 0, marginBottom: 2 }} elevation={9} variant={undefined}>
-      {cardheading ? (
-        <CardContent>
-          <h2>{headtitle}</h2>
-          <Typography variant="subtitle2" color="textSecondary">
-            {headsubtitle}
-          </Typography>
-        </CardContent>
-      ) : (
+ 
         <CardContent sx={{ p: "30px" }}>
-          {title ? (
+          {(title || subtitle || action) ? (
             <Stack
               direction="row"
               spacing={2}
@@ -59,7 +46,6 @@ const DashboardCard = ({
 
           {children}
         </CardContent>
-      )}
 
       {middlecontent}
       {footer}

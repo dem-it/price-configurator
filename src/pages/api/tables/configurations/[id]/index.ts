@@ -1,4 +1,4 @@
-import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
+import { EntityToConfigurationDto } from "@/api/tables/ConfigurationDto"
 import { TableClient, TableServiceClient } from "@azure/data-tables"
 import dotenv from "dotenv"
 import { NextApiRequest, NextApiResponse } from "next"
@@ -29,37 +29,39 @@ const getTableServiceClient = (connectionString: string) => {
 const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
   const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
   const tableName = "configurations"
+  const id = req.query.id as string
 
-  if(req.query.organizationId === undefined) {
+  if (req.query.organizationId === undefined) {
     res.status(400).json({ error: "organizationId is not defined" })
     return
   }
 
-  const partitionKey = req.query.organizationId as string
+  const organizationId = req.query.organizationId as string
 
   if (!connectionString) {
     throw new Error("AZURE_STORAGE_CONNECTION_STRING is not defined")
   }
 
+  const tableServiceClient = getTableServiceClient(connectionString)
+  await tableServiceClient.createTable(tableName)
+  const tableClient = getTableClient(connectionString, tableName)
+  
+  switch (req.method) {
+    case 'GET':
+      return handleGetRequest(req, res, tableClient, organizationId, id)
+    default:
+      res.setHeader('Allow', ['GET'])
+      res.status(405).end(`Method ${req.method} Not Allowed`)
+  }
+}
+
+const handleGetRequest = async (req: NextApiRequest, res: NextApiResponse, tableClient: TableClient, organizationId: string, id: string) => {
+
   try {
-    const tableServiceClient = getTableServiceClient(connectionString)
+    const entity = await tableClient.getEntity(organizationId, id)
 
-    await tableServiceClient.createTable(tableName)
+    const result = EntityToConfigurationDto(entity)
 
-    const tableClient = getTableClient(connectionString, tableName)
-
-    const entities = tableClient.listEntities({
-      queryOptions: { filter: `PartitionKey eq '${partitionKey}'` }
-    })
-    const result = []
-    for await (const entity of entities) {
-      const configData: ConfigurationDto = {
-        PartitionKey: entity.partitionKey ?? "",
-        RowKey: entity.rowKey ?? "",
-        Name: entity.Name as string,
-      }
-      result.push(configData)
-    }
     res.status(200).json(result)
   } catch (error: any) {
     res.status(500).json({ error: error.message })
