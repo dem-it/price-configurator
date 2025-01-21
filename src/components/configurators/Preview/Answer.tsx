@@ -19,12 +19,12 @@ const Answer = (props: AnswerProps) => {
       direction="column"
       alignItems="center"
       spacing={2}
-      sx={{ 
-        position: "relative", 
-        height: '100%', 
-        paddingBottom: 3 
+      sx={{
+        position: "relative",
+        height: "100%",
+        paddingBottom: 3
       }}>
-        
+
       <h3>{answer.title}</h3>
       <p>{answer.description}</p>
       {answer.imageId && (
@@ -34,7 +34,7 @@ const Answer = (props: AnswerProps) => {
           width={200}
         />
       )}
-      <Chip 
+      <Chip
         className="surcharge"
         variant="outlined"
         label={new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(answer.surcharge)}
@@ -47,7 +47,7 @@ const Answer = (props: AnswerProps) => {
           boxShadow: 1
         }}
       />
-        
+
     </Stack>
   )
 }

@@ -6,8 +6,8 @@ const QuestionHeader = (props: QuestionProps) => {
 
   return (
     <Stack direction="column" spacing={2}>
-        <h2>{question.title}</h2>
-        <p>{question.description}</p>
+      <h2>{question.title}</h2>
+      <p>{question.description}</p>
     </Stack>
   )
 }

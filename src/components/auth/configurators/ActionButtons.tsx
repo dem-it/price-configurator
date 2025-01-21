@@ -1,7 +1,7 @@
-import EditIcon from '@mui/icons-material/Edit'
-import ListAltIcon from '@mui/icons-material/ListAlt'
+import EditIcon from "@mui/icons-material/Edit"
+import ListAltIcon from "@mui/icons-material/ListAlt"
 import PreviewIcon from "@mui/icons-material/Preview"
-import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityIcon from "@mui/icons-material/Visibility"
 import { Button, Stack } from "@mui/material"
 import { NextRouter } from "next/router"
 
@@ -19,7 +19,7 @@ interface ActionButtonsProps {
 const ActionButtons = (props: ActionButtonsProps) => {
 
   const navigateToOverview = () => {
-    props.router.push(`/auth/configurators`)
+    props.router.push("/auth/configurators")
   }
 
   const navigateToView = () => {
@@ -44,7 +44,7 @@ const ActionButtons = (props: ActionButtonsProps) => {
       Overview
     </Button>
     }
-    
+
     {!props.hideViewButton && <Button
       variant='contained'
       color='primary'

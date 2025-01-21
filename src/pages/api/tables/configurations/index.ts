@@ -45,21 +45,20 @@ const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
   const tableServiceClient = getTableServiceClient(connectionString)
   await tableServiceClient.createTable(tableName)
   const tableClient = getTableClient(connectionString, tableName)
-  
+
   switch (req.method) {
-    case 'GET':
-      return handleGetRequest(req, res, tableClient, organizationId)
-    case 'POST':
-      return handlePostRequest(req, res, tableClient, organizationId)
-    default:
-      res.setHeader('Allow', ['GET', 'POST'])
-      res.status(405).end(`Method ${req.method} Not Allowed`)
+  case "GET":
+    return handleGetRequest(req, res, tableClient, organizationId)
+  case "POST":
+    return handlePostRequest(req, res, tableClient, organizationId)
+  default:
+    res.setHeader("Allow", ["GET", "POST"])
+    res.status(405).end(`Method ${req.method} Not Allowed`)
   }
 }
 
-
 const handleGetRequest = async (req: NextApiRequest, res: NextApiResponse, tableClient: TableClient, organizationId: string) => {
- try {
+  try {
     const entities = tableClient.listEntities({
       queryOptions: { filter: `PartitionKey eq '${organizationId}'` }
     })
@@ -86,7 +85,7 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse, tabl
     }
 
     await tableClient.createEntity(data)
-    
+
     res.status(200).json({ id: id })
   } catch (error: any) {
     res.status(500).json({ error: error.message })

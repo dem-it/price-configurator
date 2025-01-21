@@ -4,7 +4,7 @@ import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import { Button, Grid, Stack, TextField } from "@mui/material"
 import { useState } from "react"
-import { NumericFormat } from 'react-number-format'
+import { NumericFormat } from "react-number-format"
 
 interface AnswerProps {
   configuration: ConfigurationDto,
@@ -43,48 +43,48 @@ const Answer = (props: AnswerProps) => {
 
   const uploadImage = () => {
     //let the user select an image from their computer
-    const input = document.createElement('input')
-    input.type = 'file'
-    input.accept = 'image/*'
+    const input = document.createElement("input")
+    input.type = "file"
+    input.accept = "image/*"
     input.onchange = async (event) => {
       const file = (event.target as HTMLInputElement).files?.[0]
       if (file) {
         const date = new Date()
         // fullFilename: yyyy-MM-dd-HH-mm-ss-[filename]
-        const fullFilename = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}-${date.getHours().toString().padStart(2, '0')}-${date.getMinutes().toString().padStart(2, '0')}-${date.getSeconds().toString().padStart(2, '0')}-${file.name}`
+        const fullFilename = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}-${date.getHours().toString().padStart(2, "0")}-${date.getMinutes().toString().padStart(2, "0")}-${date.getSeconds().toString().padStart(2, "0")}-${file.name}`
         const encodedFilename = encodeURIComponent(fullFilename)
         const fileBytes = await file.arrayBuffer()
 
         try {
-            const base64File = Buffer.from(fileBytes).toString('base64')
+          const base64File = Buffer.from(fileBytes).toString("base64")
 
-            await fetch(`/api/blobs/images/${encodedFilename}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`, {
-            method: 'POST',
+          await fetch(`/api/blobs/images/${encodedFilename}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`, {
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json'
+              "Content-Type": "application/json"
             },
             body: JSON.stringify({ file: base64File }),
-            }).then(response => {
+          }).then(response => {
 
             if (response.ok) {
               setImageId(encodedFilename)
 
               props.saveAnswer(answer.id, (x) => {
-              x.imageId = encodedFilename
+                x.imageId = encodedFilename
               })
             } else if (response.status == 400) {
               response.json().then((data) => {
-              const errorMessage = data.error || 'Unknown error'
-              alert(`Saving the image failed: ${errorMessage}`)
+                const errorMessage = data.error || "Unknown error"
+                alert(`Saving the image failed: ${errorMessage}`)
               })
             } else if (response.status == 413) {
-              alert(`Saving the image failed: Image is too large, maximum 1 MB`)
+              alert("Saving the image failed: Image is too large, maximum 1 MB")
             } else {
-              console.error('Failed to upload image')
+              console.error("Failed to upload image")
             }
-            })
+          })
         } catch (error) {
-          console.error('Error uploading image:', error)
+          console.error("Error uploading image:", error)
         }
       }
     }
@@ -109,7 +109,7 @@ const Answer = (props: AnswerProps) => {
         <TextField
           label="Title"
           variant="standard"
-          sx={{ minWidth: '300px', width: '50%' }}
+          sx={{ minWidth: "300px", width: "50%" }}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           onBlur={(e) => updateTitle(e.target.value)}
@@ -122,7 +122,7 @@ const Answer = (props: AnswerProps) => {
         <TextField
           label="Description"
           variant="standard"
-          sx={{ minWidth: '300px', width: '50%' }}
+          sx={{ minWidth: "300px", width: "50%" }}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           onBlur={(e) => updateDescription(e.target.value)}

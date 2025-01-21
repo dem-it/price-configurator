@@ -44,13 +44,13 @@ const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
   const tableServiceClient = getTableServiceClient(connectionString)
   await tableServiceClient.createTable(tableName)
   const tableClient = getTableClient(connectionString, tableName)
-  
+
   switch (req.method) {
-    case 'PUT':
-      return handlePutRequest(req, res, tableClient, organizationId, id)
-    default:
-      res.setHeader('Allow', ['PUT'])
-      res.status(405).end(`Method ${req.method} Not Allowed`)
+  case "PUT":
+    return handlePutRequest(req, res, tableClient, organizationId, id)
+  default:
+    res.setHeader("Allow", ["PUT"])
+    res.status(405).end(`Method ${req.method} Not Allowed`)
   }
 }
 
@@ -60,10 +60,10 @@ const handlePutRequest = async (req: NextApiRequest, res: NextApiResponse, table
     const body = req.body
 
     const entity = {
-      partitionKey: organizationId, 
-      rowKey: id, 
+      partitionKey: organizationId,
+      rowKey: id,
       data: JSON.stringify(body)
-    };
+    }
 
     await tableClient.updateEntity(entity)
 

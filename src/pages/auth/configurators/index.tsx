@@ -2,19 +2,19 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import ActionButtons from "@/components/auth/configurators/ActionButtons"
 import PageContainer from "@/components/container/PageContainer"
-import Loading from '@/components/display/Loading'
+import Loading from "@/components/display/Loading"
 import DashboardCard from "@/components/shared/DashboardCard"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
-import AddIcon from '@mui/icons-material/Add'
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
+import AddIcon from "@mui/icons-material/Add"
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Button } from "@mui/material"
-import { styled } from '@mui/material/styles'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell, { tableCellClasses } from '@mui/material/TableCell'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import { useRouter } from 'next/router'
+import { styled } from "@mui/material/styles"
+import Table from "@mui/material/Table"
+import TableBody from "@mui/material/TableBody"
+import TableCell, { tableCellClasses } from "@mui/material/TableCell"
+import TableHead from "@mui/material/TableHead"
+import TableRow from "@mui/material/TableRow"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -28,11 +28,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }))
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme?.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }))
@@ -59,9 +59,9 @@ const ConfiguratorsPage = () => {
     if (!user) return
 
     const response = await fetch(`/api/tables/configurations?organizationId=${user.organizationId}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       }
     })
 
@@ -69,26 +69,26 @@ const ConfiguratorsPage = () => {
       const result = await response.json()
       router.push(`/auth/configurators/${result.id}`)
     } else {
-      console.error('Failed to post data')
+      console.error("Failed to post data")
     }
   }
 
   const removeConfigurator = (id: string) => {
     if (!user) return
 
-    if (!confirm('Are you sure you want to remove this configurator?'))
+    if (!confirm("Are you sure you want to remove this configurator?"))
       return
 
     fetch(`/api/tables/configurations/${id}?organizationId=${user.organizationId}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       }
     }).then((response) => {
       if (response.ok) {
         setData(data?.filter(x => x.rowKey !== id))
       } else {
-        console.error('Failed to remove configurator')
+        console.error("Failed to remove configurator")
       }
     })
   }

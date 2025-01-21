@@ -1,6 +1,6 @@
 import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import { Box, Tab, Tabs } from "@mui/material"
-import * as React from 'react'
+import * as React from "react"
 import { useState } from "react"
 import PreviewAsStepper from "./PreviewAsStepper"
 import PreviewProps from "./PreviewProps"
@@ -10,7 +10,7 @@ const Preview = (props: PreviewProps) => {
   const configuration = props.configuration
   const data = props.data
 
-  const [ selectedAnswers, setSelectedAnswers ] = useState<SelectedAnswer[]>([])
+  const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswer[]>([])
 
   const newProps: PreviewPropsWithAnswers = {
     selectedAnswers: selectedAnswers,
@@ -52,7 +52,7 @@ const PreviewAsTabs = (props: PreviewProps) => {
   function a11yProps(index: number) {
     return {
       id: `question-tabs-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
     }
   }
 
@@ -64,7 +64,7 @@ const PreviewAsTabs = (props: PreviewProps) => {
   }
 
   return <>
-    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
       <Tabs value={tabIndex} onChange={handleChange} aria-label="basic tabs example">
         {data.questions.map((question, index) => {
           return <Tab key={`question-${question.id}`} label={question.title} {...a11yProps(index)} />
@@ -82,7 +82,5 @@ const PreviewAsTabs = (props: PreviewProps) => {
     </CustomTabPanel>
   </>
 }
-
-
 
 export default Preview

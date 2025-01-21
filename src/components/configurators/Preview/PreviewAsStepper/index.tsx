@@ -2,7 +2,7 @@ import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft"
 import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import { Button, Stack, Step, StepLabel, Stepper } from "@mui/material"
-import * as React from 'react'
+import * as React from "react"
 import { useEffect, useState } from "react"
 import PreviewPropsWithAnswers from "../PreviewPropsWithAnswers"
 import QuestionPreview from "../Question/index"
@@ -50,7 +50,6 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
 
   }, [currentQuestion, props.selectedAnswers])
 
-
   const NavigationButtons = ({ innerContent }: { innerContent: JSX.Element }) => {
 
     return <Stack direction="row" spacing={2} justifyContent="space-between">
@@ -71,7 +70,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
         variant="contained"
         endIcon={<ArrowRightIcon />}
         disabled={selectedAnswer === undefined}>
-        {activeStep === props.data.questions.length - 1 ? 'Finish' : 'Next'}
+        {activeStep === props.data.questions.length - 1 ? "Finish" : "Next"}
       </Button>
     </Stack>
   }
@@ -80,7 +79,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
     <Stack
       direction="column"
       spacing={2}
-      sx={{ width: '100%' }}>
+      sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
         {props.data.questions.map((question, index) => {
           const stepProps: { completed?: boolean } = {}

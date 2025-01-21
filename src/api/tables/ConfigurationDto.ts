@@ -6,10 +6,10 @@ export interface ConfigurationDto {
 }
 
 export const EntityToConfigurationDto = (entity: any): ConfigurationDto => {
-    return {
-        partitionKey: entity.partitionKey ?? "",
-        rowKey: entity.rowKey ?? "",
-        name: entity.Name as string,
-        data: entity.data as string | undefined
-    }
+  return {
+    partitionKey: entity.partitionKey ?? "",
+    rowKey: entity.rowKey ?? "",
+    name: entity.Name as string,
+    data: entity.data as string | undefined
+  }
 }

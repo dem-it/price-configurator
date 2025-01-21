@@ -3,7 +3,7 @@ import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import Preview from "@/components/configurators/Preview"
 import Loading from "@/components/display/Loading"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
 const ConfiguratorPage = () => {
@@ -32,9 +32,9 @@ const ConfiguratorPage = () => {
     if(!document)
       return
 
-    document.body.classList.add('no-template')
+    document.body.classList.add("no-template")
     return () => {
-      document.body.classList.remove('no-template')
+      document.body.classList.remove("no-template")
     }
   }, [])
 

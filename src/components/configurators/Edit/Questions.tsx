@@ -4,8 +4,8 @@ import Loading from "@/components/display/Loading"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Accordion, AccordionDetails, AccordionSummary, Button, ButtonGroup, Stack } from "@mui/material"
 import Question from "./Question"
@@ -92,7 +92,7 @@ const Questions = (props: QuestionsProps) => {
               color='inherit'
               size='small'
               sx={{
-                marginLeft: '0 !important',
+                marginLeft: "0 !important",
               }}
               onClick={(e) => {
                 e.stopPropagation()
@@ -108,8 +108,8 @@ const Questions = (props: QuestionsProps) => {
               color='inherit'
               size='small'
               sx={{
-                marginLeft: '0 !important',
-                borderLeft: '1px solid #000000FF !important',
+                marginLeft: "0 !important",
+                borderLeft: "1px solid #000000FF !important",
               }}
               onClick={(e) => {
                 e.stopPropagation()
@@ -145,7 +145,7 @@ const Questions = (props: QuestionsProps) => {
             direction='row'
             spacing={2}
             justifyContent='space-between'
-            sx={{ width: '100%' }}>
+            sx={{ width: "100%" }}>
             <Identifier id={question.id} description={`Question ${index + 1}: ${question.title}`} />
             <Actions sx={{ paddingRight: 2 }} />
           </Stack>

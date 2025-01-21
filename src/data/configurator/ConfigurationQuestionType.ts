@@ -16,4 +16,4 @@ const enum ConfigurationQuestionType {
     Multiple = "multiple"
 }
 
-export default ConfigurationQuestionType;
+export default ConfigurationQuestionType

@@ -1,8 +1,8 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import PreviewQuestion from "@/components/configurators/Preview/Question/index"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
-import EditIcon from '@mui/icons-material/Edit'
-import VisibilityIcon from '@mui/icons-material/Visibility'
+import EditIcon from "@mui/icons-material/Edit"
+import VisibilityIcon from "@mui/icons-material/Visibility"
 import { Button, Grid, Stack, TextField } from "@mui/material"
 import { useState } from "react"
 import Answers from "./Answers"
@@ -53,8 +53,8 @@ const Question = (props: QuestionProps) => {
   </Stack>
 
   return <>
-    <div style={{ position: 'relative' }}>
-      <div style={{ position: 'absolute', right: 0 }}>
+    <div style={{ position: "relative" }}>
+      <div style={{ position: "absolute", right: 0 }}>
         {action}
       </div>
     </div>
@@ -67,7 +67,7 @@ const Question = (props: QuestionProps) => {
           <TextField
             label="Title"
             variant="standard"
-            sx={{ minWidth: '300px', width: '50%' }}
+            sx={{ minWidth: "300px", width: "50%" }}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             onBlur={(e) => updateTitle(e.target.value)}
@@ -80,7 +80,7 @@ const Question = (props: QuestionProps) => {
           <TextField
             label="Description"
             variant="standard"
-            sx={{ minWidth: '300px', width: '50%' }}
+            sx={{ minWidth: "300px", width: "50%" }}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             onBlur={(e) => updateDescription(e.target.value)}

@@ -1,10 +1,10 @@
-import { ConfigurationDto } from '@/api/tables/ConfigurationDto'
-import ConfigurationAnswer from '@/data/configurator/ConfigurationAnswer'
-import ConfigurationQuestion from '@/data/configurator/ConfigurationQuestion'
+import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
+import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
+import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import { calculateRandomConfigurationAnswerId } from "@/utils/calculations/calculateNewConfigurationId"
-import AddIcon from '@mui/icons-material/Add'
+import AddIcon from "@mui/icons-material/Add"
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Button, ButtonGroup, Grid, Paper, Stack } from "@mui/material"
 import Answer from "./Answer"
@@ -46,8 +46,8 @@ const Answers = (props: AnswersProps) => {
     const generatedId = calculateRandomConfigurationAnswerId()
     const newAnswer: ConfigurationAnswer = {
       id: generatedId,
-      title: ``,
-      description: '',
+      title: "",
+      description: "",
       surcharge: 0
     }
 
@@ -100,11 +100,11 @@ const Answers = (props: AnswersProps) => {
             sx={{ borderWidth: 2, padding: 1 }}
           >
 
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: "relative" }}>
               <Stack
                 direction='row'
                 spacing={2}
-                sx={{ position: 'absolute', right: 0, top: 0 }}
+                sx={{ position: "absolute", right: 0, top: 0 }}
               >
 
                 <ButtonGroup variant='outlined'>
@@ -113,7 +113,7 @@ const Answers = (props: AnswersProps) => {
                     color='inherit'
                     size='small'
                     sx={{
-                      marginLeft: '0 !important',
+                      marginLeft: "0 !important",
                     }}
                     onClick={() => moveAnswerDown(index)}
                     disabled={index === question.answers.length - 1}
@@ -126,8 +126,8 @@ const Answers = (props: AnswersProps) => {
                     color='inherit'
                     size='small'
                     sx={{
-                      marginLeft: '0 !important',
-                      borderLeft: '1px solid #000000FF !important',
+                      marginLeft: "0 !important",
+                      borderLeft: "1px solid #000000FF !important",
                     }}
                     onClick={() => moveAnswerUp(index)}
                     disabled={index === 0}

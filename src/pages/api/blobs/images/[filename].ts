@@ -42,7 +42,6 @@ const getInputs = (req: NextApiRequest): InputProps => {
   }
 }
 
-
 const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
   const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
   const containerName = "images"
@@ -63,24 +62,24 @@ const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
   const containerClient = blobServiceClient.getContainerClient(containerName)
 
   switch (req.method) {
-    case 'GET':
-      return handleGetRequest(req, res, containerClient, inputs)
-    case 'POST':
-      return handlePostRequest(req, res, containerClient, inputs)
-    default:
-      res.setHeader('Allow', ['GET'])
-      res.status(405).end(`Method ${req.method} Not Allowed`)
+  case "GET":
+    return handleGetRequest(req, res, containerClient, inputs)
+  case "POST":
+    return handlePostRequest(req, res, containerClient, inputs)
+  default:
+    res.setHeader("Allow", ["GET"])
+    res.status(405).end(`Method ${req.method} Not Allowed`)
   }
 }
 
 /**
  * Get the image by the request and store it to blob storage
- * 
- * @param req 
- * @param res 
- * @param containerClient 
- * @param organizationId 
- * @param filename 
+ *
+ * @param req
+ * @param res
+ * @param containerClient
+ * @param organizationId
+ * @param filename
  */
 const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse, containerClient: ContainerClient, payload: InputProps) => {
 
@@ -93,7 +92,7 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse, cont
     return
   }
 
-  const allowedFileTypes = ['.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.svg', '.png']
+  const allowedFileTypes = [".jpg", ".jpeg", ".gif", ".bmp", ".tiff", ".svg", ".png"]
   const isValidFileType = allowedFileTypes.some(type => payload.filename.endsWith(type))
 
   if (!isValidFileType) {
@@ -106,7 +105,7 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse, cont
     const blockBlobClient = containerClient.getBlockBlobClient(blobName)
 
     const base64File = req.body.file
-    const buffer = Buffer.from(base64File, 'base64')
+    const buffer = Buffer.from(base64File, "base64")
 
     await blockBlobClient.uploadData(buffer)
 
@@ -123,21 +122,21 @@ const handleGetRequest = async (req: NextApiRequest, res: NextApiResponse, conta
     const result = await blockBlobClient.downloadToBuffer()
 
     const filename = payload.filename
-    if (filename.endsWith('.jpg') || filename.endsWith('.jpeg'))
-      res.setHeader('Content-Type', 'image/jpeg')
-    else if (filename.endsWith('.gif'))
-      res.setHeader('Content-Type', 'image/gif')
-    else if (filename.endsWith('.bmp'))
-      res.setHeader('Content-Type', 'image/bmp')
-    else if (filename.endsWith('.tiff'))
-      res.setHeader('Content-Type', 'image/tiff')
-    else if (filename.endsWith('.svg'))
-      res.setHeader('Content-Type', 'image/svg+xml')
+    if (filename.endsWith(".jpg") || filename.endsWith(".jpeg"))
+      res.setHeader("Content-Type", "image/jpeg")
+    else if (filename.endsWith(".gif"))
+      res.setHeader("Content-Type", "image/gif")
+    else if (filename.endsWith(".bmp"))
+      res.setHeader("Content-Type", "image/bmp")
+    else if (filename.endsWith(".tiff"))
+      res.setHeader("Content-Type", "image/tiff")
+    else if (filename.endsWith(".svg"))
+      res.setHeader("Content-Type", "image/svg+xml")
     else
-      res.setHeader('Content-Type', 'image/png')
+      res.setHeader("Content-Type", "image/png")
 
-    res.setHeader('Content-Disposition', `inline; filename="${filename}"`)
-    res.setHeader('Cache-Control', 'public, max-age=31536000')
+    res.setHeader("Content-Disposition", `inline; filename="${filename}"`)
+    res.setHeader("Cache-Control", "public, max-age=31536000")
     res.status(200).send(result)
 
   } catch (error: any) {

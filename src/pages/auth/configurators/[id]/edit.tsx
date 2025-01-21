@@ -8,8 +8,8 @@ import Loading from "@/components/display/Loading"
 import DashboardCard from "@/components/shared/DashboardCard"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
-import EditIcon from '@mui/icons-material/Edit'
-import { useRouter } from 'next/router'
+import EditIcon from "@mui/icons-material/Edit"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
 const ConfiguratorEditPage = () => {
@@ -17,10 +17,9 @@ const ConfiguratorEditPage = () => {
   const router = useRouter()
   const { id } = router.query
   const { user } = useAuth0()
-  
+
   const [configuration, setConfiguration] = useState<ConfigurationDto | undefined>(undefined)
   const [data, setData] = useState<ConfigurationData | undefined>(undefined)
-
 
   useEffect(() => {
     if (!user || !id)
@@ -30,7 +29,7 @@ const ConfiguratorEditPage = () => {
       const response = await fetch(`/api/tables/configurations/${id}?organizationId=${user.organizationId}`)
       const result = await response.json() as ConfigurationDto
       setConfiguration(result)
-      
+
       const defaultData: ConfigurationData = { questions: [] }
       setData(result.data ? JSON.parse(result.data) : defaultData)
     }
@@ -43,13 +42,13 @@ const ConfiguratorEditPage = () => {
       return
 
     fetch(`/api/tables/configurations/${configuration.rowKey}/data?organizationId=${configuration.partitionKey}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedData),
     }).then((response) => {
-      
+
       setData({ ...updatedData })
     })
   }
@@ -59,7 +58,7 @@ const ConfiguratorEditPage = () => {
       <PageContainer
         title={`Edit ${configuration?.name}`}>
         <DashboardCard
-        title={<><EditIcon /> Edit configurator: {configuration?.name}</>}
+          title={<><EditIcon /> Edit configurator: {configuration?.name}</>}
           subtitle="Edit this configurator"
           action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} hideEditButton={true} />}
         >

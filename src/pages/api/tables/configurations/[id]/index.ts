@@ -45,15 +45,15 @@ const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
   const tableServiceClient = getTableServiceClient(connectionString)
   await tableServiceClient.createTable(tableName)
   const tableClient = getTableClient(connectionString, tableName)
-  
+
   switch (req.method) {
-    case 'GET':
-      return handleGetRequest(req, res, tableClient, organizationId, id)
-    case 'DELETE':
-      return handleDeleteRequest(req, res, tableClient, organizationId, id)
-    default:
-      res.setHeader('Allow', ['GET'])
-      res.status(405).end(`Method ${req.method} Not Allowed`)
+  case "GET":
+    return handleGetRequest(req, res, tableClient, organizationId, id)
+  case "DELETE":
+    return handleDeleteRequest(req, res, tableClient, organizationId, id)
+  default:
+    res.setHeader("Allow", ["GET"])
+    res.status(405).end(`Method ${req.method} Not Allowed`)
   }
 }
 

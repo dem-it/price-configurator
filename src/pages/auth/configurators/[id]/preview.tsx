@@ -7,7 +7,7 @@ import Loading from "@/components/display/Loading"
 import DashboardCard from "@/components/shared/DashboardCard"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
 const ConfiguratorPreviewPage = () => {
@@ -26,7 +26,7 @@ const ConfiguratorPreviewPage = () => {
       const response = await fetch(`/api/tables/configurations/${id}?organizationId=${user.organizationId}`)
       const result = await response.json() as ConfigurationDto
       setConfiguration(result)
-      
+
       const defaultData: ConfigurationData = { questions: [] }
       setData(result.data ? JSON.parse(result.data) : defaultData)
     }

@@ -8,4 +8,4 @@ interface QuestionProps {
     answerSelected?: (answer: SelectedAnswer) => void
   }
 
-  export default QuestionProps
+export default QuestionProps

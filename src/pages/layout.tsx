@@ -34,7 +34,7 @@ export default function Layout({ children }: LayoutProps) {
     if (!document)
       return
 
-    setIsNoTemplate(document.body.classList.contains('no-template'))
+    setIsNoTemplate(document.body.classList.contains("no-template"))
   }, [])
 
   if (isNoTemplate)

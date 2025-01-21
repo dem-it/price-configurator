@@ -8,15 +8,15 @@ export default interface SelectedAnswer
     multiple?: SelectedAnswerMultiple,
 }
 
-export const SelectedAnswerUtils = 
+export const SelectedAnswerUtils =
 {
-    getAnswerIds: (answer: SelectedAnswer): string[] => {
-        if (answer.regular !== undefined) {
-            return [answer.regular.answerId]
-        }
-        if (answer.multiple !== undefined) {
-            return answer.multiple.answerIds
-        }
-        return []
+  getAnswerIds: (answer: SelectedAnswer): string[] => {
+    if (answer.regular !== undefined) {
+      return [answer.regular.answerId]
     }
+    if (answer.multiple !== undefined) {
+      return answer.multiple.answerIds
+    }
+    return []
+  }
 }
