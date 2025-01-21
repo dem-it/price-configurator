@@ -1,3 +1,15 @@
+export function calculateRandomConfigurationAnswerId(): string {
+  const amountCharacters = 8
+
+  return generateRandomId(amountCharacters)
+}
+
+export function calculateRandomConfigurationQuestionId(): string {
+  const amountCharacters = 8
+
+  return generateRandomId(amountCharacters)
+}
+
 export function calculateRandomConfigurationId(): string {
   const amountCharacters = 8
 

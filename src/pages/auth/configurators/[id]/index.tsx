@@ -34,7 +34,7 @@ const ConfiguratorPage = () => {
         <DashboardCard
           title={`Configurator: ${data?.name}`}
           subtitle="Here you can see all your configurators"
-          action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} />}
+          action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} hideViewButton={true} />}
           >
           {content}
         </DashboardCard>
@@ -42,7 +42,7 @@ const ConfiguratorPage = () => {
     )
   }
 
-  if (!data)
+  if (!data || !id)
     return getTemplate(<p>Loading...</p>)
 
   return getTemplate(<>

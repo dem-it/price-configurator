@@ -62,13 +62,14 @@ const handlePutRequest = async (req: NextApiRequest, res: NextApiResponse, table
     const entity = {
       partitionKey: organizationId, 
       rowKey: id, 
-      data: body
+      data: JSON.stringify(body)
     };
 
     await tableClient.updateEntity(entity)
 
-    res.status(204)
+    res.status(204).json({ })
   } catch (error: any) {
+    console.error(error)
     res.status(500).json({ error: error.message })
   }
 }

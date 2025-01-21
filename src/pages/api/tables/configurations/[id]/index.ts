@@ -49,9 +49,21 @@ const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'GET':
       return handleGetRequest(req, res, tableClient, organizationId, id)
+    case 'DELETE':
+      return handleDeleteRequest(req, res, tableClient, organizationId, id)
     default:
       res.setHeader('Allow', ['GET'])
       res.status(405).end(`Method ${req.method} Not Allowed`)
+  }
+}
+
+const handleDeleteRequest = async (req: NextApiRequest, res: NextApiResponse, tableClient: TableClient, organizationId: string, id: string) => {
+  try {
+    await tableClient.deleteEntity(organizationId, id)
+
+    res.status(200).json({ id: id })
+  } catch (error: any) {
+    res.status(500).json({ error: error.message })
   }
 }
 

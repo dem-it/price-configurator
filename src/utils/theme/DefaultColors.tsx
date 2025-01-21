@@ -53,6 +53,10 @@ const baselightTheme = createTheme({
       500: "#5A6A85",
       600: "#2A3547",
     },
+    common: {
+      black: "#000",
+      white: "#fff",
+    },
     text: {
       primary: "#2A3547",
       secondary: "#5A6A85",

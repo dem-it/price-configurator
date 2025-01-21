@@ -1,5 +1,5 @@
 import LoginButton from "@/components/auth/LoginButton"
-import Loading from "@/components/Loading"
+import Loading from "@/components/display/Loading"
 import { useAuth0 } from "@auth0/auth0-react"
 import { AppBar, Box, IconButton, List, Stack, styled, Toolbar, useMediaQuery } from "@mui/material"
 import { IconMenu } from "@tabler/icons-react"

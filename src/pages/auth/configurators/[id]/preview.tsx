@@ -34,7 +34,7 @@ const ConfiguratorPreviewPage = () => {
         <DashboardCard
           title={`Preview configurator: ${data?.name}`}
           subtitle="A preview for your configurator"
-          action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} />}
+          action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} hidePreviewButton={true} />}
         >
           {content}
         </DashboardCard>

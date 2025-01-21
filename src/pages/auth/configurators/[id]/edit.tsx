@@ -2,8 +2,10 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import ActionButtons from "@/components/auth/configurators/ActionButtons"
 import Edit from "@/components/auth/configurators/Edit"
+import EditQuestions from "@/components/auth/configurators/Edit/Questions"
 import PageContainer from "@/components/container/PageContainer"
 import DashboardCard from "@/components/shared/DashboardCard"
+import { ConfigurationData } from "@/data/configurator/ConfigurationData"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
 import EditIcon from '@mui/icons-material/Edit'
 import { useRouter } from 'next/router'
@@ -14,32 +16,55 @@ const ConfiguratorEditPage = () => {
   const router = useRouter()
   const { id } = router.query
   const { user } = useAuth0()
-  const [data, setData] = useState<ConfigurationDto | undefined>(undefined)
+  
+  const [configuration, setConfiguration] = useState<ConfigurationDto | undefined>(undefined)
+  const [data, setData] = useState<ConfigurationData | undefined>(undefined)
+
 
   useEffect(() => {
-    if (!user)
+    if (!user || !id)
       return
 
     const fetchData = async () => {
       const response = await fetch(`/api/tables/configurations/${id}?organizationId=${user.organizationId}`)
       const result = await response.json() as ConfigurationDto
-      setData(result)
+      setConfiguration(result)
+      
+      const defaultData: ConfigurationData = { questions: [] }
+      setData(result.data ? JSON.parse(result.data) : defaultData)
     }
 
     fetchData()
-  }, [user])
+  }, [user, id])
 
-  const getTemplate = (content: JSX.Element) => {
+  function saveToDatabase(updatedData: ConfigurationData) {
+    if(configuration === undefined)
+      return
+
+    fetch(`/api/tables/configurations/${configuration.rowKey}/data?organizationId=${configuration.partitionKey}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    }).then((response) => {
+      
+      setData({ ...updatedData })
+    })
+  }
+
+  const getTemplate = (content: JSX.Element, outerContent: JSX.Element | undefined = undefined) => {
     return (
       <PageContainer
-        title={`Edit ${data?.name}`}>
+        title={`Edit ${configuration?.name}`}>
         <DashboardCard
-        title={<><EditIcon /> Edit configurator: {data?.name}</>}
+        title={<><EditIcon /> Edit configurator: {configuration?.name}</>}
           subtitle="Edit this configurator"
-          action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} />}
+          action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} hideEditButton={true} />}
         >
           {content}
         </DashboardCard>
+        {outerContent ?? <></>}
       </PageContainer>
     )
   }
@@ -47,7 +72,13 @@ const ConfiguratorEditPage = () => {
   if (!data)
     return getTemplate(<p>Loading...</p>)
 
-  return getTemplate(<Edit configuration={data} />)
+  const props = {
+    configuration: configuration as ConfigurationDto,
+    data: data,
+    saveToDatabase: saveToDatabase
+  }
+
+  return getTemplate(<Edit {...props} />, <EditQuestions {...props} />)
 }
 
 export default withAuthenticationRequired(ConfiguratorEditPage)

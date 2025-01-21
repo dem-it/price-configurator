@@ -1,55 +1,49 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
+import { ConfigurationData, ConfigurationQuestion, ConfigurationQuestionType } from "@/data/configurator/ConfigurationData"
+import { calculateRandomConfigurationQuestionId } from "@/utils/calculations/calculateNewConfigurationId"
 import AddIcon from '@mui/icons-material/Add'
-import { Button, Stack } from "@mui/material"
-import { useState } from "react"
-import { ConfigurationData } from "./ConfigurationData"
+import { Button, Grid } from "@mui/material"
 
 interface EditProps {
-  configuration: ConfigurationDto
+  configuration: ConfigurationDto,
+  data: ConfigurationData | undefined,
+  saveToDatabase: (updatedData: ConfigurationData) => void
 }
 
 const Edit = (props: EditProps) => {
   const configuration = props.configuration
+  const data = props.data
 
-  const [data, setData] = useState<ConfigurationData>(configuration.data ? JSON.parse(configuration.data) : { steps: [] })
+  const addQuestion = () => {
+    if(!data)
+      return
 
-  const addStep = () => {
-
-    const newStep = {
-      name: `Step ${data.steps.length + 1}`,
+    const generatedId = calculateRandomConfigurationQuestionId()
+    const newQuestion: ConfigurationQuestion = {
+      id: generatedId,
+      title: ``,
+      description: 'Place your description here',
+      type: ConfigurationQuestionType.Regular,
+      answers: []
     }
 
     const updatedData = data
-    updatedData.steps.push(newStep)
-    console.log("Updated step", updatedData, newStep)
+    updatedData.questions.push(newQuestion)
 
-    // Save to database
-    fetch(`/api/tables/configurations/${configuration.rowKey}/data?organizationId=${configuration.partitionKey}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedData),
-    }).then(response => {
-
-      setData(updatedData)
-    })
+    props.saveToDatabase(updatedData)
   }
 
-  return <>
-    <Stack direction="column" spacing={2}>
-      <Button 
+  return <Grid container spacing={1}>
+    <Grid item xs={12}>
+      <input type="hidden" value={JSON.stringify(data)} />
+      {data && (
+      <Button
         startIcon={<AddIcon />}
-        color="primary" 
-        variant="contained" onClick={addStep}>Add Step</Button>
-      <pre>
-        {JSON.stringify(data)}
-      </pre>
-      <p>
-        {configuration.name}
-      </p>
-    </Stack>
-  </>
+        color="primary"
+        variant="contained" onClick={addQuestion}>Add question</Button>
+      )}
+    </Grid>
+  </Grid>
 }
 
 export default Edit

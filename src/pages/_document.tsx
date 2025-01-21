@@ -6,7 +6,6 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="icon" href="/images/logos/logo-16x16.ico" />
-          {/* <link rel="stylesheet" href="/styles/globals.css" /> */}
         </Head>
         <body>
           <Main />

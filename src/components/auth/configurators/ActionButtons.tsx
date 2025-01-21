@@ -12,7 +12,8 @@ interface ActionButtonsProps {
   hideOverviewButton?: boolean,
   hideViewButton?: boolean,
   hideEditButton?: boolean,
-  hidePreviewButton?: boolean
+  hidePreviewButton?: boolean,
+  extraActionButtons?: JSX.Element
 }
 
 const ActionButtons = (props: ActionButtonsProps) => {
@@ -22,7 +23,7 @@ const ActionButtons = (props: ActionButtonsProps) => {
   }
 
   const navigateToView = () => {
-    props.router.push(`/auth/configurators/${props.id}/view`)
+    props.router.push(`/auth/configurators/${props.id}`)
   }
 
   const navigateToEdit = () => {
@@ -73,6 +74,9 @@ const ActionButtons = (props: ActionButtonsProps) => {
       Preview
     </Button>
     }
+
+    {props.extraActionButtons}
+
   </Stack>
 }
 
