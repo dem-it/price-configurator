@@ -2,6 +2,7 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import ActionButtons from "@/components/auth/configurators/ActionButtons"
 import PageContainer from "@/components/container/PageContainer"
+import Loading from "@/components/display/Loading"
 import DashboardCard from "@/components/shared/DashboardCard"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
 import { useRouter } from 'next/router'
@@ -27,7 +28,7 @@ const ConfiguratorPage = () => {
     fetchData()
   }, [user, id])
 
-  const getTemplate = (content: JSX.Element) => {
+  const getTemplate = (content: JSX.Element, outerContent: JSX.Element | undefined = undefined) => {
     return (
       <PageContainer
         title={`Configurator: ${data?.name}`}>
@@ -38,14 +39,15 @@ const ConfiguratorPage = () => {
           >
           {content}
         </DashboardCard>
+        {outerContent ?? <></>}
       </PageContainer>
     )
   }
 
   if (!data || !id)
-    return getTemplate(<p>Loading...</p>)
+    return getTemplate(<Loading />)
 
-  return getTemplate(<>
+  return getTemplate(<></>, <>TODO, implement - 
     <b>Name:</b> {data?.name}
   </>)
 }

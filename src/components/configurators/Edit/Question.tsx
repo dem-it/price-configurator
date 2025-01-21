@@ -1,10 +1,10 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
-import { ConfigurationQuestion } from "@/data/configurator/ConfigurationData"
+import PreviewQuestion from "@/components/configurators/Preview/Question/index"
+import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import EditIcon from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { Button, Grid, Stack, TextField } from "@mui/material"
 import { useState } from "react"
-import PreviewQuestion from "../Preview/Question"
 import Answers from "./Answers"
 
 interface QuestionProps {

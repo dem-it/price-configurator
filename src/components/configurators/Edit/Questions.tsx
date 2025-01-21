@@ -1,12 +1,13 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import Identifier from "@/components/display/Identifier"
 import Loading from "@/components/display/Loading"
-import { ConfigurationData, ConfigurationQuestion } from "@/data/configurator/ConfigurationData"
+import ConfigurationData from "@/data/configurator/ConfigurationData"
+import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
-import { Accordion, AccordionDetails, AccordionSummary, Button, Stack } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Button, ButtonGroup, Stack } from "@mui/material"
 import Question from "./Question"
 
 interface QuestionsProps {
@@ -49,7 +50,7 @@ const Questions = (props: QuestionsProps) => {
   }
 
   const moveAnswerUp = (index: number) => {
-    if(!data)
+    if (!data)
       return
 
     const updatedQuestion = data.questions
@@ -63,7 +64,7 @@ const Questions = (props: QuestionsProps) => {
   }
 
   const moveAnswerDown = (index: number) => {
-    if(!data)
+    if (!data)
       return
 
     const updatedQuestion = data.questions
@@ -76,7 +77,7 @@ const Questions = (props: QuestionsProps) => {
     props.saveToDatabase(updatedData)
   }
 
-  if(!data)
+  if (!data)
     return <Loading />
 
   return <>
@@ -85,37 +86,40 @@ const Questions = (props: QuestionsProps) => {
       const Actions = (props: any) => (
         <Stack direction="row" spacing={2} {...props}>
 
-          <Button
-            variant='outlined'
-            color='inherit'
-            size='small'
-            sx={{
-              marginLeft: '0 !important',
-            }}
-            onClick={(e) => {
-              e.stopPropagation()
-              moveAnswerDown(index)
-            }}
-            disabled={index === data.questions.length - 1}
-          >
-            <ArrowDownwardIcon />
-          </Button>
+          <ButtonGroup variant="outlined">
+            <Button
+              variant='outlined'
+              color='inherit'
+              size='small'
+              sx={{
+                marginLeft: '0 !important',
+              }}
+              onClick={(e) => {
+                e.stopPropagation()
+                moveAnswerDown(index)
+              }}
+              disabled={index === data.questions.length - 1}
+            >
+              <ArrowDownwardIcon />
+            </Button>
 
-          <Button
-            variant='outlined'
-            color='inherit'
-            size='small'
-            sx={{
-              marginLeft: '0 !important',
-            }}
-            onClick={(e) => {
-              e.stopPropagation()
-              moveAnswerUp(index)
-            }}
-            disabled={index === 0}
-          >
-            <ArrowUpwardIcon />
-          </Button>
+            <Button
+              variant='outlined'
+              color='inherit'
+              size='small'
+              sx={{
+                marginLeft: '0 !important',
+                borderLeft: '1px solid #000000FF !important',
+              }}
+              onClick={(e) => {
+                e.stopPropagation()
+                moveAnswerUp(index)
+              }}
+              disabled={index === 0}
+            >
+              <ArrowUpwardIcon />
+            </Button>
+          </ButtonGroup>
 
           <Button
             startIcon={<RemoveCircleOutlineIcon />}
@@ -137,14 +141,14 @@ const Questions = (props: QuestionsProps) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-            <Stack
+          <Stack
             direction='row'
             spacing={2}
             justifyContent='space-between'
             sx={{ width: '100%' }}>
             <Identifier id={question.id} description={`Question ${index + 1}: ${question.title}`} />
             <Actions sx={{ paddingRight: 2 }} />
-            </Stack>
+          </Stack>
         </AccordionSummary>
         <AccordionDetails>
           <Question

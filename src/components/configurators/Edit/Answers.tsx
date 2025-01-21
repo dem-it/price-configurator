@@ -1,11 +1,12 @@
 import { ConfigurationDto } from '@/api/tables/ConfigurationDto'
-import { ConfigurationAnswer, ConfigurationQuestion } from "@/data/configurator/ConfigurationData"
+import ConfigurationAnswer from '@/data/configurator/ConfigurationAnswer'
+import ConfigurationQuestion from '@/data/configurator/ConfigurationQuestion'
 import { calculateRandomConfigurationAnswerId } from "@/utils/calculations/calculateNewConfigurationId"
 import AddIcon from '@mui/icons-material/Add'
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
-import { Button, Grid, Paper, Stack } from "@mui/material"
+import { Button, ButtonGroup, Grid, Paper, Stack } from "@mui/material"
 import Answer from "./Answer"
 
 interface AnswersProps {
@@ -106,31 +107,34 @@ const Answers = (props: AnswersProps) => {
                 sx={{ position: 'absolute', right: 0, top: 0 }}
               >
 
-                <Button
-                  variant='outlined'
-                  color='inherit'
-                  size='small'
-                  sx={{
-                    marginLeft: '0 !important',
-                  }}
-                  onClick={() => moveAnswerDown(index)}
-                  disabled={index === question.answers.length - 1}
-                >
-                  <ArrowDownwardIcon />
-                </Button>
+                <ButtonGroup variant='outlined'>
+                  <Button
+                    variant='outlined'
+                    color='inherit'
+                    size='small'
+                    sx={{
+                      marginLeft: '0 !important',
+                    }}
+                    onClick={() => moveAnswerDown(index)}
+                    disabled={index === question.answers.length - 1}
+                  >
+                    <ArrowDownwardIcon />
+                  </Button>
 
-                <Button
-                  variant='outlined'
-                  color='inherit'
-                  size='small'
-                  sx={{
-                    marginLeft: '0 !important',
-                  }}
-                  onClick={() => moveAnswerUp(index)}
-                  disabled={index === 0}
-                >
-                  <ArrowUpwardIcon />
-                </Button>
+                  <Button
+                    variant='outlined'
+                    color='inherit'
+                    size='small'
+                    sx={{
+                      marginLeft: '0 !important',
+                      borderLeft: '1px solid #000000FF !important',
+                    }}
+                    onClick={() => moveAnswerUp(index)}
+                    disabled={index === 0}
+                  >
+                    <ArrowUpwardIcon />
+                  </Button>
+                </ButtonGroup>
 
                 <Button
                   startIcon={<RemoveCircleOutlineIcon />}

@@ -5,3 +5,8 @@ body {
 h2, h3 {
   margin-top: 0px;
 }
+
+.answer-selected .surcharge {
+  background-color: rgb(72, 158, 172);
+  color: white;
+}

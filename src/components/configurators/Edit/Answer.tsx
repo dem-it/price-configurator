@@ -1,6 +1,7 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import Identifier from "@/components/display/Identifier"
-import { ConfigurationAnswer, ConfigurationQuestion } from "@/data/configurator/ConfigurationData"
+import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
+import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import { Button, Grid, Stack, TextField } from "@mui/material"
 import { useState } from "react"
 import { NumericFormat } from 'react-number-format'

@@ -1,8 +1,8 @@
 "use client"
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
-import Preview from "@/components/auth/configurators/Preview"
-import PageContainer from "@/components/container/PageContainer"
-import DashboardCard from "@/components/shared/DashboardCard"
+import Preview from "@/components/configurators/Preview"
+import Loading from "@/components/display/Loading"
+import ConfigurationData from "@/data/configurator/ConfigurationData"
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react"
 
@@ -10,7 +10,8 @@ const ConfiguratorPage = () => {
 
   const router = useRouter()
   const { organizationId, id } = router.query
-  const [data, setData] = useState<ConfigurationDto | undefined>(undefined)
+  const [configuration, setConfiguration] = useState<ConfigurationDto | undefined>(undefined)
+  const [data, setData] = useState<ConfigurationData | undefined>(undefined)
 
   useEffect(() => {
     if (!organizationId || !id)
@@ -18,32 +19,29 @@ const ConfiguratorPage = () => {
     const fetchData = async () => {
       const response = await fetch(`/api/tables/configurations/${id}?organizationId=${organizationId}`)
       const result = await response.json() as ConfigurationDto
-      setData(result)
+      setConfiguration(result)
+
+      const defaultData: ConfigurationData = { questions: [] }
+      setData(result.data ? JSON.parse(result.data) : defaultData)
     }
 
     fetchData()
   }, [organizationId, id])
 
-  const getTemplate = (content: JSX.Element) => {
-    return (
-      <PageContainer
-        title={`Configurator ${data?.name}`}>
-        <DashboardCard
-          title={`Configurator ${data?.name}`}
-          subtitle="Here you can see all your configurators">
-          {content}
-        </DashboardCard>
-      </PageContainer>
-    )
-  }
+  useEffect(() => {
+    if(!document)
+      return
 
-  if (!data)
-    return getTemplate(<p>Loading...</p>)
+    document.body.classList.add('no-template')
+    return () => {
+      document.body.classList.remove('no-template')
+    }
+  }, [])
 
-  return getTemplate(<>
-    <b>PREVIEW</b>
-    <Preview configuration={data} />
-  </>)
+  if (!configuration || !data)
+    return <Loading />
+
+  return <Preview configuration={configuration} data={data} />
 }
 
 export default ConfiguratorPage

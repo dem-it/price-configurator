@@ -1,5 +1,7 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
-import { ConfigurationData, ConfigurationQuestion, ConfigurationQuestionType } from "@/data/configurator/ConfigurationData"
+import ConfigurationData from "@/data/configurator/ConfigurationData"
+import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
+import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
 import { calculateRandomConfigurationQuestionId } from "@/utils/calculations/calculateNewConfigurationId"
 import AddIcon from '@mui/icons-material/Add'
 import { Button, Grid } from "@mui/material"

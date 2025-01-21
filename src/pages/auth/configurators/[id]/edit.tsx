@@ -4,8 +4,9 @@ import ActionButtons from "@/components/auth/configurators/ActionButtons"
 import Edit from "@/components/configurators/Edit"
 import EditQuestions from "@/components/configurators/Edit/Questions"
 import PageContainer from "@/components/container/PageContainer"
+import Loading from "@/components/display/Loading"
 import DashboardCard from "@/components/shared/DashboardCard"
-import { ConfigurationData } from "@/data/configurator/ConfigurationData"
+import ConfigurationData from "@/data/configurator/ConfigurationData"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
 import EditIcon from '@mui/icons-material/Edit'
 import { useRouter } from 'next/router'
@@ -70,7 +71,7 @@ const ConfiguratorEditPage = () => {
   }
 
   if (!data)
-    return getTemplate(<p>Loading...</p>)
+    return getTemplate(<Loading />)
 
   const props = {
     configuration: configuration as ConfigurationDto,

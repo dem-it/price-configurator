@@ -2,7 +2,7 @@
 import Header from "@/components/layout/header/Header"
 import Sidebar from "@/components/layout/sidebar/Sidebar"
 import { Box, Container, styled } from "@mui/material"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 const MainWrapper = styled("div")(() => ({
   display: "flex",
@@ -20,13 +20,25 @@ const PageWrapper = styled("div")(() => ({
 }))
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
-export default function Layout({ children }:LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
 
   const [isSidebarOpen, setSidebarOpen] = useState(true)
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+
+  const [isNoTemplate, setIsNoTemplate] = useState(false)
+
+  useEffect(() => {
+    if (!document)
+      return
+
+    setIsNoTemplate(document.body.classList.contains('no-template'))
+  }, [])
+
+  if (isNoTemplate)
+    return <>{children}</>
 
   return (<>
 

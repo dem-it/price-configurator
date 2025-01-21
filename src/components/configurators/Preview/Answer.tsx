@@ -1,11 +1,12 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
-import { ConfigurationAnswer, ConfigurationQuestion } from "@/data/configurator/ConfigurationData"
+import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
+import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import { Chip, Stack } from "@mui/material"
 
 interface AnswerProps {
   configuration: ConfigurationDto,
   question: ConfigurationQuestion,
-  answer: ConfigurationAnswer
+  answer: ConfigurationAnswer,
 }
 
 const Answer = (props: AnswerProps) => {
@@ -34,6 +35,7 @@ const Answer = (props: AnswerProps) => {
         />
       )}
       <Chip 
+        className="surcharge"
         variant="outlined"
         label={new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(answer.surcharge)}
         sx={{

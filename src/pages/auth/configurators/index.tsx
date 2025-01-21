@@ -40,7 +40,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const ConfiguratorsPage = () => {
   const router = useRouter()
   const { user } = useAuth0()
-  const [data, setData] = useState<ConfigurationDto[]>([])
+  const [data, setData] = useState<ConfigurationDto[] | undefined>(undefined)
 
   useEffect(() => {
     if (!user)
@@ -86,7 +86,7 @@ const ConfiguratorsPage = () => {
       }
     }).then((response) => {
       if (response.ok) {
-        setData(data.filter(x => x.rowKey !== id))
+        setData(data?.filter(x => x.rowKey !== id))
       } else {
         console.error('Failed to remove configurator')
       }
