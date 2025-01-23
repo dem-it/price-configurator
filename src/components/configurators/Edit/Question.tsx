@@ -1,11 +1,16 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import PreviewQuestion from "@/components/configurators/Preview/Question/index"
+import quillToolbarConfig from "@/config/quillToolbarConfig"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import EditIcon from "@mui/icons-material/Edit"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import { Button, Grid, Stack, TextField } from "@mui/material"
+import dynamic from "next/dynamic"
 import { useState } from "react"
+import "react-quill/dist/quill.snow.css"
 import Answers from "./Answers"
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 
 interface QuestionProps {
   configuration: ConfigurationDto,
@@ -76,22 +81,17 @@ const Question = (props: QuestionProps) => {
 
         <Grid item xs={2}>Description</Grid>
         <Grid item xs={10}>
-
-          <TextField
-            label="Description"
-            variant="standard"
-            sx={{ minWidth: "300px", width: "50%" }}
+          <ReactQuill
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            onBlur={(e) => updateDescription(e.target.value)}
-            multiline={true}
-            rows={3}
+            onChange={setDescription}
+            onBlur={() => updateDescription(description)}
+            modules={quillToolbarConfig}
           />
         </Grid>
 
         <Answers configuration={props.configuration} question={question} saveQuestion={props.saveQuestion} />
       </Grid>
-    ) : <PreviewQuestion configuration={props.configuration} question={question} />
+    ) : <PreviewQuestion configuration={props.configuration} question={question} selectedAnswers={[]} />
     }
   </>
 }

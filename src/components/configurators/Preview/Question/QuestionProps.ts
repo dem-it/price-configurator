@@ -5,7 +5,8 @@ import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 interface QuestionProps {
     configuration: ConfigurationDto,
     question: ConfigurationQuestion,
-    answerSelected?: (answer: SelectedAnswer) => void
+    answerSelected?: (answer: SelectedAnswer) => void,
+    selectedAnswers: SelectedAnswer[]
   }
 
 export default QuestionProps

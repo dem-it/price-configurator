@@ -3,6 +3,7 @@ import Identifier from "@/components/display/Identifier"
 import Loading from "@/components/display/Loading"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
+import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
@@ -135,6 +136,17 @@ const Questions = (props: QuestionsProps) => {
         </Stack>
       )
 
+      let typeName = "Regular"
+      switch(question.type)
+      {
+      case ConfigurationQuestionType.Regular:
+        typeName = "Regular"
+        break
+      case ConfigurationQuestionType.Multiple:
+        typeName = "Multiple"
+        break
+      }
+
       return <Accordion key={index}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -146,7 +158,7 @@ const Questions = (props: QuestionsProps) => {
             spacing={2}
             justifyContent='space-between'
             sx={{ width: "100%" }}>
-            <Identifier id={question.id} description={`Question ${index + 1}: ${question.title}`} />
+            <Identifier id={question.id} description={`Question ${index + 1}: ${question.title} (${typeName})`} />
             <Actions sx={{ paddingRight: 2 }} />
           </Stack>
         </AccordionSummary>

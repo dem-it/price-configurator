@@ -1,12 +1,15 @@
+import StyledTable from "@/components/layout/shared/StyledTable"
 import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import { SelectedAnswerUtils } from "@/data/configurator/selection/SelectedAnswer"
-import { Paper } from "@mui/material"
+import { formatPrice } from "@/utils/format"
+import { Stack, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
+import Chip from "@mui/material/Chip"
 import PreviewPropsWithAnswers from "./PreviewPropsWithAnswers"
 
 const Result = (props: PreviewPropsWithAnswers) => {
 
-  const getQuestion = (questionId: string) : ConfigurationQuestion => {
+  const getQuestion = (questionId: string): ConfigurationQuestion => {
     return props.data.questions.find(x => x.id === questionId)!
   }
 
@@ -23,38 +26,73 @@ const Result = (props: PreviewPropsWithAnswers) => {
     return total
   }
 
-  function getAnswer(question: ConfigurationQuestion, answerId: string) : ConfigurationAnswer {
+  function getAnswer(question: ConfigurationQuestion, answerId: string): ConfigurationAnswer {
     return question.answers.find(x => x.id === answerId)!
   }
 
-  const formatPrice = (price: number) => {
-    return price.toLocaleString("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: 0, maximumFractionDigits: 0 })
-  }
-
   return (
-    <Paper
-      sx={{ padding: 2 }}>
+    <Stack direction="column" spacing={2}>
+
       <h2>Result</h2>
-            Selected options:
-      <ul>
-        {props.selectedAnswers.map((answer, index) => {
-          const question = getQuestion(answer.questionId)
+      <StyledTable>
+        <TableHead>
+          <TableRow>
+            <TableCell>Question</TableCell>
+            <TableCell>Answer</TableCell>
+            <TableCell>Price</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {props.selectedAnswers.map((answer, index) => {
+            const question = getQuestion(answer.questionId)
 
-          const answers = SelectedAnswerUtils.getAnswerIds(answer)
+            const answers = SelectedAnswerUtils.getAnswerIds(answer)
 
-          return answers.map(answerId => {
-            const configurationAnswer = getAnswer(question, answerId)
-            return <li key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
-              {question.title}: {configurationAnswer.title} ({formatPrice(configurationAnswer.surcharge)})
-            </li>
-          })
-        })}
-      </ul>
+            return answers.map(answerId => {
+              const configurationAnswer = getAnswer(question, answerId)
+              return <TableRow key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
+                <TableCell>{question.title}</TableCell>
+                <TableCell>{configurationAnswer.title}</TableCell>
+                <TableCell>{formatPrice(configurationAnswer.surcharge)}</TableCell>
+              </TableRow>
+            })
+          })}
+
+          <TableRow>
+            <TableCell
+              colSpan={2}
+              align="right"
+              style={{ fontWeight: "bold" }}>
+              Grand total:
+            </TableCell>
+            <TableCell
+              style={{ fontWeight: "bold" }}>
+              <Chip color="primary" variant="outlined" label={formatPrice(getTotalPrice())} />
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </StyledTable>
       <hr />
-      <b>
-                Grand total: {formatPrice(getTotalPrice())}
-      </b>
-    </Paper>
+
+      <Chip
+        className="surcharge"
+        color="primary"
+        variant="outlined"
+        label={formatPrice(getTotalPrice())}
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          padding: 1,
+          borderRadius: 1,
+          boxShadow: 1
+        }}
+      />
+
+      <p>
+        TODO: Save this (send e-mail to customer)
+      </p>
+    </Stack>
   )
 }
 

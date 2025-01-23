@@ -3,39 +3,18 @@ import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import ActionButtons from "@/components/auth/configurators/ActionButtons"
 import PageContainer from "@/components/container/PageContainer"
 import Loading from "@/components/display/Loading"
+import StyledTable from "@/components/layout/shared/StyledTable"
 import DashboardCard from "@/components/shared/DashboardCard"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
 import AddIcon from "@mui/icons-material/Add"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Button } from "@mui/material"
-import { styled } from "@mui/material/styles"
-import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
-import TableCell, { tableCellClasses } from "@mui/material/TableCell"
+import TableCell from "@mui/material/TableCell"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme?.palette.primary.main,
-    color: theme?.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}))
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme?.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}))
 
 const ConfiguratorsPage = () => {
   const router = useRouter()
@@ -118,20 +97,20 @@ const ConfiguratorsPage = () => {
           startIcon={<AddIcon />}
         >Add a new configurator</Button>}>
         <>
-          <Table>
+          <StyledTable>
             <TableHead>
               <TableRow>
-                <StyledTableCell>Id</StyledTableCell>
-                <StyledTableCell>Name</StyledTableCell>
-                <StyledTableCell>Actions</StyledTableCell>
+                <TableCell>Id</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data ? data.map((configuration, index) => (
-                <StyledTableRow key={index}>
-                  <StyledTableCell>{configuration.rowKey}</StyledTableCell>
-                  <StyledTableCell>{configuration.name}</StyledTableCell>
-                  <StyledTableCell>
+                <TableRow key={index}>
+                  <TableCell>{configuration.rowKey}</TableCell>
+                  <TableCell>{configuration.name}</TableCell>
+                  <TableCell>
                     <ActionButtons
                       router={router}
                       id={configuration.rowKey}
@@ -139,11 +118,15 @@ const ConfiguratorsPage = () => {
                       hideOverviewButton={true}
                       extraActionButtons={<ExtraActionButtons id={configuration.rowKey} />}
                     />
-                  </StyledTableCell>
-                </StyledTableRow>
-              )) : <Loading />}
+                  </TableCell>
+                </TableRow>
+              )) : <TableRow>
+                <TableCell colSpan={3}>
+                  <Loading />
+                </TableCell>
+              </TableRow>}
             </TableBody>
-          </Table>
+          </StyledTable>
         </>
       </DashboardCard>
     </PageContainer>

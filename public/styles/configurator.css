@@ -1,0 +1,12 @@
+.answer.multiple .label {
+  font-weight: bold;
+  display: inline-block;
+}
+
+.answer.multiple .description {
+  size: 0.8em;
+}
+
+.answer.multiple .description p {
+  margin: 0;
+}

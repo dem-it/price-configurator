@@ -1,3 +1,4 @@
+import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
 import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft"
 import ArrowRightIcon from "@mui/icons-material/ArrowRight"
@@ -13,6 +14,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
   const [activeStep, setActiveStep] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(props.data.questions[activeStep])
   const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>(undefined)
+  const [canGoNext, setCanGoNext] = useState(false)
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
@@ -50,6 +52,20 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
 
   }, [currentQuestion, props.selectedAnswers])
 
+  /*
+  * This effect is used to enable the next button when an answer is selected
+  **/
+  useEffect(() => {
+    if(!currentQuestion)
+      setCanGoNext(false)
+    else if (currentQuestion.type === ConfigurationQuestionType.Multiple)
+      setCanGoNext(true)
+    else if (selectedAnswer)
+      setCanGoNext(true)
+    else
+      setCanGoNext(false)
+  }, [selectedAnswer, currentQuestion])
+
   const NavigationButtons = ({ innerContent }: { innerContent: JSX.Element }) => {
 
     return <Stack direction="row" spacing={2} justifyContent="space-between">
@@ -69,7 +85,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
         color="primary"
         variant="contained"
         endIcon={<ArrowRightIcon />}
-        disabled={selectedAnswer === undefined}>
+        disabled={!canGoNext}>
         {activeStep === props.data.questions.length - 1 ? "Finish" : "Next"}
       </Button>
     </Stack>
@@ -103,15 +119,12 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
       ) : (
         <Stack direction="column" spacing={2} sx={{ marginTop: 4 }}>
           <NavigationButtons innerContent={<h1>{props.configuration.name}</h1>} />
-          <p>
-            Answer:
-            {selectedAnswer && JSON.stringify(selectedAnswer)}
-          </p>
           <Template props={props}>
             <QuestionPreview
               configuration={props.configuration}
-              question={props.data.questions[activeStep]}
-              answerSelected={answerSelected} />
+              question={currentQuestion}
+              answerSelected={answerSelected}
+              selectedAnswers={props.selectedAnswers} />
           </Template>
           <NavigationButtons innerContent={<></>} />
         </Stack>

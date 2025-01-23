@@ -1,6 +1,7 @@
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
+import { formatPrice } from "@/utils/format"
 import { Chip, Stack } from "@mui/material"
 
 interface AnswerProps {
@@ -26,7 +27,7 @@ const Answer = (props: AnswerProps) => {
       }}>
 
       <h3>{answer.title}</h3>
-      <p>{answer.description}</p>
+      <div dangerouslySetInnerHTML={{ __html: answer.description }} />
       {answer.imageId && (
         <img
           src={`/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
@@ -37,7 +38,7 @@ const Answer = (props: AnswerProps) => {
       <Chip
         className="surcharge"
         variant="outlined"
-        label={new Intl.NumberFormat("nl-NL", { style: "currency", currency: "EUR", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(answer.surcharge)}
+        label={formatPrice(answer.surcharge)}
         sx={{
           position: "absolute",
           bottom: 0,

@@ -1,7 +1,6 @@
 import EditIcon from "@mui/icons-material/Edit"
 import ListAltIcon from "@mui/icons-material/ListAlt"
 import PreviewIcon from "@mui/icons-material/Preview"
-import VisibilityIcon from "@mui/icons-material/Visibility"
 import { Button, Stack } from "@mui/material"
 import { NextRouter } from "next/router"
 
@@ -10,7 +9,6 @@ interface ActionButtonsProps {
   organizationId: string,
   router: NextRouter,
   hideOverviewButton?: boolean,
-  hideViewButton?: boolean,
   hideEditButton?: boolean,
   hidePreviewButton?: boolean,
   extraActionButtons?: JSX.Element
@@ -42,16 +40,6 @@ const ActionButtons = (props: ActionButtonsProps) => {
       startIcon={<ListAltIcon />}
     >
       Overview
-    </Button>
-    }
-
-    {!props.hideViewButton && <Button
-      variant='contained'
-      color='primary'
-      onClick={navigateToView}
-      startIcon={<VisibilityIcon />}
-    >
-      View
     </Button>
     }
 

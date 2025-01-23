@@ -7,6 +7,7 @@ import Loading from "@/components/display/Loading"
 import DashboardCard from "@/components/shared/DashboardCard"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
+import PreviewIcon from "@mui/icons-material/Preview"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
@@ -39,7 +40,7 @@ const ConfiguratorPreviewPage = () => {
       <PageContainer
         title={`Preview ${configuration?.name}`}>
         <DashboardCard
-          title={`Preview configurator: ${configuration?.name}`}
+          title={<><PreviewIcon /> Preview configurator: {configuration?.name}</>}
           subtitle="A preview for your configurator"
           action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} hidePreviewButton={true} />}
         >
