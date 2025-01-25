@@ -1,0 +1,85 @@
+import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
+import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
+import { calculateRandomConfigurationQuestionId } from "@/utils/calculations/calculateNewConfigurationId"
+import AddIcon from "@mui/icons-material/Add"
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, Stack } from "@mui/material"
+import { GroupProps } from "./Properties"
+
+const AddQuestion = (props: GroupProps) => {
+    const data = props.data
+
+    const getGroup = () => data.groups.find(x => x.id === props.groupId)!
+    const addRegularQuestion = () => addQuestion(ConfigurationQuestionType.Regular)
+    const addMultipleQuestion = () => addQuestion(ConfigurationQuestionType.Multiple)
+  
+    const addQuestion = (type: ConfigurationQuestionType) => {
+      const generatedId = calculateRandomConfigurationQuestionId()
+      const newQuestion: ConfigurationQuestion = {
+        id: generatedId,
+        title: "",
+        description: "",
+        type: type,
+        answers: []
+      }
+  
+      getGroup().questions.push(newQuestion)
+  
+      props.saveToDatabase(data)
+    }
+
+    return (
+        <Accordion
+          sx={{
+            width: "600px",
+            border: "1px solid",
+            borderColor: "primary.main"
+          }}>
+          <AccordionSummary
+            sx={{
+              fontWeight: "bold"
+            }}
+            expandIcon={<AddIcon color="primary" />}>
+            Add question
+          </AccordionSummary>
+          <AccordionDetails>
+            <Stack direction="column" spacing={2}>
+              <Box
+                border={1}
+                borderColor="primary.main"
+              >
+                <Grid container spacing={1}>
+                  <Grid item xs="auto">
+                    <Button
+                      startIcon={<AddIcon />}
+                      color="primary"
+                      variant="contained" onClick={addRegularQuestion}>Add regular question</Button>
+                  </Grid>
+                  <Grid item xs>
+                    [Screenshot of a regular question]
+                  </Grid>
+                </Grid>
+              </Box>
+
+              <Box
+                border={1}
+                borderColor="primary.main"
+              >
+                <Grid container spacing={1}>
+                  <Grid item xs="auto">
+                    <Button
+                      startIcon={<AddIcon />}
+                      color="primary"
+                      variant="contained" onClick={addMultipleQuestion}>Add multiple question</Button>
+                  </Grid>
+                  <Grid item xs>
+                    [Screenshot of a multiple question]
+                  </Grid>
+                </Grid>
+              </Box>
+            </Stack>
+          </AccordionDetails>
+        </Accordion>
+      )
+}
+
+export default AddQuestion

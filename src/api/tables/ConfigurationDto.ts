@@ -9,7 +9,7 @@ export const EntityToConfigurationDto = (entity: any): ConfigurationDto => {
   return {
     partitionKey: entity.partitionKey ?? "",
     rowKey: entity.rowKey ?? "",
-    name: entity.Name as string,
+    name: entity.name as string,
     data: entity.data as string | undefined
   }
 }

@@ -1,39 +1,32 @@
-import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import PreviewQuestion from "@/components/configurators/Preview/Question/index"
 import quillToolbarConfig from "@/config/quillToolbarConfig"
-import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import EditIcon from "@mui/icons-material/Edit"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import { Button, Grid, Stack, TextField } from "@mui/material"
 import dynamic from "next/dynamic"
 import { useState } from "react"
 import "react-quill/dist/quill.snow.css"
+import { getQuestion } from "../utils/DataUtils"
 import Answers from "./Answers"
+import { QuestionProps } from "./Properties"
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 
-interface QuestionProps {
-  configuration: ConfigurationDto,
-  question: ConfigurationQuestion,
-  saveQuestion: (id: string, updateQuestion: (arg0: ConfigurationQuestion) => void) => void
-}
-
 const Question = (props: QuestionProps) => {
-  const question = props.question
 
   const [isEdit, setIsEdit] = useState(true)
 
-  const [title, setTitle] = useState(question.title)
-  const [description, setDescription] = useState(question.description)
+  const [title, setTitle] = useState(getQuestion(props).title)
+  const [description, setDescription] = useState(getQuestion(props).description)
 
   const updateTitle = (value: string) => {
-    props.saveQuestion(question.id, (updatedQuestion) => {
+    props.saveQuestion(props.questionId, (updatedQuestion) => {
       updatedQuestion.title = value
     })
   }
 
   const updateDescription = (value: string) => {
-    props.saveQuestion(question.id, (updatedQuestion) => {
+    props.saveQuestion(props.questionId, (updatedQuestion) => {
       updatedQuestion.description = value
     })
   }
@@ -89,9 +82,9 @@ const Question = (props: QuestionProps) => {
           />
         </Grid>
 
-        <Answers configuration={props.configuration} question={question} saveQuestion={props.saveQuestion} />
+        <Answers {...props} />
       </Grid>
-    ) : <PreviewQuestion configuration={props.configuration} question={question} selectedAnswers={[]} />
+    ) : <PreviewQuestion configuration={props.configuration} question={getQuestion(props)} selectedAnswers={[]} />
     }
   </>
 }

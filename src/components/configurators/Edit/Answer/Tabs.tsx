@@ -24,27 +24,34 @@ export const CustomTabs = (props: CustomTabsProps) => {
       flexGrow: 1,
       bgcolor: "background.paper",
       display: "flex",
-      height: 224
+      // height: 224
     }}
   >
     <Tabs
       orientation="vertical"
-      variant="scrollable"
+      // variant="scrollable"
       value={tabValue}
       onChange={handleTabChange}
-      aria-label="Vertical tabs example"
+      aria-label="Vertical tabs"
       sx={{ borderRight: 1, borderColor: "divider" }}
     >
       {props.tabs.map((tab, index) => {
-        return <Tab key={`tab-${index}`} label={tab.label} {...a11yProps(index)} />
+        return <Tab key={`tab-${index}`} sx={{ width: '150px'}} label={tab.label} {...a11yProps(index)} />
       })}
     </Tabs>
 
     {props.tabs.map((tab, index) => {
-      return <TabPanel key={`tab-panel-${index}`} value={tabValue} index={index}>
+      return (
+        <TabPanel 
+          style={{
+            width: '85%'  
+          }}
+          key={`tab-panel-${index}`} 
+          value={tabValue} 
+          index={index}>
         {tab.content}
       </TabPanel>
-    })}
+    )})}
   </Box>
 }
 
@@ -52,6 +59,7 @@ interface TabPanelProps {
   children?: React.ReactNode
   index: number
   value: number
+  style?: any
 }
 
 const TabPanel = (props: TabPanelProps) => {

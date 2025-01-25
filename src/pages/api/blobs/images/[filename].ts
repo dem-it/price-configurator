@@ -87,7 +87,9 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse, cont
     res.status(400).json({ error: "No image provided" })
     return
   }
-  if (req.body.length > 1 * 1024 * 1024) {
+
+  console.log("Body length: ", req.body.length)
+  if (req.body.length > 5 * 1024 * 1024) {
     res.status(400).json({ error: "Image is too large, maximum 1 MB" })
     return
   }

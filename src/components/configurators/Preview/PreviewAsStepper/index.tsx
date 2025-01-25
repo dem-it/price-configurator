@@ -5,7 +5,7 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import { Button, Stack, Step, StepLabel, Stepper } from "@mui/material"
 import * as React from "react"
 import { useEffect, useState } from "react"
-import PreviewPropsWithAnswers from "../PreviewPropsWithAnswers"
+import { PreviewPropsWithAnswers } from "../Properties"
 import QuestionPreview from "../Question/index"
 import Finished from "./Finished"
 import Template from "./Template"
@@ -16,17 +16,9 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
   const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>(undefined)
   const [canGoNext, setCanGoNext] = useState(false)
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
-  }
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
-  }
-
-  const handleReset = () => {
-    setActiveStep(0)
-  }
+  const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
+  const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  const handleReset = () => setActiveStep(0)
 
   const answerSelected = (answer: SelectedAnswer) => {
     const selectedAnswers = props.selectedAnswers.filter(x => x.questionId !== answer.questionId)

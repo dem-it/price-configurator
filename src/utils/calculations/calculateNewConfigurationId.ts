@@ -1,3 +1,9 @@
+export function calculateRandomConfigurationGroupId(): string {
+  const amountCharacters = 8
+
+  return generateRandomId(amountCharacters)
+}
+
 export function calculateRandomConfigurationAnswerId(): string {
   const amountCharacters = 8
 

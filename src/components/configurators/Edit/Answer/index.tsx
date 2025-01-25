@@ -1,15 +1,16 @@
+import { getAnswer, getQuestion } from "@/components/configurators/utils/DataUtils"
 import Identifier from "@/components/display/Identifier"
 import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
-import AnswerProps from "./AnswerProps"
+import { AnswerProps } from "../Properties"
 import MultipleAnswer from "./MultipleAnswer"
 import RegularAnswer from "./RegularAnswer"
 
 const Answer = (props: AnswerProps) => {
-  const question = props.question
-  const answer = props.answer
+  const question = getQuestion(props)
+  const answer = getAnswer(props)
 
   return <>
-    <Identifier id={answer.id} description={`Answer ${props.index + 1}: ${answer.title}`} />
+    <Identifier id={answer.id} description={`Question ${question.title} - Answer ${props.answerIndex + 1}: ${answer.title}`} />
 
     {question.type === ConfigurationQuestionType.Regular && <RegularAnswer {...props} />}
     {question.type === ConfigurationQuestionType.Multiple && <MultipleAnswer {...props} />}

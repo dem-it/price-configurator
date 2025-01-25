@@ -1,6 +1,6 @@
-import ConfigurationQuestion from "./ConfigurationQuestion"
+import ConfigurationQuestionGroup from "./ConfigurationQuestionGroup"
 
 export default interface ConfigurationData {
-    questions: ConfigurationQuestion[];
+    groups: ConfigurationQuestionGroup[];
 }
 

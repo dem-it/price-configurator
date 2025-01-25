@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material"
-import AnswerProps from "./AnswerProps"
+import { AnswerProps } from "../Properties"
 import Description from "./Description"
 import SingleRow from "./SingleRow"
 import Surcharge from "./Surcharge"

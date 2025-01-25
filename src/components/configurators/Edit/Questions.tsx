@@ -1,7 +1,4 @@
-import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import Identifier from "@/components/display/Identifier"
-import Loading from "@/components/display/Loading"
-import ConfigurationData from "@/data/configurator/ConfigurationData"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
@@ -9,29 +6,17 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Accordion, AccordionDetails, AccordionSummary, Button, ButtonGroup, Stack } from "@mui/material"
+import { getGroup, getQuestionById } from "../utils/DataUtils"
+import { GroupProps } from "./Properties"
 import Question from "./Question"
 
-interface QuestionsProps {
-  configuration: ConfigurationDto,
-  data: ConfigurationData | undefined,
-  saveToDatabase: (updatedData: ConfigurationData) => void
-}
-
-const Questions = (props: QuestionsProps) => {
+const Questions = (props: GroupProps) => {
   const configuration = props.configuration
-  const data = props.data
+  const data = props.data!
 
   const saveQuestion = (id: string, updateQuestion: (arg0: ConfigurationQuestion) => void) => {
-    if (!data)
-      return
-
     const updatedData = data
-    const questionToUpdate = updatedData.questions.find(x => x.id === id)
-
-    if (!questionToUpdate) {
-      console.error("Question not found")
-      return
-    }
+    const questionToUpdate = getQuestionById(props, id)
 
     // the caller decides what to update in the question
     updateQuestion(questionToUpdate)
@@ -40,87 +25,80 @@ const Questions = (props: QuestionsProps) => {
   }
 
   const removeQuestion = (id: string) => {
-    if (!data)
-      return
-
-    const updatedQuestions = data.questions.filter(x => x.id !== id)
-
-    const updatedData = data
-    updatedData.questions = updatedQuestions
-    props.saveToDatabase(updatedData)
+    getGroup(props).questions = getGroup(props).questions.filter(x => x.id !== id)
+    props.saveToDatabase(data)
   }
 
   const moveAnswerUp = (index: number) => {
-    if (!data)
-      return
+    const group = getGroup(props)
+    // const updatedQuestion = data.questions
+    const temp = group.questions[index - 1]
+    group.questions[index - 1] = group.questions[index]
+    group.questions[index] = temp
 
-    const updatedQuestion = data.questions
-    const temp = updatedQuestion[index - 1]
-    updatedQuestion[index - 1] = updatedQuestion[index]
-    updatedQuestion[index] = temp
-
-    const updatedData = data
-    updatedData.questions = updatedQuestion
-    props.saveToDatabase(updatedData)
+    // const updatedData = data
+    // updatedData.questions = updatedQuestion
+    props.saveToDatabase(data)
   }
 
   const moveAnswerDown = (index: number) => {
-    if (!data)
-      return
+    const group = getGroup(props)
+    // const updatedQuestion = data.questions
+    const temp = group.questions[index + 1]
+    group.questions[index + 1] = group.questions[index]
+    group.questions[index] = temp
 
-    const updatedQuestion = data.questions
-    const temp = updatedQuestion[index + 1]
-    updatedQuestion[index + 1] = updatedQuestion[index]
-    updatedQuestion[index] = temp
-
-    const updatedData = data
-    updatedData.questions = updatedQuestion
-    props.saveToDatabase(updatedData)
+    // const updatedData = data
+    // updatedData.questions = updatedQuestion
+    props.saveToDatabase(data)
   }
 
-  if (!data)
-    return <Loading />
+  const questions = getGroup(props).questions
 
   return <>
-    {data.questions?.map((question, index) => {
+    {questions.map((question, index) => {
 
       const Actions = (props: any) => (
         <Stack direction="row" spacing={2} {...props}>
 
-          <ButtonGroup variant="outlined">
-            <Button
-              variant='outlined'
-              color='inherit'
-              size='small'
-              sx={{
-                marginLeft: "0 !important",
-              }}
-              onClick={(e) => {
-                e.stopPropagation()
-                moveAnswerDown(index)
-              }}
-              disabled={index === data.questions.length - 1}
+          {questions.length > 1 && (
+            <ButtonGroup
+              variant="outlined"
             >
-              <ArrowDownwardIcon />
-            </Button>
+              <Button
+                variant='outlined'
+                color='inherit'
+                size='small'
+                sx={{
+                  marginLeft: "0 !important",
+                }}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  moveAnswerDown(index)
+                }}
+                disabled={index === questions.length - 1}
+              >
+                <ArrowDownwardIcon />
+              </Button>
 
-            <Button
-              variant='outlined'
-              color='inherit'
-              size='small'
-              sx={{
-                marginLeft: "0 !important",
-                borderLeft: "1px solid #000000FF !important",
-              }}
-              onClick={(e) => {
-                e.stopPropagation()
-                moveAnswerUp(index)
-              }}
-              disabled={index === 0}
-            >
-              <ArrowUpwardIcon />
-            </Button>
-          </ButtonGroup>
+              <Button
+                variant='outlined'
+                color='inherit'
+                size='small'
+                sx={{
+                  marginLeft: "0 !important",
+                  borderLeft: "1px solid #000000FF !important",
+                }}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  moveAnswerUp(index)
+                }}
+                disabled={index === 0}
+              >
+                <ArrowUpwardIcon />
+              </Button>
+            </ButtonGroup>
+          )}
 
           <Button
             startIcon={<RemoveCircleOutlineIcon />}
@@ -137,17 +115,16 @@ const Questions = (props: QuestionsProps) => {
       )
 
       let typeName = "Regular"
-      switch(question.type)
-      {
-      case ConfigurationQuestionType.Regular:
-        typeName = "Regular"
-        break
-      case ConfigurationQuestionType.Multiple:
-        typeName = "Multiple"
-        break
+      switch (question.type) {
+        case ConfigurationQuestionType.Regular:
+          typeName = "Regular"
+          break
+        case ConfigurationQuestionType.Multiple:
+          typeName = "Multiple"
+          break
       }
 
-      return <Accordion key={index}>
+      return <Accordion key={`group-${props.groupId}-question-${question.id}`}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -163,11 +140,7 @@ const Questions = (props: QuestionsProps) => {
           </Stack>
         </AccordionSummary>
         <AccordionDetails>
-          <Question
-            configuration={configuration}
-            question={question}
-            saveQuestion={saveQuestion} />
-
+          <Question {...props} saveQuestion={saveQuestion} questionId={question.id} />
         </AccordionDetails>
       </Accordion>
     })}

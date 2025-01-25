@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material"
-import AnswerProps from "./AnswerProps"
+import { AnswerProps } from "../Properties"
 import Description from "./Description"
 import SingleRow from "./SingleRow"
 import Surcharge from "./Surcharge"
@@ -12,7 +12,7 @@ const RegularAnswer = (props: AnswerProps) => {
   const tabs: CustomTabsProps = {
     tabs: [
       {
-        label: "Info",
+        label: "Information",
         content: <Grid container spacing={2} alignItems="center">
           <SingleRow label="Title" content={<Title {...props} />} />
           <SingleRow label="Description" content={<Description {...props} />} />

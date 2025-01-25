@@ -1,10 +1,11 @@
+import { getAnswer } from "@/components/configurators/utils/DataUtils"
 import { Button, Stack } from "@mui/material"
 import { useState } from "react"
 import "react-quill/dist/quill.snow.css"
-import AnswerProps from "./AnswerProps"
+import { AnswerProps } from "../Properties"
 
 const UploadImage = (props: AnswerProps) => {
-  const answer = props.answer
+  const answer = getAnswer(props)
 
   const [imageId, setImageId] = useState(answer.imageId)
 

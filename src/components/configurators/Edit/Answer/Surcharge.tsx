@@ -1,11 +1,12 @@
+import { getAnswer } from "@/components/configurators/utils/DataUtils"
 import { TextField } from "@mui/material"
 import { useState } from "react"
 import { NumericFormat } from "react-number-format"
 import "react-quill/dist/quill.snow.css"
-import AnswerProps from "./AnswerProps"
+import { AnswerProps } from "../Properties"
 
 const Surcharge = (props: AnswerProps) => {
-  const answer = props.answer
+  const answer = getAnswer(props)
 
   const [surcharge, setSurcharge] = useState(answer.surcharge)
 
