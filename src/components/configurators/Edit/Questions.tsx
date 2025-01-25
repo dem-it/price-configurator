@@ -8,7 +8,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Accordion, AccordionDetails, AccordionSummary, Button, ButtonGroup, Stack } from "@mui/material"
 import { GroupProps } from "./Properties"
 import Question from "./Question"
-import { getGroup, getQuestionById } from "./utils/DataUtils"
+import { getGroup, getQuestionById } from "./utils/PropertiesUtils"
 
 const Questions = (props: GroupProps) => {
   const configuration = props.configuration

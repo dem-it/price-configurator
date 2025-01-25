@@ -1,10 +1,11 @@
 import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
+import { QuestionProps } from "../Properties"
+import { getQuestion } from "../utils/PropertiesUtils"
 import MultipleQuestion from "./MultipleQuestion"
-import QuestionProps from "./QuestionProps"
 import RegularQuestion from "./RegularQuestion"
 
 const Question = (props: QuestionProps) => {
-  const type = props.question?.type
+  const type = getQuestion(props).type
 
   if(!type)
     return <></>
@@ -13,7 +14,7 @@ const Question = (props: QuestionProps) => {
   if (type === ConfigurationQuestionType.Multiple)
     return <MultipleQuestion {...props} />
 
-  return <></>
+  return <>Question type not implemented</>
 }
 
 export default Question

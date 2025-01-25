@@ -2,15 +2,17 @@ import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import { Grid, Paper, Stack } from "@mui/material"
 import { useEffect, useState } from "react"
 import Answer from "../../Answer"
+import { QuestionProps } from "../../Properties"
+import { getQuestion } from "../../utils/PropertiesUtils"
 import Header from "../Header"
-import QuestionProps from "../QuestionProps"
 
 const RegularQuestion = (props: QuestionProps) => {
-  const question = props.question
+  const question = getQuestion(props)
 
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
 
   const answerSelected = (answerId: string) => {
+
     setSelectedAnswer(answerId)
 
     const answer: SelectedAnswer = {
@@ -20,18 +22,13 @@ const RegularQuestion = (props: QuestionProps) => {
       }
     }
 
-    props.answerSelected && props.answerSelected(answer)
+    props.setSelectedAnswers([...props.selectedAnswers.filter(x => x.questionId !== question.id), answer])
   }
 
   useEffect(() => {
-    if (!props.selectedAnswers || !question) {
-      setSelectedAnswer(null)
-      return
-    }
-
     const questionAnswer = props.selectedAnswers.find(answer => answer.questionId === question.id)
     setSelectedAnswer(questionAnswer?.regular?.answerId || null)
-  }, [props.selectedAnswers, question])
+  }, [props.selectedAnswers, props.questionId])
 
   return (
     <Stack
@@ -44,12 +41,13 @@ const RegularQuestion = (props: QuestionProps) => {
         spacing={2}
         container
         justifyContent="space-between"
+        className="answer regular"
         sx={{ width: "100%" }}>
         {question.answers.map((answer) => {
           const isSelected = selectedAnswer === answer.id
           return <Grid
             item
-            key={`regular-ansewr-${answer.id}`}
+            key={`regular-answer-${answer.id}`}
             xs
             onClick={() => answerSelected(answer.id)}>
             <Paper

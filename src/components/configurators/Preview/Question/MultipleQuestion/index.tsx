@@ -2,11 +2,12 @@ import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import { formatPrice } from "@/utils/format"
 import { Checkbox, FormControlLabel, Stack } from "@mui/material"
 import { useEffect, useState } from "react"
+import { QuestionProps } from "../../Properties"
+import { getQuestion } from "../../utils/PropertiesUtils"
 import Header from "../Header"
-import QuestionProps from "../QuestionProps"
 
 const MultipleQuestion = (props: QuestionProps) => {
-  const question = props.question
+  const question = getQuestion(props)
 
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([])
 
@@ -20,7 +21,7 @@ const MultipleQuestion = (props: QuestionProps) => {
       }
     }
 
-    props.answerSelected && props.answerSelected(answer)
+    props.setSelectedAnswers([...props.selectedAnswers.filter(x => x.questionId !== question.id), answer])
   }
 
   useEffect(() => {
@@ -66,18 +67,32 @@ const MultipleQuestion = (props: QuestionProps) => {
                   inputProps={{ "aria-label": "controlled" }}
 
                 />}
-                label={<Stack direction="column" spacing={0}>
-                  <div className="label">
-                    {answer.title} - {formatPrice(answer.surcharge)}
-                  </div>
-                  {answer.description && (
-                    <div
-                      className="description"
-                      dangerouslySetInnerHTML={{ __html: answer.description }} />
+                label={<Stack direction="row" spacing={2} alignItems="center">
+                  {answer.imageId && (
+                    <img
+                      src={`/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
+                      alt="Answer"
+                      width={30}
+                      height={30}
+                    />
                   )}
+
+                  <Stack direction="column" spacing={0}>
+                    <div className="label">
+                      {answer.title} - {formatPrice(answer.surcharge)}
+                    </div>
+
+                    {answer.description
+                      && answer.description.trim().length > 0
+                      && answer.description != "<p><br></p>"
+                      && (
+                        <div
+                          className="description"
+                          dangerouslySetInnerHTML={{ __html: answer.description }} />
+                      )}
+                  </Stack>
                 </Stack>}
               />
-
             </Stack>
           )
         })}

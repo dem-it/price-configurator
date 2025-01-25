@@ -23,7 +23,7 @@ const Answer = (props: AnswerProps) => {
       sx={{
         position: "relative",
         height: "100%",
-        paddingBottom: 3
+        paddingBottom: 5
       }}>
 
       <h3>{answer.title}</h3>

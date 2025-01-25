@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import AddQuestion from "./AddQuestion"
 import { GroupProps } from "./Properties"
 import Questions from "./Questions"
-import { getGroup } from "./utils/DataUtils"
+import { getGroup } from "./utils/PropertiesUtils"
 
 
 const Group = (props: GroupProps) => {

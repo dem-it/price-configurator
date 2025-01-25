@@ -1,7 +1,7 @@
 import Identifier from "@/components/display/Identifier"
 import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
 import { AnswerProps } from "../Properties"
-import { getAnswer, getQuestion } from "../utils/DataUtils"
+import { getAnswer, getQuestion } from "../utils/PropertiesUtils"
 import MultipleAnswer from "./MultipleAnswer"
 import RegularAnswer from "./RegularAnswer"
 

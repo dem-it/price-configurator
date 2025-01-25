@@ -2,7 +2,7 @@ import { Button, Stack } from "@mui/material"
 import { useState } from "react"
 import "react-quill/dist/quill.snow.css"
 import { AnswerProps } from "../Properties"
-import { getAnswer } from "../utils/DataUtils"
+import { getAnswer } from "../utils/PropertiesUtils"
 
 const UploadImage = (props: AnswerProps) => {
   const answer = getAnswer(props)

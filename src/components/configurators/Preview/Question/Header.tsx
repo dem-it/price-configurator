@@ -1,8 +1,9 @@
 import { Stack } from "@mui/material"
-import QuestionProps from "./QuestionProps"
+import { QuestionProps } from "../Properties"
+import { getQuestion } from "../utils/PropertiesUtils"
 
 const Header = (props: QuestionProps) => {
-  const question = props.question
+  const question = getQuestion(props)
 
   return (
     <Stack direction="column" spacing={2}>

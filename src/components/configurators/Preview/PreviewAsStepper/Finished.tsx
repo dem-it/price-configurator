@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material"
-import PreviewPropsWithAnswers from "../PreviewPropsWithAnswers"
+import { PreviewPropsWithAnswers } from "../Properties"
 import Result from "../Result"
 
 const Finished = ({ props, handleReset }: { props: PreviewPropsWithAnswers, handleReset: () => void }) => {

@@ -9,7 +9,8 @@ import DashboardCard from "@/components/shared/DashboardCard"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
 import EditIcon from "@mui/icons-material/Edit"
-import { Stack, TextField } from "@mui/material"
+import { Paper, Stack, TextField } from "@mui/material"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
@@ -65,7 +66,7 @@ const ConfiguratorEditPage = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: name,
+      body: JSON.stringify(name),
     }).then((response) => {
       setConfiguration({ ...configuration, name: name })
       setConfigurationName(name)
@@ -73,6 +74,10 @@ const ConfiguratorEditPage = () => {
   }
 
   const getTemplate = (content: JSX.Element, outerContent: JSX.Element | undefined = undefined) => {
+    const host = typeof window !== 'undefined' ? window.location.host : ''
+    const http = host.includes('localhost') ? 'http' : 'https'
+    const previewUrl = `${http}://${host}/configurators/${user.organizationId}/${id}`
+
     return (
       <PageContainer
         title={`Edit ${configuration?.name}`}>
@@ -89,10 +94,20 @@ const ConfiguratorEditPage = () => {
               }}
             />
           </Stack>}
-          subtitle="Edit this configurator"
           action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} hideEditButton={true} />}
         >
-          {content}
+          <Stack direction="column" spacing={1}>
+            <Link href={previewUrl} target="_blank">Preview url: {previewUrl}</Link>
+            <div>
+              Embed this to your website through:
+              <Paper sx={{ padding: 2 }}>
+                {`<iframe src="${previewUrl}" width="100%" height="100%"></iframe>`}
+              </Paper>
+            </div>
+            <div>
+              {content}
+            </div>
+          </Stack>
         </DashboardCard>
         {outerContent ?? <></>}
       </PageContainer>

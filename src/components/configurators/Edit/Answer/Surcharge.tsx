@@ -3,7 +3,7 @@ import { useState } from "react"
 import { NumericFormat } from "react-number-format"
 import "react-quill/dist/quill.snow.css"
 import { AnswerProps } from "../Properties"
-import { getAnswer } from "../utils/DataUtils"
+import { getAnswer } from "../utils/PropertiesUtils"
 
 const Surcharge = (props: AnswerProps) => {
   const answer = getAnswer(props)

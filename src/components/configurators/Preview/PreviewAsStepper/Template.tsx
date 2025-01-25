@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material"
 import * as React from "react"
-import PreviewPropsWithAnswers from "../PreviewPropsWithAnswers"
+import { PreviewPropsWithAnswers } from "../Properties"
 import ResultSmall from "../ResultSmall"
 
 const Template: React.FC<{ children: React.ReactNode, props: PreviewPropsWithAnswers }> = ({ children, props }) => {

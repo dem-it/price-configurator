@@ -58,7 +58,6 @@ const handlePutRequest = async (req: NextApiRequest, res: NextApiResponse, table
 
   try {
     const body = req.body
-    console.log("Body", body)
 
     const entity = {
       partitionKey: organizationId,

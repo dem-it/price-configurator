@@ -1,62 +1,63 @@
-import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
-import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft"
 import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import { Button, Stack, Step, StepLabel, Stepper } from "@mui/material"
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { PreviewPropsWithAnswers } from "../Properties"
-import QuestionPreview from "../Question/index"
+import QuestionsPreview from "../Questions/index"
+import { calculateCanGoNext } from "../utils/CalculationUtils"
 import Finished from "./Finished"
 import Template from "./Template"
 
 const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
+
   const [activeStep, setActiveStep] = useState(0)
-  const [currentQuestion, setCurrentQuestion] = useState(props.data.questions[activeStep])
-  const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>(undefined)
+  const [currentGroup, setCurrentGroup] = useState(props.data.groups[activeStep])
+  // const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>(undefined)
   const [canGoNext, setCanGoNext] = useState(false)
 
   const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
   const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
   const handleReset = () => setActiveStep(0)
 
-  const answerSelected = (answer: SelectedAnswer) => {
-    const selectedAnswers = props.selectedAnswers.filter(x => x.questionId !== answer.questionId)
-    selectedAnswers.push(answer)
-    props.setSelectedAnswers(selectedAnswers)
-  }
+  // const answerSelected = (answer: SelectedAnswer) => {
+  //   const selectedAnswers = props.selectedAnswers.filter(x => x.questionId !== answer.questionId)
+  //   selectedAnswers.push(answer)
+  //   props.setSelectedAnswers(selectedAnswers)
+  // }
 
   useEffect(() => {
-    if (!props.data.questions)
-      return
+    setCurrentGroup(props.data.groups[activeStep])
+  }, [activeStep, props.data.groups])
 
-    setCurrentQuestion(props.data.questions[activeStep])
-  }, [activeStep, props.data.questions])
+  // useEffect(() => {
+  //   if (!props.selectedAnswers || !currentGroup) {
+  //     setSelectedAnswer(undefined)
+  //     return
+  //   }
 
-  useEffect(() => {
-    if (!props.selectedAnswers || !currentQuestion) {
-      setSelectedAnswer(undefined)
-      return
-    }
+  //   const questionAnswer = props.selectedAnswers.find(answer => answer.questionId === currentGroup.id)
+  //   setSelectedAnswer(questionAnswer)
 
-    const questionAnswer = props.selectedAnswers.find(answer => answer.questionId === currentQuestion.id)
-    setSelectedAnswer(questionAnswer)
-
-  }, [currentQuestion, props.selectedAnswers])
+  // }, [currentGroup, props.selectedAnswers])
 
   /*
   * This effect is used to enable the next button when an answer is selected
   **/
   useEffect(() => {
-    if(!currentQuestion)
+    if (!currentGroup)
       setCanGoNext(false)
-    else if (currentQuestion.type === ConfigurationQuestionType.Multiple)
-      setCanGoNext(true)
-    else if (selectedAnswer)
-      setCanGoNext(true)
-    else
-      setCanGoNext(false)
-  }, [selectedAnswer, currentQuestion])
+    else {
+      const canGoNextCalculated = calculateCanGoNext({ ...props, groupId: currentGroup.id })
+      setCanGoNext(canGoNextCalculated)
+    }
+  }, [props.selectedAnswers, currentGroup])
+
+  const isLastStep = activeStep === props.data.groups.length - 1
+  const isFinished = activeStep === props.data.groups.length
+
+  if (isFinished)
+    return <Finished props={props} handleReset={handleReset} />
 
   const NavigationButtons = ({ innerContent }: { innerContent: JSX.Element }) => {
 
@@ -78,7 +79,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
         variant="contained"
         endIcon={<ArrowRightIcon />}
         disabled={!canGoNext}>
-        {activeStep === props.data.questions.length - 1 ? "Finish" : "Next"}
+        {isLastStep ? "Finish" : "Next"}
       </Button>
     </Stack>
   }
@@ -89,7 +90,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
       spacing={2}
       sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
-        {props.data.questions.map((question, index) => {
+        {props.data.groups.map((group) => {
           const stepProps: { completed?: boolean } = {}
           const labelProps: {
             optional?: React.ReactNode
@@ -99,28 +100,20 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
           // }
 
           return (
-            <Step key={`Step ${question.id}`} {...stepProps}>
-              <StepLabel {...labelProps}>{question.title}</StepLabel>
+            <Step key={`stepper-group-${group.id}`} {...stepProps}>
+              <StepLabel {...labelProps}>{group.title}</StepLabel>
             </Step>
           )
         })}
       </Stepper>
 
-      {activeStep === props.data.questions.length ? (
-        <Finished props={props} handleReset={handleReset} />
-      ) : (
-        <Stack direction="column" spacing={2} sx={{ marginTop: 4 }}>
-          <NavigationButtons innerContent={<h1>{props.configuration.name}</h1>} />
-          <Template props={props}>
-            <QuestionPreview
-              configuration={props.configuration}
-              question={currentQuestion}
-              answerSelected={answerSelected}
-              selectedAnswers={props.selectedAnswers} />
-          </Template>
-          <NavigationButtons innerContent={<></>} />
-        </Stack>
-      )}
+      <Stack direction="column" spacing={2} sx={{ marginTop: 4 }}>
+        <NavigationButtons innerContent={<h1>{currentGroup.title}</h1>} />
+        <Template props={props}>
+          <QuestionsPreview {...props} groupId={currentGroup.id} />
+        </Template>
+        <NavigationButtons innerContent={<></>} />
+      </Stack>
     </Stack>
   )
 }

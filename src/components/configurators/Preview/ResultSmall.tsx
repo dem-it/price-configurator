@@ -3,12 +3,13 @@ import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import { SelectedAnswerUtils } from "@/data/configurator/selection/SelectedAnswer"
 import { formatPrice } from "@/utils/format"
 import { Paper } from "@mui/material"
-import PreviewPropsWithAnswers from "./PreviewPropsWithAnswers"
+import { PreviewPropsWithAnswers } from "./Properties"
+import { getQuestionByIdWithProps } from "./utils/PropertiesUtils"
 
 const ResultSmall = (props: PreviewPropsWithAnswers) => {
 
   const getQuestion = (questionId: string) : ConfigurationQuestion => {
-    return props.data.questions.find(x => x.id === questionId)!
+    return getQuestionByIdWithProps(props, questionId)
   }
 
   const getTotalPrice = () => {
@@ -50,7 +51,7 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
       </ul>
       <hr />
       <b>
-                Grand total: {formatPrice(getTotalPrice())}
+        Grand total: {formatPrice(getTotalPrice())}
       </b>
     </Paper>
   )

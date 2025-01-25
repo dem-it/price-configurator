@@ -7,7 +7,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Button, ButtonGroup, Grid, Paper, Stack } from "@mui/material"
 import Answer from "./Answer"
 import { QuestionProps } from "./Properties"
-import { getAnswerById, getQuestion } from "./utils/DataUtils"
+import { getAnswerById, getQuestion } from "./utils/PropertiesUtils"
 
 const Answers = (props: QuestionProps) => {
 

@@ -13,6 +13,9 @@ const Preview = (props: PreviewProps) => {
     ...props
   }
 
+  if(props.data.groups.length === 0)
+    return <b>No questions available, please configure your first question</b>
+
   return <>
     <PreviewAsStepper {...newProps} />
   </>

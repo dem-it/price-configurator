@@ -5,13 +5,14 @@ import { SelectedAnswerUtils } from "@/data/configurator/selection/SelectedAnswe
 import { formatPrice } from "@/utils/format"
 import { Stack, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import Chip from "@mui/material/Chip"
-import PreviewPropsWithAnswers from "./PreviewPropsWithAnswers"
+import { PreviewPropsWithAnswers } from "./Properties"
+import { getQuestionByIdWithProps } from "./utils/PropertiesUtils"
 
 const Result = (props: PreviewPropsWithAnswers) => {
 
-  const getQuestion = (questionId: string): ConfigurationQuestion => {
-    return props.data.questions.find(x => x.id === questionId)!
-  }
+    const getQuestion = (questionId: string) : ConfigurationQuestion => {
+      return getQuestionByIdWithProps(props, questionId)
+    }
 
   const getTotalPrice = () => {
     let total = 0
@@ -52,7 +53,29 @@ const Result = (props: PreviewPropsWithAnswers) => {
               const configurationAnswer = getAnswer(question, answerId)
               return <TableRow key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
                 <TableCell>{question.title}</TableCell>
-                <TableCell>{configurationAnswer.title}</TableCell>
+                <TableCell>
+                  {configurationAnswer.title}
+                    {/* <IconButton
+                    aria-label="info"
+                    onClick={(event) => {
+                      setAnchorEl(event.currentTarget);
+                      setPopoverContent(configurationAnswer.description);
+                    }}
+                    >
+                    <InfoIcon />
+                    </IconButton>
+                    <Popover
+                    open={Boolean(anchorEl)}
+                    anchorEl={anchorEl}
+                    onClose={() => setAnchorEl(null)}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    >
+                    <Typography sx={{ p: 2 }}>{popoverContent}</Typography>
+                    </Popover> */}
+                </TableCell>
                 <TableCell>{formatPrice(configurationAnswer.surcharge)}</TableCell>
               </TableRow>
             })
@@ -73,21 +96,6 @@ const Result = (props: PreviewPropsWithAnswers) => {
         </TableBody>
       </StyledTable>
       <hr />
-
-      <Chip
-        className="surcharge"
-        color="primary"
-        variant="outlined"
-        label={formatPrice(getTotalPrice())}
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          padding: 1,
-          borderRadius: 1,
-          boxShadow: 1
-        }}
-      />
 
       <p>
         TODO: Save this (send e-mail to customer)

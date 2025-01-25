@@ -30,7 +30,7 @@ const AddQuestion = (props: GroupProps) => {
     return (
         <Accordion
           sx={{
-            width: "600px",
+            width: "100%",
             border: "1px solid",
             borderColor: "primary.main"
           }}>
@@ -46,8 +46,9 @@ const AddQuestion = (props: GroupProps) => {
               <Box
                 border={1}
                 borderColor="primary.main"
+                p={1}
               >
-                <Grid container spacing={1}>
+                <Grid container spacing={1}  justifyContent="center" alignItems="center">
                   <Grid item xs="auto">
                     <Button
                       startIcon={<AddIcon />}
@@ -55,7 +56,7 @@ const AddQuestion = (props: GroupProps) => {
                       variant="contained" onClick={addRegularQuestion}>Add regular question</Button>
                   </Grid>
                   <Grid item xs>
-                    [Screenshot of a regular question]
+                    <img src="/images/configurator/regular-question.png" alt="Regular question" style={{ height: '200px' }} />
                   </Grid>
                 </Grid>
               </Box>
@@ -63,9 +64,10 @@ const AddQuestion = (props: GroupProps) => {
               <Box
                 border={1}
                 borderColor="primary.main"
+                p={1}
               >
-                <Grid container spacing={1}>
-                  <Grid item xs="auto">
+                <Grid container spacing={1} justifyContent="center" alignItems="center">
+                  <Grid item xs="auto" >
                     <Button
                       startIcon={<AddIcon />}
                       color="primary"

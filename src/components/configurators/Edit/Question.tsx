@@ -8,7 +8,7 @@ import { useState } from "react"
 import "react-quill/dist/quill.snow.css"
 import Answers from "./Answers"
 import { QuestionProps } from "./Properties"
-import { getQuestion } from "./utils/DataUtils"
+import { getQuestion } from "./utils/PropertiesUtils"
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 
@@ -84,7 +84,10 @@ const Question = (props: QuestionProps) => {
 
         <Answers {...props} />
       </Grid>
-    ) : <PreviewQuestion configuration={props.configuration} question={getQuestion(props)} selectedAnswers={[]} />
+    ) : <PreviewQuestion 
+          {...props} 
+          selectedAnswers={[]}
+          setSelectedAnswers={() => {}} />
     }
   </>
 }

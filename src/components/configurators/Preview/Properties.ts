@@ -4,11 +4,19 @@ import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import * as React from "react"
 
 export interface PreviewProps {
-  configuration: ConfigurationDto
-  data: ConfigurationData
+    configuration: ConfigurationDto
+    data: ConfigurationData
 }
 
 export interface PreviewPropsWithAnswers extends PreviewProps {
     selectedAnswers: SelectedAnswer[],
     setSelectedAnswers: React.Dispatch<React.SetStateAction<SelectedAnswer[]>>
-  }
+}
+
+export interface GroupProps extends PreviewPropsWithAnswers {
+    groupId: string
+}
+
+export interface QuestionProps extends GroupProps {
+    questionId: string
+}

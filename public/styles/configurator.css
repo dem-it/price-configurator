@@ -10,3 +10,7 @@
 .answer.multiple .description p {
   margin: 0;
 }
+
+.answer.regular p {
+  margin: 0;
+}
