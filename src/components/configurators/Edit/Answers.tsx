@@ -5,9 +5,9 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Button, ButtonGroup, Grid, Paper, Stack } from "@mui/material"
-import { getAnswerById, getQuestion } from "../utils/DataUtils"
 import Answer from "./Answer"
 import { QuestionProps } from "./Properties"
+import { getAnswerById, getQuestion } from "./utils/DataUtils"
 
 const Answers = (props: QuestionProps) => {
 

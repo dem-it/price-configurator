@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material"
 import { useState } from "react"
 import "react-quill/dist/quill.snow.css"
-import { getAnswer } from "../../utils/DataUtils"
 import { AnswerProps } from "../Properties"
+import { getAnswer } from "../utils/DataUtils"
 
 const Title = (props: AnswerProps) => {
   const answer = getAnswer(props)

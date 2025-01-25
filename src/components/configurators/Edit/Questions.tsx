@@ -6,9 +6,9 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Accordion, AccordionDetails, AccordionSummary, Button, ButtonGroup, Stack } from "@mui/material"
-import { getGroup, getQuestionById } from "../utils/DataUtils"
 import { GroupProps } from "./Properties"
 import Question from "./Question"
+import { getGroup, getQuestionById } from "./utils/DataUtils"
 
 const Questions = (props: GroupProps) => {
   const configuration = props.configuration

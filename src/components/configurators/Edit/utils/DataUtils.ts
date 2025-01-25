@@ -1,7 +1,7 @@
 import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import ConfigurationGroup from "@/data/configurator/ConfigurationQuestionGroup"
-import { AnswerProps, GroupProps, GroupsProps, QuestionProps } from "../Edit/Properties"
+import { AnswerProps, GroupProps, GroupsProps, QuestionProps } from "../Properties"
 
 const getGroupById = (groupsProps: GroupsProps, groupId: string) : ConfigurationGroup => {
     return groupsProps.data.groups.find(x => x.id === groupId)!

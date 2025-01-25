@@ -6,9 +6,9 @@ import { Button, Grid, Stack, TextField } from "@mui/material"
 import dynamic from "next/dynamic"
 import { useState } from "react"
 import "react-quill/dist/quill.snow.css"
-import { getQuestion } from "../utils/DataUtils"
 import Answers from "./Answers"
 import { QuestionProps } from "./Properties"
+import { getQuestion } from "./utils/DataUtils"
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 

@@ -1,9 +1,9 @@
-import { getAnswer } from "@/components/configurators/utils/DataUtils"
 import quillToolbarConfig from "@/config/quillToolbarConfig"
 import dynamic from "next/dynamic"
 import { useState } from "react"
 import "react-quill/dist/quill.snow.css"
 import { AnswerProps } from "../Properties"
+import { getAnswer } from "../utils/DataUtils"
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 

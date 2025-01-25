@@ -1,10 +1,10 @@
 import DashboardCard from "@/components/shared/DashboardCard"
 import { Stack, TextField } from "@mui/material"
 import { useEffect, useState } from "react"
-import { getGroup } from "../utils/DataUtils"
 import AddQuestion from "./AddQuestion"
 import { GroupProps } from "./Properties"
 import Questions from "./Questions"
+import { getGroup } from "./utils/DataUtils"
 
 
 const Group = (props: GroupProps) => {
