@@ -3,6 +3,7 @@ import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestion
 import { AnswerProps } from "../Properties"
 import { getAnswer, getQuestion } from "../utils/PropertiesUtils"
 import MultipleAnswer from "./MultipleAnswer"
+import OpenTextAnswer from "./OpenTextAnswer"
 import RegularAnswer from "./RegularAnswer"
 
 const Answer = (props: AnswerProps) => {
@@ -14,6 +15,7 @@ const Answer = (props: AnswerProps) => {
 
     {question.type === ConfigurationQuestionType.Regular && <RegularAnswer {...props} />}
     {question.type === ConfigurationQuestionType.Multiple && <MultipleAnswer {...props} />}
+    {question.type === ConfigurationQuestionType.OpenText && <OpenTextAnswer {...props} />}
   </>
 }
 

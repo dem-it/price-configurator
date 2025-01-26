@@ -7,8 +7,8 @@ const Header = (props: QuestionProps) => {
 
   return (
     <Stack direction="column" spacing={2}>
-      <h2>{question.title}</h2>
-      <div dangerouslySetInnerHTML={{ __html: question.description }} />
+      <h2 className="title">{question.title}</h2>
+      <div className="description" dangerouslySetInnerHTML={{ __html: question.description }} />
     </Stack>
   )
 }

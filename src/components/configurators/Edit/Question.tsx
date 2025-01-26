@@ -1,5 +1,6 @@
 import PreviewQuestion from "@/components/configurators/Preview/Question/index"
 import quillToolbarConfig from "@/config/quillToolbarConfig"
+import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
 import EditIcon from "@mui/icons-material/Edit"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import { Button, Grid, Stack, TextField } from "@mui/material"
@@ -50,6 +51,13 @@ const Question = (props: QuestionProps) => {
     }
   </Stack>
 
+  const showAnswers = () => {
+    const question = getQuestion(props)
+    if(question.type === ConfigurationQuestionType.OpenText)
+      return false
+    return true
+}
+
   return <>
     <div style={{ position: "relative" }}>
       <div style={{ position: "absolute", right: 0 }}>
@@ -82,7 +90,7 @@ const Question = (props: QuestionProps) => {
           />
         </Grid>
 
-        <Answers {...props} />
+        {showAnswers() && <Answers {...props} /> }
       </Grid>
     ) : <PreviewQuestion
       {...props}

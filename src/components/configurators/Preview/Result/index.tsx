@@ -9,8 +9,9 @@ import Chip from "@mui/material/Chip"
 import IconButton from "@mui/material/IconButton"
 import Popover from "@mui/material/Popover"
 import { useState } from "react"
-import { PreviewPropsWithAnswers } from "./Properties"
-import { getQuestionByIdWithProps } from "./utils/PropertiesUtils"
+import { PreviewPropsWithAnswers } from "../Properties"
+import { getQuestionByIdWithProps } from "../utils/PropertiesUtils"
+import SendAsQuote from "./SendAsQuote"
 
 const Result = (props: PreviewPropsWithAnswers) => {
 
@@ -37,6 +38,8 @@ const Result = (props: PreviewPropsWithAnswers) => {
   function getAnswer(question: ConfigurationQuestion, answerId: string): ConfigurationAnswer {
     return question.answers.find(x => x.id === answerId)!
   }
+
+  const openTextAnswers = props.selectedAnswers.filter(x => x.openText)
 
   return (
     <Stack direction="column" spacing={2} className="result">
@@ -65,25 +68,52 @@ const Result = (props: PreviewPropsWithAnswers) => {
                     {configurationAnswer.title}
 
                     {configurationAnswer.description
-                    && configurationAnswer.description.trim().length > 0
-                    && configurationAnswer.description != "<p><br></p>"
-                    && (
-                      <>
+                      && configurationAnswer.description.trim().length > 0
+                      && configurationAnswer.description != "<p><br></p>"
+                      && (
+                        <>
 
-                        <IconButton
-                          aria-label="info"
-                          onClick={(event) => {
-                            setAnchorEl(event.currentTarget)
-                            setPopoverContent(configurationAnswer.description)
-                          }}
-                        >
-                          <InfoIcon />
-                        </IconButton>
-                      </>)}
+                          <IconButton
+                            aria-label="info"
+                            onClick={(event) => {
+                              setAnchorEl(event.currentTarget)
+                              setPopoverContent(configurationAnswer.description)
+                            }}
+                          >
+                            <InfoIcon />
+                          </IconButton>
+                        </>)}
                   </TableCell>
                   <TableCell>{formatPrice(configurationAnswer.surcharge)}</TableCell>
                 </TableRow>
-              ) })
+              )
+            })
+          })}
+
+          {openTextAnswers.map((answer) => {
+            const question = getQuestion(answer.questionId)
+
+            return (
+              <TableRow key={`result-question-${question.id}-answer`}>
+                <TableCell>
+                  {question.title}
+
+                  <IconButton
+                    aria-label="info"
+                    onClick={(event) => {
+                      setAnchorEl(event.currentTarget)
+                      setPopoverContent(question.description)
+                    }}
+                  >
+                    <InfoIcon />
+                  </IconButton>
+                </TableCell>
+                <TableCell>
+                  {answer.openText?.answer}
+                </TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            )
           })}
 
           <TableRow>
@@ -101,6 +131,8 @@ const Result = (props: PreviewPropsWithAnswers) => {
         </TableBody>
       </StyledTable>
 
+      <SendAsQuote {...props} />
+
       <Popover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
@@ -112,11 +144,6 @@ const Result = (props: PreviewPropsWithAnswers) => {
       >
         <div style={{ padding: "8px 24px" }} dangerouslySetInnerHTML={{ __html: popoverContent }} />
       </Popover>
-      <hr />
-
-      <p>
-        TODO: Save this (send e-mail to customer)
-      </p>
     </Stack>
   )
 }

@@ -13,7 +13,11 @@ const enum ConfigurationQuestionType {
     /**
      * A multiple question is one with multiple answers that include their own surcharge.
      */
-    Multiple = "multiple"
+    Multiple = "multiple",
+    /**
+     * An open text question is one that requires a text input.
+     */
+    OpenText = "openText"
 }
 
 export default ConfigurationQuestionType

@@ -1,3 +1,4 @@
+import Loading from "@/components/display/Loading"
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft"
 import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import { Button, Stack, Step, StepLabel, Stepper } from "@mui/material"
@@ -13,44 +14,22 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
 
   const [activeStep, setActiveStep] = useState(0)
   const [currentGroup, setCurrentGroup] = useState(props.data.groups[activeStep])
-  // const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | undefined>(undefined)
   const [canGoNext, setCanGoNext] = useState(false)
 
   const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
   const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
   const handleReset = () => setActiveStep(0)
 
-  // const answerSelected = (answer: SelectedAnswer) => {
-  //   const selectedAnswers = props.selectedAnswers.filter(x => x.questionId !== answer.questionId)
-  //   selectedAnswers.push(answer)
-  //   props.setSelectedAnswers(selectedAnswers)
-  // }
-
   useEffect(() => {
     setCurrentGroup(props.data.groups[activeStep])
   }, [activeStep, props.data.groups])
-
-  // useEffect(() => {
-  //   if (!props.selectedAnswers || !currentGroup) {
-  //     setSelectedAnswer(undefined)
-  //     return
-  //   }
-
-  //   const questionAnswer = props.selectedAnswers.find(answer => answer.questionId === currentGroup.id)
-  //   setSelectedAnswer(questionAnswer)
-
-  // }, [currentGroup, props.selectedAnswers])
 
   /*
   * This effect is used to enable the next button when an answer is selected
   **/
   useEffect(() => {
-    if (!currentGroup)
-      setCanGoNext(false)
-    else {
-      const canGoNextCalculated = calculateCanGoNext({ ...props, groupId: currentGroup.id })
+      const canGoNextCalculated = calculateCanGoNext({ ...props, groupId: currentGroup?.id ?? "" })
       setCanGoNext(canGoNextCalculated)
-    }
   }, [props.selectedAnswers, currentGroup])
 
   const isLastStep = activeStep === props.data.groups.length - 1
@@ -58,6 +37,9 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
 
   if (isFinished)
     return <Finished props={props} handleReset={handleReset} />
+
+  if(!currentGroup)
+    return <Loading />
 
   const NavigationButtons = ({ innerContent }: { innerContent: JSX.Element }) => {
 

@@ -21,7 +21,7 @@ const ConfiguratorPage = () => {
       const result = await response.json() as ConfigurationDto
       setConfiguration(result)
 
-      const defaultData: ConfigurationData = { questions: [] }
+      const defaultData: ConfigurationData = { groups: [] }
       setData(result.data ? JSON.parse(result.data) : defaultData)
     }
 

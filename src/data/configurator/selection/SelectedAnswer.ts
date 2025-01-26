@@ -1,4 +1,5 @@
 import SelectedAnswerMultiple from "./SelectedAnswerMultiple"
+import SelectedAnswerOpenText from "./SelectedAnswerOpenText"
 import SelectedAnswerRegular from "./SelectedAnswerRegular"
 
 export default interface SelectedAnswer
@@ -6,6 +7,7 @@ export default interface SelectedAnswer
     questionId: string,
     regular?: SelectedAnswerRegular,
     multiple?: SelectedAnswerMultiple,
+    openText?: SelectedAnswerOpenText
 }
 
 export const SelectedAnswerUtils =

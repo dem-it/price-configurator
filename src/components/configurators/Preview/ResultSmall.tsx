@@ -8,7 +8,7 @@ import { getQuestionByIdWithProps } from "./utils/PropertiesUtils"
 
 const ResultSmall = (props: PreviewPropsWithAnswers) => {
 
-  const getQuestion = (questionId: string) : ConfigurationQuestion => {
+  const getQuestion = (questionId: string): ConfigurationQuestion => {
     return getQuestionByIdWithProps(props, questionId)
   }
 
@@ -25,15 +25,17 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
     return total
   }
 
-  function getAnswer(question: ConfigurationQuestion, answerId: string) : ConfigurationAnswer {
+  function getAnswer(question: ConfigurationQuestion, answerId: string): ConfigurationAnswer {
     return question.answers.find(x => x.id === answerId)!
   }
+
+  const openTextAnswers = props.selectedAnswers.filter(x => x.openText)
 
   return (
     <Paper
       sx={{ padding: 2 }}>
       <h2>Result</h2>
-            Selected options:
+      Selected options:
       {props.selectedAnswers.length === 0 && <p>No options selected</p>}
       <ul>
         {props.selectedAnswers.map((answer, index) => {
@@ -49,6 +51,23 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
           })
         })}
       </ul>
+
+      {openTextAnswers.length > 0 && (
+        <>
+          Open text answers:
+          <ul>
+            {openTextAnswers.map((answer) => {
+              const question = getQuestion(answer.questionId)
+
+              return (
+                <li key={`result-question-${question.id}-answer`}>
+                  {question.title}: {answer.openText?.answer}
+                </li>
+              )
+            })}
+          </ul>
+        </>
+      )}
       <hr />
       <b>
         Grand total: {formatPrice(getTotalPrice())}

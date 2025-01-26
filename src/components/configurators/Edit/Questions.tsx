@@ -122,6 +122,9 @@ const Questions = (props: GroupProps) => {
       case ConfigurationQuestionType.Multiple:
         typeName = "Multiple"
         break
+      case ConfigurationQuestionType.OpenText:
+        typeName = "OpenText"
+        break
       }
 
       return <Accordion key={`group-${props.groupId}-question-${question.id}`}>
