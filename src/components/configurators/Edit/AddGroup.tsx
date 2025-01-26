@@ -11,35 +11,35 @@ interface AddGroupProps {
 }
 
 const AddGroup = (props: AddGroupProps) => {
-    const data = props.data
+  const data = props.data
 
-    const addGroup = () => {
-      if (!data)
-        return
-  
-      const generatedId = calculateRandomConfigurationGroupId()
-      const newGroup: ConfigurationQuestionGroup = {
-        id: generatedId,
-        title: "",
-        questions: []
-      }
-  
-      const updatedData = data
-      updatedData.groups.push(newGroup)
-      props.saveToDatabase(updatedData)
+  const addGroup = () => {
+    if (!data)
+      return
+
+    const generatedId = calculateRandomConfigurationGroupId()
+    const newGroup: ConfigurationQuestionGroup = {
+      id: generatedId,
+      title: "",
+      questions: []
     }
 
-    if(!data) 
-        return <Loading />
+    const updatedData = data
+    updatedData.groups.push(newGroup)
+    props.saveToDatabase(updatedData)
+  }
 
-    return (
-        <Button 
-          startIcon={<AddIcon />}
-          color="primary"
-          variant="contained" onClick={addGroup}>
+  if(!data)
+    return <Loading />
+
+  return (
+    <Button
+      startIcon={<AddIcon />}
+      color="primary"
+      variant="contained" onClick={addGroup}>
             Add group
-          </Button>
-      )
+    </Button>
+  )
 }
 
 export default AddGroup

@@ -3,7 +3,6 @@ import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 
-
 export interface GroupsProps {
     configuration: ConfigurationDto,
     data: ConfigurationData,

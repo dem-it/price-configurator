@@ -84,10 +84,10 @@ const Question = (props: QuestionProps) => {
 
         <Answers {...props} />
       </Grid>
-    ) : <PreviewQuestion 
-          {...props} 
-          selectedAnswers={[]}
-          setSelectedAnswers={() => {}} />
+    ) : <PreviewQuestion
+      {...props}
+      selectedAnswers={[]}
+      setSelectedAnswers={() => {}} />
     }
   </>
 }

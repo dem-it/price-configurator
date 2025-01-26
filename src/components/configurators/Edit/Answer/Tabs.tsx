@@ -36,22 +36,22 @@ export const CustomTabs = (props: CustomTabsProps) => {
       sx={{ borderRight: 1, borderColor: "divider" }}
     >
       {props.tabs.map((tab, index) => {
-        return <Tab key={`tab-${index}`} sx={{ width: '150px'}} label={tab.label} {...a11yProps(index)} />
+        return <Tab key={`tab-${index}`} sx={{ width: "150px" }} label={tab.label} {...a11yProps(index)} />
       })}
     </Tabs>
 
     {props.tabs.map((tab, index) => {
       return (
-        <TabPanel 
+        <TabPanel
           style={{
-            width: '85%'  
+            width: "85%"
           }}
-          key={`tab-panel-${index}`} 
-          value={tabValue} 
+          key={`tab-panel-${index}`}
+          value={tabValue}
           index={index}>
-        {tab.content}
-      </TabPanel>
-    )})}
+          {tab.content}
+        </TabPanel>
+      ) })}
   </Box>
 }
 

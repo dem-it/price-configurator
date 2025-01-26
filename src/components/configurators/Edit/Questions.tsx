@@ -116,12 +116,12 @@ const Questions = (props: GroupProps) => {
 
       let typeName = "Regular"
       switch (question.type) {
-        case ConfigurationQuestionType.Regular:
-          typeName = "Regular"
-          break
-        case ConfigurationQuestionType.Multiple:
-          typeName = "Multiple"
-          break
+      case ConfigurationQuestionType.Regular:
+        typeName = "Regular"
+        break
+      case ConfigurationQuestionType.Multiple:
+        typeName = "Multiple"
+        break
       }
 
       return <Accordion key={`group-${props.groupId}-question-${question.id}`}>

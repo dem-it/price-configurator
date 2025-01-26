@@ -6,35 +6,34 @@ import { GroupProps } from "./Properties"
 import Questions from "./Questions"
 import { getGroup } from "./utils/PropertiesUtils"
 
-
 const Group = (props: GroupProps) => {
-    const data = props.data
+  const data = props.data
 
-    const [groupName, setGroupName] = useState("")
+  const [groupName, setGroupName] = useState("")
 
-    useEffect(() => {
-        setGroupName(getGroup(props).title)
-    }, [props.groupId])
+  useEffect(() => {
+    setGroupName(getGroup(props).title)
+  }, [props.groupId])
 
-    return (
-        <DashboardCard>
-            <Stack direction="column" spacing={2}>
-                <TextField
-                    label="Group Name"
-                    value={groupName}
-                    onChange={(e) => setGroupName(e.target.value)}
-                    onBlur={(e) => {
-                        const group = getGroup(props)
-                        group.title = e.target.value
-                        props.saveToDatabase(data)
-                    }} />
+  return (
+    <DashboardCard>
+      <Stack direction="column" spacing={2}>
+        <TextField
+          label="Group Name"
+          value={groupName}
+          onChange={(e) => setGroupName(e.target.value)}
+          onBlur={(e) => {
+            const group = getGroup(props)
+            group.title = e.target.value
+            props.saveToDatabase(data)
+          }} />
 
-                <AddQuestion {...props} />
+        <AddQuestion {...props} />
 
-                <Questions {...props} />
-            </Stack>
-        </DashboardCard>
-    )
+        <Questions {...props} />
+      </Stack>
+    </DashboardCard>
+  )
 }
 
 export default Group

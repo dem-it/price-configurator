@@ -60,11 +60,11 @@ const Result = (props: PreviewPropsWithAnswers) => {
               const configurationAnswer = getAnswer(question, answerId)
               return (
                 <TableRow key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
-                <TableCell>{question.title}</TableCell>
-                <TableCell>
-                  {configurationAnswer.title}
+                  <TableCell>{question.title}</TableCell>
+                  <TableCell>
+                    {configurationAnswer.title}
 
-                  {configurationAnswer.description
+                    {configurationAnswer.description
                     && configurationAnswer.description.trim().length > 0
                     && configurationAnswer.description != "<p><br></p>"
                     && (
@@ -80,10 +80,10 @@ const Result = (props: PreviewPropsWithAnswers) => {
                           <InfoIcon />
                         </IconButton>
                       </>)}
-                </TableCell>
-                <TableCell>{formatPrice(configurationAnswer.surcharge)}</TableCell>
-              </TableRow>
-            )})
+                  </TableCell>
+                  <TableCell>{formatPrice(configurationAnswer.surcharge)}</TableCell>
+                </TableRow>
+              ) })
           })}
 
           <TableRow>
@@ -106,11 +106,11 @@ const Result = (props: PreviewPropsWithAnswers) => {
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: "bottom",
+          horizontal: "left",
         }}
       >
-        <div style={{ padding: '8px 24px' }} dangerouslySetInnerHTML={{ __html: popoverContent }} />
+        <div style={{ padding: "8px 24px" }} dangerouslySetInnerHTML={{ __html: popoverContent }} />
       </Popover>
       <hr />
 

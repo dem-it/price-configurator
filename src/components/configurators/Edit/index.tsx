@@ -17,7 +17,7 @@ const Edit = (props: EditProps) => {
     <Grid item xs={12}>
       <input type="hidden" value={JSON.stringify(data)} />
 
-        <AddGroup data={data} saveToDatabase={props.saveToDatabase} />
+      <AddGroup data={data} saveToDatabase={props.saveToDatabase} />
 
     </Grid>
   </Grid>
