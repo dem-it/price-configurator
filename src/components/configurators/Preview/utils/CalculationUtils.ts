@@ -3,7 +3,7 @@ import { getGroup } from "./PropertiesUtils"
 
 export const calculateCanGoNext = (props: GroupProps) => {
   if(!props.groupId)
-      return false
+    return false
 
   const group = getGroup(props)
 

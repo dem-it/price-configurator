@@ -28,8 +28,8 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
   * This effect is used to enable the next button when an answer is selected
   **/
   useEffect(() => {
-      const canGoNextCalculated = calculateCanGoNext({ ...props, groupId: currentGroup?.id ?? "" })
-      setCanGoNext(canGoNextCalculated)
+    const canGoNextCalculated = calculateCanGoNext({ ...props, groupId: currentGroup?.id ?? "" })
+    setCanGoNext(canGoNextCalculated)
   }, [props.selectedAnswers, currentGroup])
 
   const isLastStep = activeStep === props.data.groups.length - 1

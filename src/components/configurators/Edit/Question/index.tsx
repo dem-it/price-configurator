@@ -7,9 +7,10 @@ import { Button, Grid, Stack, TextField } from "@mui/material"
 import dynamic from "next/dynamic"
 import { useState } from "react"
 import "react-quill/dist/quill.snow.css"
-import Answers from "./Answers"
-import { QuestionProps } from "./Properties"
-import { getQuestion } from "./utils/PropertiesUtils"
+import Answers from "../Answers"
+import { QuestionProps } from "../Properties"
+import { getQuestion } from "../utils/PropertiesUtils"
+import Variant from "./Variant"
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 
@@ -56,7 +57,7 @@ const Question = (props: QuestionProps) => {
     if(question.type === ConfigurationQuestionType.OpenText)
       return false
     return true
-}
+  }
 
   return <>
     <div style={{ position: "relative" }}>
@@ -89,6 +90,8 @@ const Question = (props: QuestionProps) => {
             modules={quillToolbarConfig}
           />
         </Grid>
+
+        <Variant {...props} />
 
         {showAnswers() && <Answers {...props} /> }
       </Grid>

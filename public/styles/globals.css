@@ -10,3 +10,19 @@ h2, h3 {
   background-color: rgb(72, 158, 172);
   color: white;
 }
+
+.edit .question .variant {
+  padding: 8px;
+}
+
+.edit .question .variant {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.edit .question .variant.selected {
+  border: 2px solid rgb(72, 158, 172);
+}
+  .edit .question .variant:hover {
+  border: 2px solid gray!important;
+}

@@ -7,7 +7,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { Accordion, AccordionDetails, AccordionSummary, Button, ButtonGroup, Stack } from "@mui/material"
 import { GroupProps } from "./Properties"
-import Question from "./Question"
+import Question from "./Question/index"
 import { getGroup, getQuestionById } from "./utils/PropertiesUtils"
 
 const Questions = (props: GroupProps) => {
@@ -127,7 +127,7 @@ const Questions = (props: GroupProps) => {
         break
       }
 
-      return <Accordion key={`group-${props.groupId}-question-${question.id}`}>
+      return <Accordion key={`group-${props.groupId}-question-${question.id}`} className="question">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

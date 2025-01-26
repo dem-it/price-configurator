@@ -5,6 +5,7 @@ export default interface ConfigurationQuestion {
     id: string;
     title: string;
     description: string;
+    variant?: string;
     type: ConfigurationQuestionType;
     answers: ConfigurationAnswer[];
 }

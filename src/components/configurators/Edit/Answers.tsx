@@ -153,6 +153,13 @@ const Answers = (props: QuestionProps) => {
         })}
       </Stack>
     </Grid>
+
+    <Grid item xs={12}>
+      <Button
+        startIcon={<AddIcon />}
+        color="primary"
+        variant="contained" onClick={addAnswer}>Add new answer</Button>
+    </Grid>
   </Grid>
 }
 

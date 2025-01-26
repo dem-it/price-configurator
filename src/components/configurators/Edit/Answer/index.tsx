@@ -4,7 +4,7 @@ import { AnswerProps } from "../Properties"
 import { getAnswer, getQuestion } from "../utils/PropertiesUtils"
 import MultipleAnswer from "./MultipleAnswer"
 import OpenTextAnswer from "./OpenTextAnswer"
-import RegularAnswer from "./RegularAnswer"
+import RegularAnswer from "./RegularAnswer/index"
 
 const Answer = (props: AnswerProps) => {
   const question = getQuestion(props)

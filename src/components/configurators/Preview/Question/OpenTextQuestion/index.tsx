@@ -36,7 +36,7 @@ const OpenTextQuestion = (props: QuestionProps) => {
       direction="column">
       <Header {...props} />
 
-      <TextField 
+      <TextField
         label={getQuestion(props).title}
         variant="outlined"
         fullWidth

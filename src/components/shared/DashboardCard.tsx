@@ -7,6 +7,7 @@ type Props = {
   footer?: JSX.Element;
   children?: JSX.Element;
   middlecontent?: string | JSX.Element;
+  className?: string;
 };
 
 const DashboardCard = ({
@@ -15,10 +16,11 @@ const DashboardCard = ({
   children,
   action,
   middlecontent,
-  footer
+  footer,
+  className
 }: Props) => {
   return (
-    <Card sx={{ padding: 0, marginBottom: 2 }} elevation={9} variant={undefined}>
+    <Card sx={{ padding: 0, marginBottom: 2 }} elevation={9} variant={undefined} className={className}>
 
       <CardContent sx={{ p: "30px" }}>
         {(title || subtitle || action) ? (

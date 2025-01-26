@@ -1,11 +1,11 @@
 import { Grid } from "@mui/material"
-import { AnswerProps } from "../Properties"
-import Description from "./Description"
-import SingleRow from "./SingleRow"
-import Surcharge from "./Surcharge"
-import { CustomTabs, CustomTabsProps } from "./Tabs"
-import Title from "./Title"
-import UploadImage from "./UploadImage"
+import { AnswerProps } from "../../Properties"
+import Description from "../Description"
+import SingleRow from "../SingleRow"
+import Surcharge from "../Surcharge"
+import { CustomTabs, CustomTabsProps } from "../Tabs"
+import Title from "../Title"
+import UploadImage from "../UploadImage"
 
 const RegularAnswer = (props: AnswerProps) => {
 

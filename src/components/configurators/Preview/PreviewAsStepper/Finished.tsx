@@ -6,7 +6,12 @@ const Finished = ({ props, handleReset }: { props: PreviewPropsWithAnswers, hand
 
   return <>
     <Box sx={{ mt: 2, mb: 1 }}>
-      All steps completed - you&apos;re finished
+      <p>
+        All steps completed - you&apos;re finished.
+      </p>
+      <p>
+        Feel free to email us and we will send you a custom quote within 48 hours!
+      </p>
     </Box>
     <Result {...props} />
     <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
