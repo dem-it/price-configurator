@@ -27,7 +27,7 @@ const Answer = (props: AnswerProps) => {
       }}>
 
       <h3>{answer.title}</h3>
-      <div dangerouslySetInnerHTML={{ __html: answer.description }} />
+      <div className="description" dangerouslySetInnerHTML={{ __html: answer.description }} />
       {answer.imageId && (
         <img
           src={`/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}

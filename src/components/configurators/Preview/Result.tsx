@@ -3,16 +3,23 @@ import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import { SelectedAnswerUtils } from "@/data/configurator/selection/SelectedAnswer"
 import { formatPrice } from "@/utils/format"
+import InfoIcon from "@mui/icons-material/Info"
 import { Stack, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import Chip from "@mui/material/Chip"
+import IconButton from "@mui/material/IconButton"
+import Popover from "@mui/material/Popover"
+import { useState } from "react"
 import { PreviewPropsWithAnswers } from "./Properties"
 import { getQuestionByIdWithProps } from "./utils/PropertiesUtils"
 
 const Result = (props: PreviewPropsWithAnswers) => {
 
-    const getQuestion = (questionId: string) : ConfigurationQuestion => {
-      return getQuestionByIdWithProps(props, questionId)
-    }
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const [popoverContent, setPopoverContent] = useState<string>("")
+
+  const getQuestion = (questionId: string): ConfigurationQuestion => {
+    return getQuestionByIdWithProps(props, questionId)
+  }
 
   const getTotalPrice = () => {
     let total = 0
@@ -32,7 +39,7 @@ const Result = (props: PreviewPropsWithAnswers) => {
   }
 
   return (
-    <Stack direction="column" spacing={2}>
+    <Stack direction="column" spacing={2} className="result">
 
       <h2>Result</h2>
       <StyledTable>
@@ -45,40 +52,38 @@ const Result = (props: PreviewPropsWithAnswers) => {
         </TableHead>
         <TableBody>
           {props.selectedAnswers.map((answer, index) => {
-            const question = getQuestion(answer.questionId)
 
+            const question = getQuestion(answer.questionId)
             const answers = SelectedAnswerUtils.getAnswerIds(answer)
 
             return answers.map(answerId => {
               const configurationAnswer = getAnswer(question, answerId)
-              return <TableRow key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
+              return (
+                <TableRow key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
                 <TableCell>{question.title}</TableCell>
                 <TableCell>
                   {configurationAnswer.title}
-                    {/* <IconButton
-                    aria-label="info"
-                    onClick={(event) => {
-                      setAnchorEl(event.currentTarget);
-                      setPopoverContent(configurationAnswer.description);
-                    }}
-                    >
-                    <InfoIcon />
-                    </IconButton>
-                    <Popover
-                    open={Boolean(anchorEl)}
-                    anchorEl={anchorEl}
-                    onClose={() => setAnchorEl(null)}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'left',
-                    }}
-                    >
-                    <Typography sx={{ p: 2 }}>{popoverContent}</Typography>
-                    </Popover> */}
+
+                  {configurationAnswer.description
+                    && configurationAnswer.description.trim().length > 0
+                    && configurationAnswer.description != "<p><br></p>"
+                    && (
+                      <>
+
+                        <IconButton
+                          aria-label="info"
+                          onClick={(event) => {
+                            setAnchorEl(event.currentTarget)
+                            setPopoverContent(configurationAnswer.description)
+                          }}
+                        >
+                          <InfoIcon />
+                        </IconButton>
+                      </>)}
                 </TableCell>
                 <TableCell>{formatPrice(configurationAnswer.surcharge)}</TableCell>
               </TableRow>
-            })
+            )})
           })}
 
           <TableRow>
@@ -95,6 +100,18 @@ const Result = (props: PreviewPropsWithAnswers) => {
           </TableRow>
         </TableBody>
       </StyledTable>
+
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <div style={{ padding: '8px 24px' }} dangerouslySetInnerHTML={{ __html: popoverContent }} />
+      </Popover>
       <hr />
 
       <p>

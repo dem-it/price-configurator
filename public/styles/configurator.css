@@ -7,10 +7,7 @@
   size: 0.8em;
 }
 
-.answer.multiple .description p {
-  margin: 0;
-}
-
-.answer.regular p {
+.answer .description p,
+.result .description p {
   margin: 0;
 }
