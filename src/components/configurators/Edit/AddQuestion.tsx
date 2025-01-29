@@ -93,7 +93,7 @@ const AddQuestion = (props: GroupProps) => {
                   variant="contained" onClick={addOpenTextQuestion}>Add open text question</Button>
               </Grid>
               <Grid item xs>
-                <img src="/images/configurator/multiple-question.png" alt="Open text question" style={{ height: "100px" }} />
+                <img src="/images/configurator/open-text-question.png" alt="Open text question" style={{ height: "150px" }} />
               </Grid>
             </Grid>
           </Box>

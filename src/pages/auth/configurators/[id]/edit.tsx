@@ -3,14 +3,14 @@ import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
 import ActionButtons from "@/components/auth/configurators/ActionButtons"
 import Edit from "@/components/configurators/Edit"
 import EditGroup from "@/components/configurators/Edit/Groups"
+import Metadata from "@/components/configurators/Edit/Metadata/index"
 import PageContainer from "@/components/container/PageContainer"
 import Loading from "@/components/display/Loading"
 import DashboardCard from "@/components/shared/DashboardCard"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react"
 import EditIcon from "@mui/icons-material/Edit"
-import { Paper, Stack, TextField } from "@mui/material"
-import Link from "next/link"
+import { Stack, TextField } from "@mui/material"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
@@ -73,6 +73,14 @@ const ConfiguratorEditPage = () => {
     })
   }
 
+  const constructProps = () => {
+    return {
+      configuration: configuration as ConfigurationDto,
+      data: data!,
+      saveToDatabase: saveToDatabase
+    }
+  }
+
   const getTemplate = (content: JSX.Element, outerContent: JSX.Element | undefined = undefined) => {
     const host = typeof window !== "undefined" ? window.location.host : ""
     const http = host.includes("localhost") ? "http" : "https"
@@ -97,13 +105,8 @@ const ConfiguratorEditPage = () => {
           action={<ActionButtons id={id as string} organizationId={user?.organizationId} router={router} hideEditButton={true} />}
         >
           <Stack direction="column" spacing={1}>
-            <Link href={previewUrl} target="_blank">Preview url: {previewUrl}</Link>
-            <div>
-              Embed this to your website through:
-              <Paper sx={{ padding: 2 }}>
-                {`<iframe src="${previewUrl}" width="100%" height="100%"></iframe>`}
-              </Paper>
-            </div>
+
+            <Metadata {...constructProps()} />
             <div>
               {content}
             </div>
@@ -117,13 +120,7 @@ const ConfiguratorEditPage = () => {
   if (!data)
     return getTemplate(<Loading />)
 
-  const props = {
-    configuration: configuration as ConfigurationDto,
-    data: data,
-    saveToDatabase: saveToDatabase
-  }
-
-  return getTemplate(<Edit {...props} />, <EditGroup {...props} />)
+  return getTemplate(<Edit {...constructProps()} />, <EditGroup {...constructProps()} />)
 }
 
 export default withAuthenticationRequired(ConfiguratorEditPage)

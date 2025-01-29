@@ -1,10 +1,10 @@
 import { VariantType } from "@/components/configurators/Edit/Question/Variant"
 import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import { Grid, Paper, Stack } from "@mui/material"
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
+import FormControl from "@mui/material/FormControl"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import Select from "@mui/material/Select"
 import { useEffect, useState } from "react"
 import Answer from "../../Answer"
 import { QuestionProps } from "../../Properties"
@@ -58,7 +58,7 @@ const RegularQuestion = (props: QuestionProps) => {
                   labelId={`regular-question-dropdown-${question.id}`}
                   value={selectedAnswer || ""}
                   onChange={(e) => answerSelected(e.target.value)}
-                  
+
                   label="Select an option"
                 >
                   <MenuItem value="">

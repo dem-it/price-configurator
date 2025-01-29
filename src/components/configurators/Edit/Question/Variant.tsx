@@ -17,7 +17,7 @@ const Variant = (props: QuestionProps) => {
 
   const updateVariant = (value: string) => {
     setVariant(value)
-    
+
     props.saveQuestion(question.id, (x) => {
       x.variant = value
     })
@@ -26,24 +26,31 @@ const Variant = (props: QuestionProps) => {
   if (question.type !== ConfigurationQuestionType.Regular)
     return <></>
 
-
   return <>
     <Grid item xs={2}>Variant ({variant})</Grid>
     <Grid item xs={5}>
-      <Box 
+      <Box
         className={`variant ${variant === VariantType.Regular ? "selected" : ""}`}
         onClick={() => updateVariant(VariantType.Regular)}
-        >
-        <img src="/images/configurator/regular-question.png" alt="Regular question" style={{ width: '100%' }} />
+      >
+        <img
+          src="/images/configurator/regular-question.png"
+          title="Regular"
+          alt="Regular question"
+          style={{ height: "120px", maxWidth: "100%" }} />
       </Box>
     </Grid>
-    
+
     <Grid item xs={5}>
-      <Box 
+      <Box
         className={`variant ${variant === VariantType.Dropdown ? "selected" : ""}`}
         onClick={() => updateVariant(VariantType.Dropdown)}
-        >
-        <img src="/images/configurator/regular-question.png" alt="Dropdown question" style={{ width: "100%" }} />
+      >
+        <img
+          src="/images/configurator/regular-question-dropdown.png"
+          title="Dropdown"
+          alt="Dropdown question"
+          style={{ height: "120px", maxWidth: "100%" }} />
       </Box>
     </Grid>
   </>

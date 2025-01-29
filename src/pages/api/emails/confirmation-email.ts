@@ -24,8 +24,8 @@ const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 
-  const { name, email, message } = req.body
-  if (!name || !email || !message) {
+  const { name, email, message, url, phoneNumber, adminEmail } = req.body
+  if (!name || !email || !message || !url || !adminEmail) {
     return res.status(400).json({ error: "Missing required fields" })
   }
 
@@ -40,21 +40,23 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
         ],
         bcc: [
           {
-            email: "dennis@dem-it.nl",
+            email: adminEmail,
             name: "Admin Price configurator Dem IT",
           }
         ]
       }
     ],
-    to: "dennis.rosenbaum@outlook.com",
+    to: email,
     from: "dennis@dem-it.nl",
-    bcc: "dennis@dem-it.nl",
+    bcc: adminEmail,
     subject: "Bedankt voor uw aanvraag",
     templateId: "d-8a655dc9a5f342789371a1abab78e604",
     dynamic_template_data: {
       email: email,
       first_name: name,
       content: message,
+      url: url,
+      phone_number: phoneNumber
     },
   }
 

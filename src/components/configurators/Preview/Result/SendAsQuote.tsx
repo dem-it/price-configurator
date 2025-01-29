@@ -11,6 +11,15 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
   const [status, setStatus] = useState("")
   const [canSend, setCanSend] = useState(false)
   const [showMail, setShowMail] = useState(true)
+  const [phoneNumber, setPhoneNumber] = useState("")
+
+  const configuration = props.configuration
+
+  const host = typeof window !== "undefined" ? window.location.host : ""
+  const http = host.includes("localhost") ? "http" : "https"
+  const previewUrl = `${http}://${host}/configurators/${configuration.partitionKey}/${configuration.rowKey}`
+
+  const adminEmail = props.data.meta?.adminEmail ?? "dennis@dem-it.nl"
 
   useEffect(() => {
     if (name && email) {
@@ -34,6 +43,9 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
       name: name,
       email: email,
       message: constructMessage(),
+      url: previewUrl,
+      adminEmail: adminEmail,
+      phoneNumber: phoneNumber
     }
 
     try {
@@ -59,10 +71,10 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
 
   return <Stack spacing={2} direction="column">
     <p>
-            Stuur een bevestiging van de offerte naar jezelf of een ander. Wij worden hier ook van op de hoogte gebracht.
+      Stuur een bevestiging van de offerte naar jezelf of een ander. Wij worden hier ook van op de hoogte gebracht.
     </p>
     {status && <p>{status}</p>}
-    {showMail &&(
+    {showMail && (
       <>
         <TextField
           label="Naam"
@@ -76,6 +88,12 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
           onChange={(event) => setEmail(event.target.value)}
           fullWidth
         />
+        <TextField
+          label="Phone"
+          value={phoneNumber}
+          onChange={(event) => setPhoneNumber(event.target.value)}
+          fullWidth
+        />
 
         <Button
           variant="contained"
@@ -83,7 +101,7 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
           onClick={sendMail}
           disabled={!canSend}
         >
-                    Verstuur offerte
+          Verstuur offerte
         </Button>
       </>
     )}
