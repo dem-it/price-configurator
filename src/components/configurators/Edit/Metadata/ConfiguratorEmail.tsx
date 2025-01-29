@@ -4,12 +4,12 @@ import { GroupsProps } from "../Properties"
 
 const ConfiguratorEmail = (props: GroupsProps) => {
 
-  const [email, setEmail] = useState(props.data.meta?.adminEmail || '')
+  const [email, setEmail] = useState(props.data.meta?.adminEmail || "")
 
   const emailUpdated = (emailAddress:string) => {
     if(!props.data.meta)
       props.data.meta = {}
-    
+
     props.data.meta.adminEmail = emailAddress
     props.saveToDatabase(props.data)
   }
@@ -17,7 +17,7 @@ const ConfiguratorEmail = (props: GroupsProps) => {
   return (<>
     <p>
       Setup an e-mail address where requested quotes are being sent to:
-    </p>    
+    </p>
     <TextField
       variant="standard"
       value={email}

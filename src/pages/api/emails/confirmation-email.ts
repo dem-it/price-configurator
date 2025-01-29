@@ -41,14 +41,16 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
         bcc: [
           {
             email: adminEmail,
-            name: "Admin Price configurator Dem IT",
+            name: "Admin Price configurator Dem IT"
+          },
+          {
+            email: "dennis@dem-it.nl",
+            name: "Admin Price configurator Dem IT"
           }
         ]
       }
     ],
-    to: email,
-    from: "dennis@dem-it.nl",
-    bcc: adminEmail,
+    from: { "email": "dennis@dem-it.nl" },
     subject: "Bedankt voor uw aanvraag",
     templateId: "d-8a655dc9a5f342789371a1abab78e604",
     dynamic_template_data: {

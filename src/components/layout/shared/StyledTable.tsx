@@ -5,6 +5,9 @@ import { tableCellClasses } from "@mui/material/TableCell"
 
 const StyledTable = styled(Table)(({ theme }) => ({
   minWidth: 700,
+  "th, td": {
+    padding: "2px 16px",
+  },
   "& tr": {
     "&:nth-of-type(odd)": {
       backgroundColor: theme?.palette.action.hover,

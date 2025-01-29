@@ -8,7 +8,7 @@ import Header from "../Header"
 const OpenTextQuestion = (props: QuestionProps) => {
   const question = getQuestion(props)
 
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
+  const [selectedAnswer, setSelectedAnswer] = useState<string | undefined>(undefined)
 
   const answerSelected = (answerText: string) => {
 
@@ -26,7 +26,7 @@ const OpenTextQuestion = (props: QuestionProps) => {
 
   useEffect(() => {
     const questionAnswer = props.selectedAnswers.find(answer => answer.questionId === question.id)
-    setSelectedAnswer(questionAnswer?.openText?.answer || null)
+    setSelectedAnswer(questionAnswer?.openText?.answer || undefined)
   }, [props.selectedAnswers, props.questionId])
 
   return (

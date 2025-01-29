@@ -67,7 +67,7 @@ const ConfiguratorEditPage = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(name),
-    }).then((response) => {
+    }).then(() => {
       setConfiguration({ ...configuration, name: name })
       setConfigurationName(name)
     })
@@ -82,9 +82,6 @@ const ConfiguratorEditPage = () => {
   }
 
   const getTemplate = (content: JSX.Element, outerContent: JSX.Element | undefined = undefined) => {
-    const host = typeof window !== "undefined" ? window.location.host : ""
-    const http = host.includes("localhost") ? "http" : "https"
-    const previewUrl = `${http}://${host}/configurators/${user?.organizationId}/${id}`
 
     return (
       <PageContainer
