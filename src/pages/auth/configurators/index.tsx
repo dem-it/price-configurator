@@ -26,7 +26,7 @@ const ConfiguratorsPage = () => {
 
   const handleClose = (value?: boolean) => {
     setAddDialogOpen(false)
-    if(value)
+    if(value !== undefined)
       addNewConfiguration(value)
   }
 

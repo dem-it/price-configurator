@@ -18,11 +18,18 @@ const Groups = (props: GroupsProps) => {
   const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
 
   useEffect(() => {
-    setGroupName(data.groups[activeStep].title)
-    setGroupId(data.groups[activeStep].id)
+    const group = data.groups[activeStep]
+    if (!group)
+      return
+    setGroupName(group.title)
+    setGroupId(group.id)
   }, [activeStep, data])
 
   const removeGroup = (id: string) => {
+    // we don't want to remove the last group
+    if (data.groups.length <= 1)
+      return
+
     setIsRemoving(true)
   }
 
@@ -45,7 +52,7 @@ const Groups = (props: GroupsProps) => {
         onClick={handleBack}
         startIcon={<ArrowLeftIcon />}
       >
-                Back
+        Back
       </Button>
 
       {groupName}
@@ -56,7 +63,7 @@ const Groups = (props: GroupsProps) => {
         variant="contained"
         endIcon={<ArrowRightIcon />}
         disabled={activeStep >= (data?.groups.length ?? Number.MAX_VALUE) - 1}>
-                Next
+        Next
       </Button>
     </Stack>
   }
@@ -89,18 +96,20 @@ const Groups = (props: GroupsProps) => {
       <Stack direction="column" spacing={2} sx={{ marginTop: 4 }}>
         <NavigationButtons />
 
-        <Button
-          startIcon={<RemoveCircleOutlineIcon />}
-          variant='contained'
-          color='error'
-          onClick={(e) => {
-            e.stopPropagation()
-            removeGroup(groupId)
-          }}
-          sx={{ alignSelf: "flex-end" }}
-        >
-                    Remove
-        </Button>
+        {data.groups.length > 1 && (
+          <Button
+            startIcon={<RemoveCircleOutlineIcon />}
+            variant='contained'
+            color='error'
+            onClick={(e) => {
+              e.stopPropagation()
+              removeGroup(groupId)
+            }}
+            sx={{ alignSelf: "flex-end" }}
+          >
+            Remove
+          </Button>
+        )}
 
         {isRemoving && <p>Removing...</p>}
         {!isRemoving && <Group {...props} groupId={groupId} />}

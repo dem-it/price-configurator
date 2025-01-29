@@ -1,5 +1,6 @@
 import { VariantType } from "@/components/configurators/Edit/Question/Variant"
 import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
+import { formatPrice } from "@/utils/format"
 import { Grid, Paper, Stack } from "@mui/material"
 import FormControl from "@mui/material/FormControl"
 import InputLabel from "@mui/material/InputLabel"
@@ -87,6 +88,9 @@ const RegularQuestion = (props: QuestionProps) => {
                               className="description"
                               dangerouslySetInnerHTML={{ __html: answer.description }} />
                           )}
+                        {answer.surcharge != 0 && (
+                          <span>({formatPrice(answer.surcharge)})</span>
+                        )}
                       </Stack>
                     </MenuItem>
                   ))}

@@ -12,7 +12,11 @@ const Group = (props: GroupProps) => {
   const [groupName, setGroupName] = useState("")
 
   useEffect(() => {
-    setGroupName(getGroup(props).title)
+    const group = getGroup(props)
+    if (!group)
+      return
+
+    setGroupName(group.title)
   }, [props.groupId])
 
   return (

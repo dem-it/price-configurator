@@ -53,7 +53,7 @@ const Questions = (props: GroupProps) => {
     props.saveToDatabase(data)
   }
 
-  const questions = getGroup(props).questions
+  const questions = getGroup(props)?.questions ?? []
 
   return <>
     {questions.map((question, index) => {

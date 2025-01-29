@@ -23,6 +23,9 @@ const AddQuestion = (props: GroupProps) => {
       answers: []
     }
 
+    const group = getGroup()
+    if (!group.questions)
+      group.questions = []
     getGroup().questions.push(newQuestion)
 
     props.saveToDatabase(data)
