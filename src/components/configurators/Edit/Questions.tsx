@@ -1,4 +1,5 @@
 import Identifier from "@/components/display/Identifier"
+import { useSnackbar } from "@/components/hoc/SnackbarContext"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
@@ -11,8 +12,9 @@ import Question from "./Question/index"
 import { getGroup, getQuestionById } from "./utils/PropertiesUtils"
 
 const Questions = (props: GroupProps) => {
-  const configuration = props.configuration
   const data = props.data!
+
+  const { showSnackbar } = useSnackbar()
 
   const saveQuestion = (id: string, updateQuestion: (arg0: ConfigurationQuestion) => void) => {
     const updatedData = data
@@ -27,6 +29,8 @@ const Questions = (props: GroupProps) => {
   const removeQuestion = (id: string) => {
     getGroup(props).questions = getGroup(props).questions.filter(x => x.id !== id)
     props.saveToDatabase(data)
+
+    showSnackbar("Question removed", 'error')
   }
 
   const moveAnswerUp = (index: number) => {

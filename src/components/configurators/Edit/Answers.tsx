@@ -143,7 +143,6 @@ const Answers = (props: QuestionProps) => {
                 </Button>
               </Stack>
             </div>
-
             <Answer
               {...props}
               answerId={answer.id}
@@ -154,12 +153,14 @@ const Answers = (props: QuestionProps) => {
       </Stack>
     </Grid>
 
-    <Grid item xs={12}>
-      <Button
-        startIcon={<AddIcon />}
-        color="primary"
-        variant="contained" onClick={addAnswer}>Add new answer</Button>
-    </Grid>
+    {question.answers.length > 0 && (
+      <Grid item xs={12}>
+        <Button
+          startIcon={<AddIcon />}
+          color="primary"
+          variant="contained" onClick={addAnswer}>Add new answer</Button>
+      </Grid>
+    )}
   </Grid>
 }
 

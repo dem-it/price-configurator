@@ -1,5 +1,6 @@
 import ConfigurationAnswer from "./ConfigurationAnswer"
 import ConfigurationQuestionType from "./ConfigurationQuestionType"
+import ConfigurationOptionHide from "./options/ConfigurationOptionHide"
 
 export default interface ConfigurationQuestion {
     id: string;
@@ -8,4 +9,5 @@ export default interface ConfigurationQuestion {
     variant?: string;
     type: ConfigurationQuestionType;
     answers: ConfigurationAnswer[];
+    optionHide?: ConfigurationOptionHide;
 }

@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material"
 import { AnswerProps } from "../../Properties"
 import Description from "../Description"
+import OptionHide from "../OptionHide"
 import SingleRow from "../SingleRow"
 import Surcharge from "../Surcharge"
 import { CustomTabs, CustomTabsProps } from "../Tabs"
@@ -22,6 +23,10 @@ const RegularAnswer = (props: AnswerProps) => {
       {
         label: "Image",
         content: <UploadImage {...props} />
+      },
+      {
+        label: "Options",
+        content: <OptionHide {...props} />
       }
     ]
   }

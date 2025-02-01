@@ -9,6 +9,7 @@ import Select from "@mui/material/Select"
 import { useEffect, useState } from "react"
 import Answer from "../../Answer"
 import { QuestionProps } from "../../Properties"
+import { checkIfNeedsToBeHidden } from "../../utils/OptionHideUtils"
 import { getQuestion } from "../../utils/PropertiesUtils"
 import Header from "../Header"
 
@@ -35,6 +36,12 @@ const RegularQuestion = (props: QuestionProps) => {
     const questionAnswer = props.selectedAnswers.find(answer => answer.questionId === question.id)
     setSelectedAnswer(questionAnswer?.regular?.answerId || null)
   }, [props.selectedAnswers, props.questionId])
+
+  const getAnswersToShow = () => {
+    return question.answers.filter(x => {
+      return !checkIfNeedsToBeHidden({ optionHide: x.optionHide, propsWithAnswers: props })
+    })
+  }
 
   return (
     <Stack
@@ -66,7 +73,7 @@ const RegularQuestion = (props: QuestionProps) => {
                     <em>Select an answer</em>
                   </MenuItem>
 
-                  {question.answers.map((answer) => (
+                  {getAnswersToShow().map((answer) => (
                     <MenuItem key={answer.id} value={answer.id}>
                       <Stack direction="row" spacing={2} alignItems="center">
                         {answer.imageId && (
@@ -100,7 +107,7 @@ const RegularQuestion = (props: QuestionProps) => {
           </>
         ) : (
           <>
-            {question.answers.map((answer) => {
+            {getAnswersToShow().map((answer) => {
               const isSelected = selectedAnswer === answer.id
               return <Grid
                 item

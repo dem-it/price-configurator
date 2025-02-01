@@ -27,32 +27,36 @@ const Variant = (props: QuestionProps) => {
     return <></>
 
   return <>
-    <Grid item xs={2}>Variant ({variant})</Grid>
-    <Grid item xs={5}>
-      <Box
-        className={`variant ${variant === VariantType.Regular ? "selected" : ""}`}
-        onClick={() => updateVariant(VariantType.Regular)}
-      >
-        <img
-          src="/images/configurator/regular-question.png"
-          title="Regular"
-          alt="Regular question"
-          style={{ height: "120px", maxWidth: "100%" }} />
-      </Box>
+    <Grid item container xs={12}>
+
+      <Grid item xs={12}>Selected variant: ({variant})</Grid>
+      <Grid item xs={6}>
+        <Box
+          className={`variant ${variant === VariantType.Regular ? "selected" : ""}`}
+          onClick={() => updateVariant(VariantType.Regular)}
+        >
+          <img
+            src="/images/configurator/regular-question.png"
+            title="Regular"
+            alt="Regular question"
+            style={{ height: "120px", maxWidth: "100%" }} />
+        </Box>
+      </Grid>
+
+      <Grid item xs={6}>
+        <Box
+          className={`variant ${variant === VariantType.Dropdown ? "selected" : ""}`}
+          onClick={() => updateVariant(VariantType.Dropdown)}
+        >
+          <img
+            src="/images/configurator/regular-question-dropdown.png"
+            title="Dropdown"
+            alt="Dropdown question"
+            style={{ height: "120px", maxWidth: "100%" }} />
+        </Box>
+      </Grid>
     </Grid>
 
-    <Grid item xs={5}>
-      <Box
-        className={`variant ${variant === VariantType.Dropdown ? "selected" : ""}`}
-        onClick={() => updateVariant(VariantType.Dropdown)}
-      >
-        <img
-          src="/images/configurator/regular-question-dropdown.png"
-          title="Dropdown"
-          alt="Dropdown question"
-          style={{ height: "120px", maxWidth: "100%" }} />
-      </Box>
-    </Grid>
   </>
 }
 

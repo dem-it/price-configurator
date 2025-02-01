@@ -1,3 +1,4 @@
+import { SnackbarProvider } from "@/components/hoc/SnackbarContext"
 import { baselightTheme } from "@/utils/theme/DefaultColors"
 import { Auth0Provider } from "@auth0/auth0-react"
 import CssBaseline from "@mui/material/CssBaseline"
@@ -26,16 +27,17 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       cacheLocation="localstorage"
       authorizationParams={{
         redirect_uri:
-            typeof window !== "undefined" ? window.location.origin : undefined,
+          typeof window !== "undefined" ? window.location.origin : undefined,
       }}
     >
       <ThemeProvider theme={baselightTheme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-
+        <SnackbarProvider>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </SnackbarProvider>
       </ThemeProvider>
     </Auth0Provider>
   </>

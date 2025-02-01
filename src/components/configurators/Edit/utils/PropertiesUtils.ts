@@ -28,3 +28,7 @@ export const getAnswerById = (questionProps: QuestionProps, answerId: string) : 
 export const getAnswer = (answerProps: AnswerProps) : ConfigurationAnswer => {
   return getAnswerById(answerProps, answerProps.answerId)
 }
+
+export const getAllQuestions = (groupsProps: GroupsProps) : ConfigurationQuestion[] => {
+  return groupsProps.data.groups.flatMap(group => group.questions)
+}

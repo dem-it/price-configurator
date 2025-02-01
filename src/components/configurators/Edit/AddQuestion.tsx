@@ -1,3 +1,4 @@
+import { useSnackbar } from "@/components/hoc/SnackbarContext"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import ConfigurationQuestionType from "@/data/configurator/ConfigurationQuestionType"
 import { calculateRandomConfigurationQuestionId } from "@/utils/calculations/calculateNewConfigurationId"
@@ -7,6 +8,8 @@ import { GroupProps } from "./Properties"
 
 const AddQuestion = (props: GroupProps) => {
   const data = props.data
+
+  const { showSnackbar } = useSnackbar()
 
   const getGroup = () => data.groups.find(x => x.id === props.groupId)!
   const addRegularQuestion = () => addQuestion(ConfigurationQuestionType.Regular)
@@ -29,6 +32,8 @@ const AddQuestion = (props: GroupProps) => {
     getGroup().questions.push(newQuestion)
 
     props.saveToDatabase(data)
+
+    showSnackbar("Question added", 'success')
   }
 
   return (

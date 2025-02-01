@@ -3,6 +3,7 @@ import { formatPrice } from "@/utils/format"
 import { Checkbox, FormControlLabel, Stack } from "@mui/material"
 import { useEffect, useState } from "react"
 import { QuestionProps } from "../../Properties"
+import { checkIfNeedsToBeHidden } from "../../utils/OptionHideUtils"
 import { getQuestion } from "../../utils/PropertiesUtils"
 import Header from "../Header"
 
@@ -34,6 +35,12 @@ const MultipleQuestion = (props: QuestionProps) => {
     setSelectedAnswers(questionAnswer?.multiple?.answerIds || [])
   }, [props.selectedAnswers, question])
 
+  const getAnswersToShow = () => {
+    return question.answers.filter(x => {
+      return !checkIfNeedsToBeHidden({ optionHide: x.optionHide, propsWithAnswers: props })
+    })
+  }
+
   return (
     <Stack
       id={`question-${question.id}`}
@@ -42,7 +49,7 @@ const MultipleQuestion = (props: QuestionProps) => {
       <Header {...props} />
 
       <Stack direction="column" spacing={1}>
-        {question.answers.map((answer) => {
+        {getAnswersToShow().map((answer) => {
           const isSelected = selectedAnswers.includes(answer.id)
 
           const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
