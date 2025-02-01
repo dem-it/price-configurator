@@ -30,7 +30,7 @@ const Questions = (props: GroupProps) => {
     getGroup(props).questions = getGroup(props).questions.filter(x => x.id !== id)
     props.saveToDatabase(data)
 
-    showSnackbar("Question removed", 'error')
+    showSnackbar("Question removed", "error")
   }
 
   const moveAnswerUp = (index: number) => {

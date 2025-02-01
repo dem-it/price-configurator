@@ -12,8 +12,8 @@ const Question = (props: QuestionProps) => {
 
   if(!type)
     return <></>
-    
-  if(checkIfNeedsToBeHidden({optionHide: question.optionHide, propsWithAnswers: props}))
+
+  if(checkIfNeedsToBeHidden({ optionHide: question.optionHide, propsWithAnswers: props }))
     return <></>
   if (type === ConfigurationQuestionType.Regular)
     return <RegularQuestion {...props} />

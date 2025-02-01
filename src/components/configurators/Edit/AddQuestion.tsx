@@ -33,7 +33,7 @@ const AddQuestion = (props: GroupProps) => {
 
     props.saveToDatabase(data)
 
-    showSnackbar("Question added", 'success')
+    showSnackbar("Question added", "success")
   }
 
   return (

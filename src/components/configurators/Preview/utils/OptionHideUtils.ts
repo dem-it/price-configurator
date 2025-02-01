@@ -18,18 +18,17 @@ export const checkIfNeedsToBeHidden = (props: OptionHideProps) => {
   const question = getQuestionByIdWithProps(groupProps, optionHide.questionId)
   const selectedAnswer = groupProps.selectedAnswers.find(x => x.questionId === optionHide.questionId)
 
-  console.log("Question", question)
   switch (question.type) {
-    case ConfigurationQuestionType.Regular:
-      if (selectedAnswer?.regular?.answerId === optionHide.answerId)
-        return true
-      break
-    case ConfigurationQuestionType.Multiple:
-      if (selectedAnswer?.multiple?.answerIds.includes(optionHide.answerId))
-        return true
-      break
-    case ConfigurationQuestionType.OpenText:
-      break
+  case ConfigurationQuestionType.Regular:
+    if (selectedAnswer?.regular?.answerId === optionHide.answerId)
+      return true
+    break
+  case ConfigurationQuestionType.Multiple:
+    if (selectedAnswer?.multiple?.answerIds.includes(optionHide.answerId))
+      return true
+    break
+  case ConfigurationQuestionType.OpenText:
+    break
   }
   return false
 }

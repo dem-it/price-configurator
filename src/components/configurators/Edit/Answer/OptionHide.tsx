@@ -1,8 +1,8 @@
 import ConfigurationAnswer from "@/data/configurator/ConfigurationAnswer"
 import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material"
-import Button from '@mui/material/Button'
+import Button from "@mui/material/Button"
 import { useEffect, useState } from "react"
 import "react-quill/dist/quill.snow.css"
 import { AnswerProps } from "../Properties"
@@ -28,13 +28,13 @@ const OptionHide = (props: AnswerProps) => {
     props.saveAnswer(answer.id, (x) => {
       x.optionHide = optionHide
     })
-    
+
   }, [selectedAnswerId])
 
   const clearQuestion = () => {
     setSelectedQuestionId(undefined)
     setSelectedAnswerId(undefined)
-    
+
     props.saveAnswer(answer.id, (x) => {
       x.optionHide = undefined
     })
@@ -59,13 +59,12 @@ const OptionHide = (props: AnswerProps) => {
 
   return <>
     <Grid container spacing={2} alignItems="center">
-      <Grid item xs={6} style={{ textAlign: 'right' }}>        
+      <Grid item xs={6} style={{ textAlign: "right" }}>
         <b>Hide when this question</b>
       </Grid>
-      <Grid item xs={6} style={{ textAlign: 'left' }}>
+      <Grid item xs={6} style={{ textAlign: "left" }}>
         <b>is answered with this answer</b>
       </Grid>
-
 
       <Grid item xs={6}>
         <FormControl fullWidth>
@@ -103,15 +102,15 @@ const OptionHide = (props: AnswerProps) => {
           </FormControl>
         </Grid>
       )}
-      
+
       {selectedAnswerId && (
         <Grid item xs={12}>
-          <Button 
-                  startIcon={<RemoveCircleOutlineIcon />}
-                  variant='contained'
-                  color='error' 
-                  onClick={clearQuestion}>Clear</Button>
-          </Grid>
+          <Button
+            startIcon={<RemoveCircleOutlineIcon />}
+            variant='contained'
+            color='error'
+            onClick={clearQuestion}>Clear</Button>
+        </Grid>
       )}
     </Grid>
   </>

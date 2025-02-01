@@ -45,7 +45,6 @@ const Question = (props: QuestionProps) => {
     return true
   }
 
-
   const tabs: CustomTabsProps = {
     tabs: [
       {

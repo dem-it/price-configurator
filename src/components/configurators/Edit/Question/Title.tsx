@@ -17,13 +17,13 @@ const Title = (props: QuestionProps) => {
 
   return <>
     <TextField
-            label="Title"
-            variant="standard"
-            sx={{ minWidth: "300px", width: "50%" }}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            onBlur={(e) => updateTitle(e.target.value)}
-          />
+      label="Title"
+      variant="standard"
+      sx={{ minWidth: "300px", width: "50%" }}
+      value={title}
+      onChange={(e) => setTitle(e.target.value)}
+      onBlur={(e) => updateTitle(e.target.value)}
+    />
   </>
 }
 
