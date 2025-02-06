@@ -95,7 +95,7 @@ const RegularQuestion = (props: QuestionProps) => {
                               className="description"
                               dangerouslySetInnerHTML={{ __html: answer.description }} />
                           )}
-                        {answer.surcharge != 0 && (
+                        {!answer.surchargeHidden && (
                           <span>({formatPrice(answer.surcharge)})</span>
                         )}
                       </Stack>

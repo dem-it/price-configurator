@@ -35,19 +35,21 @@ const Answer = (props: AnswerProps) => {
           width={200}
         />
       )}
-      <Chip
-        className="surcharge"
-        variant="outlined"
-        label={formatPrice(answer.surcharge)}
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          padding: 1,
-          borderRadius: 1,
-          boxShadow: 1
-        }}
-      />
+      {!answer.surchargeHidden && (
+        <Chip
+          className="surcharge"
+          variant="outlined"
+          label={formatPrice(answer.surcharge)}
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            padding: 1,
+            borderRadius: 1,
+            boxShadow: 1
+          }}
+        />
+      )}
 
     </Stack>
   )
