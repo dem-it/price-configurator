@@ -112,7 +112,9 @@ const RegularQuestion = (props: QuestionProps) => {
               return <Grid
                 item
                 key={`regular-answer-${answer.id}`}
-                xs
+                xs={12}
+                md={12}
+                lg
                 onClick={() => answerSelected(answer.id)}>
                 <Paper
                   className={`${isSelected ? "answer-selected" : ""}`}
