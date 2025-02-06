@@ -1,10 +1,12 @@
 import { Button, Stack, TextField } from "@mui/material"
 import { useEffect, useState } from "react"
 import ReactDOMServer from "react-dom/server"
+import { useTranslation } from "react-i18next"
 import { PreviewPropsWithAnswers } from "../Properties"
 import ResultSmall from "../ResultSmall"
 
 const SendAsQuote = (props: PreviewPropsWithAnswers) => {
+  const { t } = useTranslation(["configurator"])
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -36,7 +38,7 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
 
   const sendMail = async () => {
 
-    setStatus("Sending email...")
+    setStatus(t("result.sending-email"))
     setShowMail(false)
 
     const data = {
@@ -58,38 +60,38 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
       })
 
       if (response.ok) {
-        setStatus("Email sent successfully!")
+        setStatus(t("result.email-sent-successfully"))
       } else {
         const data = await response.json()
-        setStatus(data.error || "Failed to send email.")
+        setStatus(data.error || t("result.email-sent-failed"))
         setShowMail(true)
       }
     } catch (error) {
-      setStatus("An unexpected error occurred.")
+      setStatus(t("result.email-sent-failed"))
     }
   }
 
   return <Stack spacing={2} direction="column">
     <p>
-      Stuur een bevestiging van de offerte naar jezelf of een ander. Wij worden hier ook van op de hoogte gebracht.
+      {t("result.send-as-quote")}
     </p>
     {status && <p>{status}</p>}
     {showMail && (
       <>
         <TextField
-          label="Naam"
+          label={t("result.form-name")}
           value={name}
           onChange={(event) => setName(event.target.value)}
           fullWidth
         />
         <TextField
-          label="Email"
+          label={t("result.form-email")}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           fullWidth
         />
         <TextField
-          label="Phone"
+          label={t("result.form-phone")}
           value={phoneNumber}
           onChange={(event) => setPhoneNumber(event.target.value)}
           fullWidth
@@ -101,7 +103,7 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
           onClick={sendMail}
           disabled={!canSend}
         >
-          Verstuur offerte
+          {t("result.send-quote-button")}
         </Button>
       </>
     )}

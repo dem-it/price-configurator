@@ -3,10 +3,12 @@ import ConfigurationQuestion from "@/data/configurator/ConfigurationQuestion"
 import { SelectedAnswerUtils } from "@/data/configurator/selection/SelectedAnswer"
 import { formatPrice } from "@/utils/format"
 import { Paper } from "@mui/material"
+import { useTranslation } from "react-i18next"
 import { PreviewPropsWithAnswers } from "./Properties"
 import { getQuestionByIdWithProps } from "./utils/PropertiesUtils"
 
 const ResultSmall = (props: PreviewPropsWithAnswers) => {
+  const { t, i18n } = useTranslation(["configurator"])
 
   const getQuestion = (questionId: string): ConfigurationQuestion => {
     return getQuestionByIdWithProps(props, questionId)
@@ -34,9 +36,9 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
   return (
     <Paper
       sx={{ padding: 2 }}>
-      <h2>Result</h2>
-      Selected options:
-      {props.selectedAnswers.length === 0 && <p>No options selected</p>}
+      <h2>{t("resultsmall.title")}</h2>
+      {t("resultsmall.selected-options")}
+      {props.selectedAnswers.length === 0 && <p>{t("resultsmall.no-options-selected")}</p>}
       <ul>
         {props.selectedAnswers.map((answer, index) => {
           const question = getQuestion(answer.questionId)
@@ -54,7 +56,7 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
 
       {openTextAnswers.length > 0 && (
         <>
-          Open text answers:
+          {t("resultsmall.open-text-answers")}
           <ul>
             {openTextAnswers.map((answer) => {
               const question = getQuestion(answer.questionId)
@@ -70,7 +72,7 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
       )}
       <hr />
       <b>
-        Grand total: {formatPrice(getTotalPrice())}
+        {t("resultsmall.grand-total")} {formatPrice(getTotalPrice())}
       </b>
     </Paper>
   )

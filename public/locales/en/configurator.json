@@ -1,0 +1,32 @@
+{
+    "common": {
+        "button-next": "Next",
+        "button-back": "Back",
+        "button-done": "Finish"
+    },
+    "resultsmall": {
+        "title": "Result",
+        "selected-options": "Selected options",
+        "no-options-selected": "No options selected",
+        "open-text-answers": "Open text answers:",
+        "grand-total": "Grand total:"
+    },
+    "result": {
+        "title": "Result",
+        "table-header-question": "Question",
+        "table-header-answer": "Answer",
+        "table-header-price": "Price",
+        "total": "Grand total:",
+        "sending-email": "Sending email...",
+        "email-sent-successfully": "Email sent successfully.",
+        "email-sent-failed": "An unexpected error occurred while sending the mail.",
+        "send-as-quote": "Send a convirmation of the quote to yourself or someone else. We will also be notified of this message.",
+        "send-quote-button": "Send quote",
+        "form-name": "Name",
+        "form-email": "Email",
+        "form-phone": "Phone",
+        "finished": "All steps completed - you&apos;re finished.",
+        "finished-email": "Feel free to email us and we will send you a custom quote within 48 hours!",
+        "start-again-button": "Start again"
+    }
+}

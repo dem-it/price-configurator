@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack"
 import { useState } from "react"
 import { GroupsProps } from "../Properties"
 import ConfiguratorEmail from "./ConfiguratorEmail"
+import ConfiguratorLanguage from "./ConfiguratorLanguage"
 
 const Metadata = (props: GroupsProps) => {
   const [tabIndex, setTabIndex] = useState(0)
@@ -49,6 +50,7 @@ const Metadata = (props: GroupsProps) => {
         {tabIndex === 1 && (
           <>
             <ConfiguratorEmail {...props} />
+            <ConfiguratorLanguage {...props} />
           </>
         )}
       </Box>

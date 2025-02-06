@@ -1,0 +1,32 @@
+{
+    "common": {
+        "button-next": "Volgende",
+        "button-back": "Terug",
+        "button-done": "Afronden"
+    },
+    "resultsmall": {
+        "title": "Resultaat",
+        "selected-options": "Geselecteerde opties",
+        "no-options-selected": "Geen opties geselecteerd",
+        "open-text-answers": "Open tekst antwoorden:",
+        "grand-total": "Totaalprijs:"
+    },
+    "result": {
+        "title": "Resultaat",
+        "table-header-question": "Vraag",
+        "table-header-answer": "Antwoord",
+        "table-header-price": "Prijs",
+        "total": "Totaalprijs:",
+        "sending-email": "E-mail wordt opgestuurd...",
+        "email-sent-successfully": "E-mail is verstuurd.",
+        "email-sent-failed": "Er ontstond een fout tijdens het sturen van de mail.",
+        "send-as-quote": "Stuur een bevestiging van de offerte naar jezelf of een ander. Wij worden hier ook van op de hoogte gebracht.",
+        "send-quote-button": "Verstuur offerte",
+        "form-name": "Naam",
+        "form-email": "E-mail",
+        "form-phone": "Telefoonnummer",
+        "finished": "Alle stappen zijn voldaan, je bent klaar.",
+        "finished-email": "Stuur ons een e-mail en we sturen je binnen 48 uur een offerte op maat!",
+        "start-again-button": "Begin opnieuw"
+      }
+}

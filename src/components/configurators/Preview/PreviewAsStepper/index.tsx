@@ -4,6 +4,7 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import { Button, Stack, Step, StepLabel, Stepper } from "@mui/material"
 import * as React from "react"
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { PreviewPropsWithAnswers } from "../Properties"
 import QuestionsPreview from "../Questions/index"
 import { calculateCanGoNext } from "../utils/CalculationUtils"
@@ -11,6 +12,7 @@ import Finished from "./Finished"
 import Template from "./Template"
 
 const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
+  const { t } = useTranslation(["configurator"])
 
   const [activeStep, setActiveStep] = useState(0)
   const [currentGroup, setCurrentGroup] = useState(props.data.groups[activeStep])
@@ -50,7 +52,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
         onClick={handleBack}
         startIcon={<ArrowLeftIcon />}
       >
-        Back
+        {t("common.button-back")}
       </Button>
 
       {innerContent}
@@ -61,7 +63,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
         variant="contained"
         endIcon={<ArrowRightIcon />}
         disabled={!canGoNext}>
-        {isLastStep ? "Finish" : "Next"}
+        {isLastStep ? t("common.button-done") : t("common.button-next")}
       </Button>
     </Stack>
   }

@@ -9,11 +9,13 @@ import Chip from "@mui/material/Chip"
 import IconButton from "@mui/material/IconButton"
 import Popover from "@mui/material/Popover"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { PreviewPropsWithAnswers } from "../Properties"
 import { getQuestionByIdWithProps } from "../utils/PropertiesUtils"
 import SendAsQuote from "./SendAsQuote"
 
 const Result = (props: PreviewPropsWithAnswers) => {
+  const { t } = useTranslation(["configurator"])
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [popoverContent, setPopoverContent] = useState<string>("")
@@ -44,13 +46,13 @@ const Result = (props: PreviewPropsWithAnswers) => {
   return (
     <Stack direction="column" spacing={2} className="result">
 
-      <h2>Result</h2>
+      <h2>{t("result.title")}</h2>
       <StyledTable>
         <TableHead>
           <TableRow>
-            <TableCell>Question</TableCell>
-            <TableCell>Answer</TableCell>
-            <TableCell>Price</TableCell>
+            <TableCell>{t("result.table-header-question")}</TableCell>
+            <TableCell>{t("result.table-header-answer")}</TableCell>
+            <TableCell>{t("result.table-header-price")}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -121,7 +123,7 @@ const Result = (props: PreviewPropsWithAnswers) => {
               colSpan={2}
               align="right"
               style={{ fontWeight: "bold" }}>
-              Grand total:
+              {t("result.total")}
             </TableCell>
             <TableCell
               style={{ fontWeight: "bold" }}>
