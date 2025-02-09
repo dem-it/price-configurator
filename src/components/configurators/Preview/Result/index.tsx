@@ -86,7 +86,11 @@ const Result = (props: PreviewPropsWithAnswers) => {
                           </IconButton>
                         </>)}
                   </TableCell>
-                  <TableCell>{formatPrice(configurationAnswer.surcharge)}</TableCell>
+                  <TableCell>
+                    {!configurationAnswer.surchargeHidden && (
+                      formatPrice(configurationAnswer.surcharge)
+                    )}
+                  </TableCell>
                 </TableRow>
               )
             })

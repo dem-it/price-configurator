@@ -5,14 +5,14 @@
         "button-done": "Finish"
     },
     "resultsmall": {
-        "title": "Result",
-        "selected-options": "Selected options",
+        "title": "Summary",
+        "selected-options": "Your selection",
         "no-options-selected": "No options selected",
         "open-text-answers": "Open text answers:",
         "grand-total": "Indication grand total:"
     },
     "result": {
-        "title": "Result",
+        "title": "Summary",
         "table-header-question": "Question",
         "table-header-answer": "Answer",
         "table-header-price": "Price",

@@ -5,14 +5,14 @@
         "button-done": "Afronden"
     },
     "resultsmall": {
-        "title": "Resultaat",
-        "selected-options": "Geselecteerde opties",
+        "title": "Samenvatting",
+        "selected-options": "Jouw selectie",
         "no-options-selected": "Geen opties geselecteerd",
         "open-text-answers": "Open tekst antwoorden:",
         "grand-total": "Indicatie totaalprijs:"
     },
     "result": {
-        "title": "Resultaat",
+        "title": "Samenvatting",
         "table-header-question": "Vraag",
         "table-header-answer": "Antwoord",
         "table-header-price": "Prijs",

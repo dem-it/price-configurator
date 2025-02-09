@@ -48,7 +48,7 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
           return answers.map(answerId => {
             const configurationAnswer = getAnswer(question, answerId)
             return <li key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
-              {question.title}: {configurationAnswer.title} ({formatPrice(configurationAnswer.surcharge)})
+              {configurationAnswer.title} {!configurationAnswer.surchargeHidden && (<><br />+ {formatPrice(configurationAnswer.surcharge)}</>)}
             </li>
           })
         })}
@@ -63,7 +63,8 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
 
               return (
                 <li key={`result-question-${question.id}-answer`}>
-                  {question.title}: {answer.openText?.answer}
+                  <b>{question.title}</b>
+                  <br />{answer.openText?.answer}
                 </li>
               )
             })}
@@ -72,7 +73,8 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
       )}
       <hr />
       <b>
-        {t("resultsmall.grand-total")} {formatPrice(getTotalPrice())}
+        {t("resultsmall.grand-total")}
+        <br />{formatPrice(getTotalPrice())}
       </b>
     </Paper>
   )
