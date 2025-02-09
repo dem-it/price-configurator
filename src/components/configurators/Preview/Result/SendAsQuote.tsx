@@ -63,7 +63,7 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
         setStatus(t("result.email-sent-successfully"))
       } else {
         const data = await response.json()
-        setStatus(data.error || t("result.email-sent-failed"))
+        setStatus(data.error || t("result.email-sent-failed" + ": " + data.error))
         setShowMail(true)
       }
     } catch (error) {

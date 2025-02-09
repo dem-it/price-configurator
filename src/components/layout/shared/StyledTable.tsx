@@ -7,6 +7,8 @@ const StyledTable = styled(Table)(({ theme }) => ({
   minWidth: 700,
   "th, td": {
     padding: "2px 16px",
+    minHeight: "40px",
+    height: "40px"
   },
   "& tr": {
     "&:nth-of-type(odd)": {

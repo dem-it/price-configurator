@@ -9,24 +9,24 @@
         "selected-options": "Geselecteerde opties",
         "no-options-selected": "Geen opties geselecteerd",
         "open-text-answers": "Open tekst antwoorden:",
-        "grand-total": "Totaalprijs:"
+        "grand-total": "Indicatie totaalprijs:"
     },
     "result": {
         "title": "Resultaat",
         "table-header-question": "Vraag",
         "table-header-answer": "Antwoord",
         "table-header-price": "Prijs",
-        "total": "Totaalprijs:",
+        "total": "Indicatie totaalprijs:",
         "sending-email": "E-mail wordt opgestuurd...",
         "email-sent-successfully": "E-mail is verstuurd.",
         "email-sent-failed": "Er ontstond een fout tijdens het sturen van de mail.",
-        "send-as-quote": "Stuur een bevestiging van de offerte naar jezelf of een ander. Wij worden hier ook van op de hoogte gebracht.",
-        "send-quote-button": "Verstuur offerte",
+        "send-as-quote": "Laat je gegevens achter en wij nemen binnen 48 uur contact met je op.",
+        "send-quote-button": "Verstuur",
         "form-name": "Naam",
         "form-email": "E-mail",
         "form-phone": "Telefoonnummer",
-        "finished": "Alle stappen zijn voldaan, je bent klaar.",
-        "finished-email": "Stuur ons een e-mail en we sturen je binnen 48 uur een offerte op maat!",
+        "finished": "Alle stappen zijn uitgevoerd.",
+        "finished-email": "Hieronder nog een beknopt overzicht van je keuzes. Verstuur je aanvraag en wij nemen binnen 48 uur contact met je op. De prijs is een indicatie en hangt van de daadwerkelijke inkoopprijs en (rest-)BPM van de bus.",
         "start-again-button": "Begin opnieuw"
       }
 }

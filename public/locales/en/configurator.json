@@ -9,24 +9,24 @@
         "selected-options": "Selected options",
         "no-options-selected": "No options selected",
         "open-text-answers": "Open text answers:",
-        "grand-total": "Grand total:"
+        "grand-total": "Indication grand total:"
     },
     "result": {
         "title": "Result",
         "table-header-question": "Question",
         "table-header-answer": "Answer",
         "table-header-price": "Price",
-        "total": "Grand total:",
+        "total": "Indication grand total:",
         "sending-email": "Sending email...",
         "email-sent-successfully": "Email sent successfully.",
         "email-sent-failed": "An unexpected error occurred while sending the mail.",
-        "send-as-quote": "Send a convirmation of the quote to yourself or someone else. We will also be notified of this message.",
-        "send-quote-button": "Send quote",
+        "send-as-quote": "Leave your details and we will contact you within 48 hours.",
+        "send-quote-button": "Send",
         "form-name": "Name",
         "form-email": "Email",
         "form-phone": "Phone",
-        "finished": "All steps completed - you&apos;re finished.",
-        "finished-email": "Feel free to email us and we will send you a custom quote within 48 hours!",
+        "finished": "All steps are completed.",
+        "finished-email": "Below is another brief overview of your choices. Submit your request and we will contact you within 48 hours. The price is an indication and depends on the actual purchase price and (residual) BPM of the bus.",
         "start-again-button": "Start again"
     }
 }
