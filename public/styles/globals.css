@@ -26,3 +26,7 @@ h2, h3 {
   .edit .question .variant:hover {
   border: 2px solid gray!important;
 }
+
+.MuiButton-root {
+  text-transform: none;
+}
