@@ -152,6 +152,16 @@ const UploadImage = (props: AnswerProps) => {
     setImageHeight(height)
   }
 
+  const removeImage = () => {
+    setImageId(undefined)
+    props.saveAnswer(answer.id, (x) => x.imageId = undefined)
+  }
+
+  const removeImageUrl = () => {
+    setImageUrl("")
+    props.saveAnswer(answer.id, (x) => x.imageUrl = "")
+  }
+
   return <>
     <Stack direction="column" spacing={1}>
       <Button
@@ -162,15 +172,23 @@ const UploadImage = (props: AnswerProps) => {
       </Button>
 
       {imageId && (
-        <img
-          src={`/api/blobs/images/${imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
-          alt="Answer"
-          style={{
-            width: imageWidth ? constructSizeForDatabase(imageWidth, imageWidthOption) : "200px",
-            height: imageHeight ? constructSizeForDatabase(imageHeight, imageHeightOption) : "auto",
-            maxWidth: imageWidthOption === ImageSizeOption.Auto ? "max-content" : "100%"
-          }}
-        />
+        <>
+          <img
+            src={`/api/blobs/images/${imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
+            alt="Answer"
+            style={{
+              width: imageWidth ? constructSizeForDatabase(imageWidth, imageWidthOption) : "200px",
+              height: imageHeight ? constructSizeForDatabase(imageHeight, imageHeightOption) : "auto",
+              maxWidth: imageWidthOption === ImageSizeOption.Auto ? "max-content" : "100%"
+            }}
+          />
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={removeImage}>
+            Remove image
+          </Button>
+        </>
       )}
 
       <TextField
@@ -182,15 +200,23 @@ const UploadImage = (props: AnswerProps) => {
       />
 
       {imageUrl && (
-        <img
-          src={imageUrl}
-          alt="Answer"
-          style={{
-            width: imageWidth ? constructSizeForDatabase(imageWidth, imageWidthOption) : "200px",
-            height: imageHeight ? constructSizeForDatabase(imageHeight, imageHeightOption) : "auto",
-            maxWidth: imageWidthOption === ImageSizeOption.Auto ? "max-content" : "100%"
-          }}
-        />
+        <>
+          <img
+            src={imageUrl}
+            alt="Answer"
+            style={{
+              width: imageWidth ? constructSizeForDatabase(imageWidth, imageWidthOption) : "200px",
+              height: imageHeight ? constructSizeForDatabase(imageHeight, imageHeightOption) : "auto",
+              maxWidth: imageWidthOption === ImageSizeOption.Auto ? "max-content" : "100%"
+            }}
+          />
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={removeImageUrl}>
+            Remove image URL
+          </Button>
+        </>
       )}
 
       <Grid container spacing={2}>
