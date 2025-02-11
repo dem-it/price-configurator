@@ -148,13 +148,6 @@ const Answers = (props: QuestionProps) => {
               answerId={answer.id}
               answerIndex={index}
               saveAnswer={saveAnswer} />
-            {answer.imageUrl && (
-              <img
-                src={answer.imageUrl}
-                alt="Answer"
-                width={200}
-              />
-            )}
           </Paper>
         })}
       </Stack>
