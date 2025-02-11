@@ -157,11 +157,6 @@ const UploadImage = (props: AnswerProps) => {
     props.saveAnswer(answer.id, (x) => x.imageId = undefined)
   }
 
-  const removeImageUrl = () => {
-    setImageUrl("")
-    props.saveAnswer(answer.id, (x) => x.imageUrl = "")
-  }
-
   return <>
     <Stack direction="column" spacing={1}>
       <Button
@@ -172,23 +167,27 @@ const UploadImage = (props: AnswerProps) => {
       </Button>
 
       {imageId && (
-        <>
-          <img
-            src={`/api/blobs/images/${imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
-            alt="Answer"
-            style={{
-              width: imageWidth ? constructSizeForDatabase(imageWidth, imageWidthOption) : "200px",
-              height: imageHeight ? constructSizeForDatabase(imageHeight, imageHeightOption) : "auto",
-              maxWidth: imageWidthOption === ImageSizeOption.Auto ? "max-content" : "100%"
-            }}
-          />
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={removeImage}>
-            Remove image
-          </Button>
-        </>
+        <Grid container spacing={2}>
+          <Grid item xs style={{ paddingLeft: 0 }}>
+            <img
+              src={`/api/blobs/images/${imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
+              alt="Answer"
+              style={{
+                width: imageWidth ? constructSizeForDatabase(imageWidth, imageWidthOption) : "200px",
+                height: imageHeight ? constructSizeForDatabase(imageHeight, imageHeightOption) : "auto",
+                maxWidth: imageWidthOption === ImageSizeOption.Auto ? "max-content" : "100%"
+              }}
+            />
+          </Grid>
+          <Grid item xs={'auto'}  style={{ paddingRight: 16 }}>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={removeImage}>
+              Remove image
+            </Button>
+          </Grid>
+        </Grid>
       )}
 
       <TextField
@@ -200,23 +199,15 @@ const UploadImage = (props: AnswerProps) => {
       />
 
       {imageUrl && (
-        <>
-          <img
-            src={imageUrl}
-            alt="Answer"
-            style={{
-              width: imageWidth ? constructSizeForDatabase(imageWidth, imageWidthOption) : "200px",
-              height: imageHeight ? constructSizeForDatabase(imageHeight, imageHeightOption) : "auto",
-              maxWidth: imageWidthOption === ImageSizeOption.Auto ? "max-content" : "100%"
-            }}
-          />
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={removeImageUrl}>
-            Remove image URL
-          </Button>
-        </>
+        <img
+          src={imageUrl}
+          alt="Answer"
+          style={{
+            width: imageWidth ? constructSizeForDatabase(imageWidth, imageWidthOption) : "200px",
+            height: imageHeight ? constructSizeForDatabase(imageHeight, imageHeightOption) : "auto",
+            maxWidth: imageWidthOption === ImageSizeOption.Auto ? "max-content" : "100%"
+          }}
+        />
       )}
 
       <Grid container spacing={2}>
@@ -238,14 +229,14 @@ const UploadImage = (props: AnswerProps) => {
         <Grid item xs={4}>
           {(imageWidthOption === ImageSizeOption.SpecifyInPercentage ||
             imageWidthOption === ImageSizeOption.SpecifyInPixels) && (
-            <TextField
-              label="Width"
-              variant="outlined"
-              value={imageWidth}
-              onChange={handleImageWidthChange}
-              fullWidth
-            />
-          )}
+              <TextField
+                label="Width"
+                variant="outlined"
+                value={imageWidth}
+                onChange={handleImageWidthChange}
+                fullWidth
+              />
+            )}
         </Grid>
         <Grid item xs={4}></Grid>
 
@@ -265,14 +256,14 @@ const UploadImage = (props: AnswerProps) => {
         <Grid item xs={4}>
           {(imageHeightOption === ImageSizeOption.SpecifyInPercentage ||
             imageHeightOption === ImageSizeOption.SpecifyInPixels) && (
-            <TextField
-              label="Height"
-              variant="outlined"
-              value={imageHeight}
-              onChange={handleImageHeightChange}
-              fullWidth
-            />
-          )}
+              <TextField
+                label="Height"
+                variant="outlined"
+                value={imageHeight}
+                onChange={handleImageHeightChange}
+                fullWidth
+              />
+            )}
         </Grid>
         <Grid item xs={4}></Grid>
       </Grid>
