@@ -32,14 +32,16 @@ const Answer = (props: AnswerProps) => {
         <img
           src={`/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
           alt="Answer"
-          width={200}
+          width={answer.imageWidth}
+          height={answer.imageHeight}
         />
       )}
       {answer.imageUrl && (
         <img
           src={answer.imageUrl}
           alt="Answer"
-          width={200}
+          width={answer.imageWidth}
+          height={answer.imageHeight}
         />
       )}
       {!answer.surchargeHidden && (

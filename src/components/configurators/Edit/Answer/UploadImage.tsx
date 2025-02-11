@@ -9,6 +9,8 @@ const UploadImage = (props: AnswerProps) => {
 
   const [imageId, setImageId] = useState(answer.imageId)
   const [imageUrl, setImageUrl] = useState(answer.imageUrl || "")
+  const [imageWidth, setImageWidth] = useState(answer.imageWidth || "")
+  const [imageHeight, setImageHeight] = useState(answer.imageHeight || "")
 
   const uploadImage = () => {
     //let the user select an image from their computer
@@ -68,6 +70,22 @@ const UploadImage = (props: AnswerProps) => {
     })
   }
 
+  const handleImageWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const width = event.target.value
+    setImageWidth(width)
+    props.saveAnswer(answer.id, (x) => {
+      x.imageWidth = width
+    })
+  }
+
+  const handleImageHeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const height = event.target.value
+    setImageHeight(height)
+    props.saveAnswer(answer.id, (x) => {
+      x.imageHeight = height
+    })
+  }
+
   return <>
     <Stack direction="column" spacing={1}>
       <Button
@@ -81,7 +99,8 @@ const UploadImage = (props: AnswerProps) => {
         <img
           src={`/api/blobs/images/${imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
           alt="Answer"
-          width={200}
+          width={imageWidth}
+          height={imageHeight}
         />
       )}
 
@@ -97,9 +116,26 @@ const UploadImage = (props: AnswerProps) => {
         <img
           src={imageUrl}
           alt="Answer"
-          width={200}
+          width={imageWidth}
+          height={imageHeight}
         />
       )}
+
+      <TextField
+        label="Width"
+        variant="outlined"
+        value={imageWidth}
+        onChange={handleImageWidthChange}
+        fullWidth
+      />
+
+      <TextField
+        label="Height"
+        variant="outlined"
+        value={imageHeight}
+        onChange={handleImageHeightChange}
+        fullWidth
+      />
     </Stack>
   </>
 }
