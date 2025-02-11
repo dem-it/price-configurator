@@ -18,8 +18,6 @@ const MultipleAnswer = (props: AnswerProps) => {
           <SingleRow label="Title" content={<Title {...props} />} />
           <SingleRow label="Description" content={<Description {...props} />} />
           <SingleRow label="Surcharge" content={<Surcharge {...props} />} />
-          <SingleRow label="Image Width" content={<TextField {...props} />} />
-          <SingleRow label="Image Height" content={<TextField {...props} />} />
         </Grid>
       },
       {

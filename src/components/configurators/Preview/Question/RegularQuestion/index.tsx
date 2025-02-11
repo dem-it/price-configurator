@@ -73,21 +73,31 @@ const RegularQuestion = (props: QuestionProps) => {
                     <em>Select an answer</em>
                   </MenuItem>
 
-                  {getAnswersToShow().map((answer) => (
-                    <MenuItem key={answer.id} value={answer.id}>
-                      <Stack direction="row" spacing={2} alignItems="center">
-                        {answer.imageId && (
-                          <img
-                            src={`/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
-                            alt="Answer"
-                            width={25}
-                            height={25}
-                          />
-                        )}
+                  {getAnswersToShow().map((answer) => {
+                    let imageUrl: string | undefined =  undefined
+                    if(answer.imageId)
+                      imageUrl = `/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`
+                    else if(answer.imageUrl)
+                      imageUrl = answer.imageUrl
 
-                        <span>{answer.title}</span>
+                    return (
+                      <MenuItem key={answer.id} value={answer.id}>
+                        <Stack direction="row" spacing={2} alignItems="center">
+                          {imageUrl && (
+                            <img
+                              src={imageUrl}
+                              alt="Answer"
+                              style={{
+                                width: answer.imageWidth ? answer.imageWidth : "25px",
+                                height: answer.imageHeight ? answer.imageHeight : "25px",
+                                maxWidth: answer.imageWidth === "auto" ? "max-content" : "100%"
+                              }}
+                            />
+                          )}
 
-                        {answer.description
+                          <span>{answer.title}</span>
+
+                          {answer.description
                           && answer.description.trim().length > 0
                           && answer.description != "<p><br></p>"
                           && (
@@ -95,12 +105,12 @@ const RegularQuestion = (props: QuestionProps) => {
                               className="description"
                               dangerouslySetInnerHTML={{ __html: answer.description }} />
                           )}
-                        {!answer.surchargeHidden && (
-                          <span>({formatPrice(answer.surcharge)})</span>
-                        )}
-                      </Stack>
-                    </MenuItem>
-                  ))}
+                          {!answer.surchargeHidden && (
+                            <span>({formatPrice(answer.surcharge)})</span>
+                          )}
+                        </Stack>
+                      </MenuItem>
+                    ) })}
                 </Select>
               </FormControl>
             </Grid>

@@ -61,6 +61,12 @@ const MultipleQuestion = (props: QuestionProps) => {
             answersUpdated(answers)
           }
 
+          let imageUrl: string | undefined = undefined
+          if (answer.imageId)
+            imageUrl = `/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`
+          else if (answer.imageUrl)
+            imageUrl = answer.imageUrl
+
           return (
             <Stack
               key={answer.id}
@@ -75,12 +81,16 @@ const MultipleQuestion = (props: QuestionProps) => {
 
                 />}
                 label={<Stack direction="row" spacing={2} alignItems="center">
-                  {answer.imageId && (
+
+                  {imageUrl && (
                     <img
-                      src={`/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
+                      src={imageUrl}
                       alt="Answer"
-                      width={30}
-                      height={30}
+                      style={{
+                        width: answer.imageWidth ? answer.imageWidth : "30px",
+                        height: answer.imageHeight ? answer.imageHeight : "30px",
+                        maxWidth: answer.imageWidth === "auto" ? "max-content" : "100%"
+                      }}
                     />
                   )}
 
