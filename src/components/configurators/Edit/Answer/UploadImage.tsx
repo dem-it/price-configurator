@@ -179,7 +179,7 @@ const UploadImage = (props: AnswerProps) => {
               }}
             />
           </Grid>
-          <Grid item xs={'auto'}  style={{ paddingRight: 16 }}>
+          <Grid item xs={"auto"}  style={{ paddingRight: 16 }}>
             <Button
               variant="outlined"
               color="error"
@@ -229,14 +229,14 @@ const UploadImage = (props: AnswerProps) => {
         <Grid item xs={4}>
           {(imageWidthOption === ImageSizeOption.SpecifyInPercentage ||
             imageWidthOption === ImageSizeOption.SpecifyInPixels) && (
-              <TextField
-                label="Width"
-                variant="outlined"
-                value={imageWidth}
-                onChange={handleImageWidthChange}
-                fullWidth
-              />
-            )}
+            <TextField
+              label="Width"
+              variant="outlined"
+              value={imageWidth}
+              onChange={handleImageWidthChange}
+              fullWidth
+            />
+          )}
         </Grid>
         <Grid item xs={4}></Grid>
 
@@ -256,14 +256,14 @@ const UploadImage = (props: AnswerProps) => {
         <Grid item xs={4}>
           {(imageHeightOption === ImageSizeOption.SpecifyInPercentage ||
             imageHeightOption === ImageSizeOption.SpecifyInPixels) && (
-              <TextField
-                label="Height"
-                variant="outlined"
-                value={imageHeight}
-                onChange={handleImageHeightChange}
-                fullWidth
-              />
-            )}
+            <TextField
+              label="Height"
+              variant="outlined"
+              value={imageHeight}
+              onChange={handleImageHeightChange}
+              fullWidth
+            />
+          )}
         </Grid>
         <Grid item xs={4}></Grid>
       </Grid>
