@@ -5,6 +5,7 @@ export default interface ConfigurationAnswer {
     title: string
     description: string
     imageId?: string | undefined
+    imageUrl?: string | undefined
     surchargeHidden?: boolean | undefined
     surcharge: number
     optionHide?: ConfigurationOptionHide

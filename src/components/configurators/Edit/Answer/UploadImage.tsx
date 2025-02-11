@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material"
+import { Button, Stack, TextField } from "@mui/material"
 import { useState } from "react"
 import "react-quill/dist/quill.snow.css"
 import { AnswerProps } from "../Properties"
@@ -8,6 +8,7 @@ const UploadImage = (props: AnswerProps) => {
   const answer = getAnswer(props)
 
   const [imageId, setImageId] = useState(answer.imageId)
+  const [imageUrl, setImageUrl] = useState(answer.imageUrl || "")
 
   const uploadImage = () => {
     //let the user select an image from their computer
@@ -59,6 +60,14 @@ const UploadImage = (props: AnswerProps) => {
     input.click()
   }
 
+  const handleImageUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const url = event.target.value
+    setImageUrl(url)
+    props.saveAnswer(answer.id, (x) => {
+      x.imageUrl = url
+    })
+  }
+
   return <>
     <Stack direction="column" spacing={1}>
       <Button
@@ -71,6 +80,22 @@ const UploadImage = (props: AnswerProps) => {
       {imageId && (
         <img
           src={`/api/blobs/images/${imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
+          alt="Answer"
+          width={200}
+        />
+      )}
+
+      <TextField
+        label="Image URL"
+        variant="outlined"
+        value={imageUrl}
+        onChange={handleImageUrlChange}
+        fullWidth
+      />
+
+      {imageUrl && (
+        <img
+          src={imageUrl}
           alt="Answer"
           width={200}
         />
