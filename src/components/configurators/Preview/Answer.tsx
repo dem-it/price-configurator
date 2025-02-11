@@ -35,6 +35,13 @@ const Answer = (props: AnswerProps) => {
           width={200}
         />
       )}
+      {answer.imageUrl && (
+        <img
+          src={answer.imageUrl}
+          alt="Answer"
+          width={200}
+        />
+      )}
       {!answer.surchargeHidden && (
         <Chip
           className="surcharge"
