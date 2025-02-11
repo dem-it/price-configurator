@@ -9,4 +9,6 @@ export default interface ConfigurationAnswer {
     surchargeHidden?: boolean | undefined
     surcharge: number
     optionHide?: ConfigurationOptionHide
+    imageWidth?: string | number
+    imageHeight?: string | number
 }

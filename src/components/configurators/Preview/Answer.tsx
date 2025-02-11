@@ -14,6 +14,12 @@ const Answer = (props: AnswerProps) => {
   const answer = props.answer
   const question = props.question
 
+  let imageUrl: string | undefined = undefined
+  if (answer.imageId)
+    imageUrl = `/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`
+  else if (answer.imageUrl)
+    imageUrl = answer.imageUrl
+
   return (
     <Stack
       id={`question-${question.id}-answer-${answer.id}`}
@@ -28,20 +34,19 @@ const Answer = (props: AnswerProps) => {
 
       <h3>{answer.title}</h3>
       <div className="description" dangerouslySetInnerHTML={{ __html: answer.description }} />
-      {answer.imageId && (
+
+      {imageUrl && (
         <img
-          src={`/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`}
+          src={imageUrl}
           alt="Answer"
-          width={200}
+          style={{
+            width: answer.imageWidth ? answer.imageWidth : "200px",
+            height: answer.imageHeight ? answer.imageHeight : "auto",
+            maxWidth: answer.imageWidth === "auto" ? "max-content" : "100%"
+          }}
         />
       )}
-      {answer.imageUrl && (
-        <img
-          src={answer.imageUrl}
-          alt="Answer"
-          width={200}
-        />
-      )}
+
       {!answer.surchargeHidden && (
         <Chip
           className="surcharge"
