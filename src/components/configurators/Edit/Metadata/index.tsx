@@ -4,6 +4,7 @@ import { useState } from "react"
 import { GroupsProps } from "../Properties"
 import ConfiguratorEmail from "./ConfiguratorEmail"
 import ConfiguratorLanguage from "./ConfiguratorLanguage"
+import ConfiguratorCSS from "./ConfiguratorCSS"
 
 const Metadata = (props: GroupsProps) => {
   const [tabIndex, setTabIndex] = useState(0)
@@ -31,6 +32,7 @@ const Metadata = (props: GroupsProps) => {
       >
         <Tab label="Accessibility" />
         <Tab label="Settings" />
+        <Tab label="CSS Adjustments" />
       </Tabs>
       <Box sx={{ p: 3 }}>
         {tabIndex === 0 && (
@@ -52,6 +54,9 @@ const Metadata = (props: GroupsProps) => {
             <ConfiguratorEmail {...props} />
             <ConfiguratorLanguage {...props} />
           </>
+        )}
+        {tabIndex === 2 && (
+          <ConfiguratorCSS {...props} />
         )}
       </Box>
     </Box>
