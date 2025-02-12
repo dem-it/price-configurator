@@ -13,7 +13,6 @@ const Questions = (props: GroupProps) => {
       return <div
         className="question"
         key={`group-${group.id}-question-${question.id}`}
-        // style={{marginBottom: '20px'}}
       >
         <QuestionPreview {...props} questionId={question.id} />
       </div>

@@ -35,11 +35,12 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
 
   return (
     <Paper
+      className="result-small"
       sx={{ padding: 2 }}>
-      <h2>{t("resultsmall.title")}</h2>
-      {t("resultsmall.selected-options")}
-      {props.selectedAnswers.length === 0 && <p>{t("resultsmall.no-options-selected")}</p>}
-      <ul>
+      <h2 className="title">{t("resultsmall.title")}</h2>
+      <span className="sub-title">{t("resultsmall.selected-options")}</span>
+      {props.selectedAnswers.length === 0 && <p className="no-options">{t("resultsmall.no-options-selected")}</p>}
+      <ul className="options">
         {props.selectedAnswers.map((answer, index) => {
           const question = getQuestion(answer.questionId)
 
@@ -47,7 +48,7 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
 
           return answers.map(answerId => {
             const configurationAnswer = getAnswer(question, answerId)
-            return <li key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
+            return <li className="option" key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
               {configurationAnswer.title} {!configurationAnswer.surchargeHidden && (<><br />+ {formatPrice(configurationAnswer.surcharge)}</>)}
             </li>
           })
@@ -56,13 +57,13 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
 
       {openTextAnswers.length > 0 && (
         <>
-          {t("resultsmall.open-text-answers")}
-          <ul>
+          <span className="open-text-subtitle">{t("resultsmall.open-text-answers")}</span>
+          <ul className="open-text-answers">
             {openTextAnswers.map((answer) => {
               const question = getQuestion(answer.questionId)
 
               return (
-                <li key={`result-question-${question.id}-answer`}>
+                <li className="answer" key={`result-question-${question.id}-answer`}>
                   <b>{question.title}</b>
                   <br />{answer.openText?.answer}
                 </li>
@@ -72,9 +73,9 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
         </>
       )}
       <hr />
-      <b>
+      <b className="total">
         {t("resultsmall.grand-total")}
-        <br />{formatPrice(getTotalPrice())}
+        <br /><span className="price">{formatPrice(getTotalPrice())}</span>
       </b>
     </Paper>
   )

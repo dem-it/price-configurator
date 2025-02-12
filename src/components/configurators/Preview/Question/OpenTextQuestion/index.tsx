@@ -37,6 +37,7 @@ const OpenTextQuestion = (props: QuestionProps) => {
       <Header {...props} />
 
       <TextField
+        className="answer open-text"
         label={getQuestion(props).title}
         variant="outlined"
         fullWidth
