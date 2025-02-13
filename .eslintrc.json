@@ -8,13 +8,13 @@
     "no-multiple-empty-lines": [ "error", { "max": 1 } ],
     "indent": [ "error", 2 ],
     "no-unused-vars": [ "off" ],
-    "linebreak-style": [ "error", "unix" ],
     "no-trailing-spaces": [ "error" ],
     "line-comment-position": [ "error", { "position": "above" } ],
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "array-bracket-spacing": [ "error", "never" ],
     "object-curly-spacing": [ "error", "always" ],
     "prefer-arrow-callback": [ "error" ],
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "linebreak-style": "off"
   }
 }
