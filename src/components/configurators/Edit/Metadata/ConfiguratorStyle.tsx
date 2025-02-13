@@ -19,7 +19,14 @@ const ConfiguratorStyle = (props: GroupsProps) => {
     if (!props.data.meta) {
       props.data.meta = {}
     }
-    props.data.meta.css = cssInput ?? css
+    
+    const newCss = cssInput ?? css
+    const updatedCss = newCss.replace(/<\/?/g, "").replace(/<script/gi, "")
+    if(newCss !== updatedCss) 
+      setCss(updatedCss)
+
+    props.data.meta.css = updatedCss
+
     props.saveToDatabase(props.data)
   }
 
