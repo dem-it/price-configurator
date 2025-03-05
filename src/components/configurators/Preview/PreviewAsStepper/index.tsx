@@ -26,6 +26,11 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
   }
 
   useEffect(() => {
+    //scroll to top
+    window.scrollTo(0, 0)
+  }, [activeStep])
+
+  useEffect(() => {
     setCurrentGroup(props.data.groups[activeStep])
   }, [activeStep, props.data.groups])
 
