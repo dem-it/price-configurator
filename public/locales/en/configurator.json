@@ -18,9 +18,9 @@
         "grand-total": "Indication grand total:"
     },
     "result": {
-        "title": "Summary",
-        "table-header-question": "Question",
-        "table-header-answer": "Answer",
+        "title": "Overview of your choices",
+        "table-header-question": "Subject",
+        "table-header-answer": "Choice",
         "table-header-price": "Price",
         "total": "Indication grand total:",
         "sending-email": "Sending email...",

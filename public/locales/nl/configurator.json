@@ -18,9 +18,9 @@
         "grand-total": "Indicatie totaalprijs:"
     },
     "result": {
-        "title": "Samenvatting",
-        "table-header-question": "Vraag",
-        "table-header-answer": "Antwoord",
+        "title": "Overzicht van je keuzes",
+        "table-header-question": "Onderwerp",
+        "table-header-answer": "Keuze",
         "table-header-price": "Prijs",
         "total": "Indicatie totaalprijs:",
         "sending-email": "E-mail wordt opgestuurd...",
