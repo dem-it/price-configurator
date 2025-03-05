@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 import Select from "@mui/material/Select"
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import Answer from "../../Answer"
 import { QuestionProps } from "../../Properties"
 import { checkIfNeedsToBeHidden } from "../../utils/OptionHideUtils"
@@ -14,6 +15,8 @@ import { getQuestion } from "../../utils/PropertiesUtils"
 import Header from "../Header"
 
 const RegularQuestion = (props: QuestionProps) => {
+  const { t } = useTranslation(["configurator"])
+
   const question = getQuestion(props)
 
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
@@ -61,23 +64,23 @@ const RegularQuestion = (props: QuestionProps) => {
           <>
             <Grid item xs={12}>
               <FormControl sx={{ minWidth: 200 }}>
-                <InputLabel id={`regular-question-dropdown-${question.id}`}>Select an option</InputLabel>
+                <InputLabel id={`regular-question-dropdown-${question.id}`}>{t("answer.regular-dropdown.placeholder")}</InputLabel>
                 <Select
                   labelId={`regular-question-dropdown-${question.id}`}
                   value={selectedAnswer || ""}
                   onChange={(e) => answerSelected(e.target.value)}
 
-                  label="Select an option"
+                  label={t("answer.regular-dropdown.placeholder")}
                 >
                   <MenuItem value="">
-                    <em>Select an answer</em>
+                    <em>{t("answer.regular-dropdown.no-option-selected")}</em>
                   </MenuItem>
 
                   {getAnswersToShow().map((answer) => {
-                    let imageUrl: string | undefined =  undefined
-                    if(answer.imageId)
+                    let imageUrl: string | undefined = undefined
+                    if (answer.imageId)
                       imageUrl = `/api/blobs/images/${answer.imageId}?organizationId=${props.configuration.partitionKey}&configurationId=${props.configuration.rowKey}`
-                    else if(answer.imageUrl)
+                    else if (answer.imageUrl)
                       imageUrl = answer.imageUrl
 
                     return (
@@ -98,13 +101,13 @@ const RegularQuestion = (props: QuestionProps) => {
                           <span>{answer.title}</span>
 
                           {answer.description
-                          && answer.description.trim().length > 0
-                          && answer.description != "<p><br></p>"
-                          && (
-                            <div
-                              className="description"
-                              dangerouslySetInnerHTML={{ __html: answer.description }} />
-                          )}
+                            && answer.description.trim().length > 0
+                            && answer.description != "<p><br></p>"
+                            && (
+                              <div
+                                className="description"
+                                dangerouslySetInnerHTML={{ __html: answer.description }} />
+                            )}
                           {!answer.surchargeHidden && (
                             <Chip
                               className="surcharge chip"
@@ -112,12 +115,13 @@ const RegularQuestion = (props: QuestionProps) => {
                               label={formatPrice(answer.surcharge)}
                               sx={{
                               }}
-                              />
+                            />
                             // <span>({formatPrice(answer.surcharge)})</span>
                           )}
                         </Stack>
                       </MenuItem>
-                    ) })}
+                    )
+                  })}
                 </Select>
               </FormControl>
             </Grid>

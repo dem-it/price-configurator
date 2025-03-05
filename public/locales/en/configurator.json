@@ -4,6 +4,12 @@
         "button-back": "Back",
         "button-done": "Finish"
     },
+    "answer": {
+        "regular-dropdown": {
+            "placeholder": "Select an option",
+            "no-option-selected": "Select an option"
+        }
+    },
     "resultsmall": {
         "title": "Summary",
         "selected-options": "Your selection",

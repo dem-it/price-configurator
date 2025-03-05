@@ -4,6 +4,12 @@
         "button-back": "Terug",
         "button-done": "Afronden"
     },
+    "answer": {
+        "regular-dropdown": {
+            "placeholder": "Selecteer een optie",
+            "no-option-selected": "Selecteer een optie"
+        }
+    },
     "resultsmall": {
         "title": "Samenvatting",
         "selected-options": "Jouw selectie",
