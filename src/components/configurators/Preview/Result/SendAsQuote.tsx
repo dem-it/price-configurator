@@ -22,6 +22,7 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
   const previewUrl = `${http}://${host}/configurators/${configuration.partitionKey}/${configuration.rowKey}`
 
   const adminEmail = props.data.meta?.adminEmail ?? "dennis@dem-it.nl"
+  const sendEmailToCustomer = props.data.meta?.sendQuoteToCustomer ?? false
 
   useEffect(() => {
     if (name && email) {
@@ -47,7 +48,8 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
       message: constructMessage(),
       url: previewUrl,
       adminEmail: adminEmail,
-      phoneNumber: phoneNumber
+      phoneNumber: phoneNumber,
+      sendToCustomer: sendEmailToCustomer
     }
 
     try {

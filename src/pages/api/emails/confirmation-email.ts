@@ -24,9 +24,24 @@ const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 
-  const { name, email, message, url, phoneNumber, adminEmail } = req.body
+  const { name, email, message, url, phoneNumber, adminEmail, sendToCustomer } = req.body
   if (!name || !email || !message || !url || !adminEmail) {
     return res.status(400).json({ error: "Missing required fields" })
+  }
+
+  const receiverEmail = sendToCustomer ? email : adminEmail
+  let bcc = [
+    {
+      email: "dennis@dem-it.nl",
+      name: "Admin Price configurator Dem IT"
+    }
+  ]
+  if(sendToCustomer){
+    bcc.push(
+      {
+        email: adminEmail,
+        name: "Admin Price configurator Dem IT"
+      })
   }
 
   const msg = {
@@ -34,20 +49,11 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
       {
         to: [
           {
-            email: email,
+            email: receiverEmail,
             name: name
           }
         ],
-        bcc: [
-          {
-            email: adminEmail,
-            name: "Admin Price configurator Dem IT"
-          },
-          {
-            email: "dennis@dem-it.nl",
-            name: "Admin Price configurator Dem IT"
-          }
-        ]
+        bcc: bcc
       }
     ],
     from: { "email": "dennis@dem-it.nl" },

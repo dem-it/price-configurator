@@ -2,9 +2,28 @@ import { Grid, Link, Paper, Tab, Tabs } from "@mui/material"
 import Stack from "@mui/material/Stack"
 import { useState } from "react"
 import { GroupsProps } from "../Properties"
-import ConfiguratorEmail from "./ConfiguratorEmail"
 import ConfiguratorLanguage from "./ConfiguratorLanguage"
 import ConfiguratorStyle from "./ConfiguratorStyle"
+import ConfigureQuoteRequest from "./ConfigureQuoteRequest"
+
+interface SingleTab {
+  Index: number
+  Label: string
+}
+
+interface TabIndexType {
+  Accessibility: SingleTab,
+  Settings: SingleTab,
+  Style: SingleTab,
+  RequestAQuote: SingleTab
+}
+
+const TabIndexes: TabIndexType = {
+  Accessibility: { Index: 0, Label: "Accessibility" },
+  Settings: { Index: 1, Label: "Settings" },
+  RequestAQuote: { Index: 2, Label: "Quote request" },
+  Style: { Index: 3, Label: "Style" }
+}
 
 const Metadata = (props: GroupsProps) => {
   const [tabIndex, setTabIndex] = useState(0)
@@ -25,19 +44,19 @@ const Metadata = (props: GroupsProps) => {
       <Grid item xs='auto'>
         <Tabs
           orientation="vertical"
-          // variant="scrollable"
           value={tabIndex}
           onChange={handleChange}
           aria-label="Configurator tab"
           sx={{ borderRight: 1, borderColor: "divider" }}
         >
-          <Tab label="Accessibility" />
-          <Tab label="Settings" />
-          <Tab label="Style" />
+          <Tab label={TabIndexes.Accessibility.Label} />
+          <Tab label={TabIndexes.Settings.Label} />
+          <Tab label={TabIndexes.RequestAQuote.Label} />
+          <Tab label={TabIndexes.Style.Label} />
         </Tabs>
       </Grid>
       <Grid item xs sx={{ p: 3 }}>
-        {tabIndex === 0 && (
+        {tabIndex === TabIndexes.Accessibility.Index && (
           <Stack direction="column" spacing={1}>
             <div>
               Preview url:
@@ -51,13 +70,13 @@ const Metadata = (props: GroupsProps) => {
             </div>
           </Stack>
         )}
-        {tabIndex === 1 && (
-          <>
-            <ConfiguratorEmail {...props} />
-            <ConfiguratorLanguage {...props} />
-          </>
+        {tabIndex === TabIndexes.Settings.Index && (
+          <ConfiguratorLanguage {...props} />
         )}
-        {tabIndex === 2 && (
+        {tabIndex === TabIndexes.RequestAQuote.Index && (
+          <ConfigureQuoteRequest {...props} />
+        )}
+        {tabIndex === TabIndexes.Style.Index && (
           <ConfiguratorStyle {...props} />
         )}
       </Grid>

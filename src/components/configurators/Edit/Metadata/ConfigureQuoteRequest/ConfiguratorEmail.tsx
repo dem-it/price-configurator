@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material"
 import { useState } from "react"
-import { GroupsProps } from "../Properties"
+import { GroupsProps } from "../../Properties"
 
 const ConfiguratorEmail = (props: GroupsProps) => {
 
@@ -16,7 +16,7 @@ const ConfiguratorEmail = (props: GroupsProps) => {
 
   return (<>
     <p>
-      Setup an e-mail address where requested quotes are being sent to:
+      Where should the e-mails be sent to?
     </p>
     <TextField
       variant="standard"
