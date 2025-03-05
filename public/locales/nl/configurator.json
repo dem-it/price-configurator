@@ -27,6 +27,7 @@
         "form-phone": "Telefoonnummer",
         "finished": "Alle stappen zijn uitgevoerd.",
         "finished-email": "Hieronder nog een beknopt overzicht van je keuzes. Verstuur je aanvraag en wij nemen binnen 48 uur contact met je op. De prijs is een indicatie en hangt van de daadwerkelijke inkoopprijs en (rest-)BPM van de bus.",
-        "start-again-button": "Begin opnieuw"
+        "start-again-button": "Begin opnieuw",
+        "back-button": "Terug"
       }
 }

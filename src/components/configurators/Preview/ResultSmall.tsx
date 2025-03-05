@@ -49,7 +49,7 @@ const ResultSmall = (props: PreviewPropsWithAnswers) => {
           return answers.map(answerId => {
             const configurationAnswer = getAnswer(question, answerId)
             return <li className="option" key={`result-question-${question.id}-answer-${configurationAnswer.id}`}>
-              {configurationAnswer.title} {!configurationAnswer.surchargeHidden && (<><br />+ {formatPrice(configurationAnswer.surcharge)}</>)}
+              {configurationAnswer.title} {!configurationAnswer.surchargeHidden && (<><br />{formatPrice(configurationAnswer.surcharge)}</>)}
             </li>
           })
         })}

@@ -18,7 +18,7 @@ const Surcharge = (props: AnswerProps) => {
   }
 
   const parseSurcharge = (value: string): number => {
-    const result = parseFloat(value.replace("€", "").replace(".", "").replace(",", ".").trim())
+    const result = parseFloat(value.replace("€", "").replace(" ", "").replace(".", "").replace(",", ".").trim())
     return result
   }
 

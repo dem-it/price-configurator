@@ -1,6 +1,6 @@
 import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import { formatPrice } from "@/utils/format"
-import { Checkbox, FormControlLabel, Stack } from "@mui/material"
+import { Checkbox, Chip, FormControlLabel, Stack } from "@mui/material"
 import { useEffect, useState } from "react"
 import { QuestionProps } from "../../Properties"
 import { checkIfNeedsToBeHidden } from "../../utils/OptionHideUtils"
@@ -95,9 +95,16 @@ const MultipleQuestion = (props: QuestionProps) => {
                   )}
 
                   <Stack direction="column" spacing={0}>
-                    <div className="label">
-                      {answer.title} - {formatPrice(answer.surcharge)}
-                    </div>
+                    <Stack direction="row" className="label" spacing={2}>
+                      <span>
+                        {answer.title}
+                      </span>
+                      <Chip
+                        className="surcharge chip"
+                        variant="outlined"
+                        label={formatPrice(answer.surcharge)}
+                      />
+                    </Stack>
 
                     {answer.description
                       && answer.description.trim().length > 0

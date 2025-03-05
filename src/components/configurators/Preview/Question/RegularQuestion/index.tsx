@@ -1,7 +1,7 @@
 import { VariantType } from "@/components/configurators/Edit/Question/Variant"
 import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import { formatPrice } from "@/utils/format"
-import { Grid, Paper, Stack } from "@mui/material"
+import { Chip, Grid, Paper, Stack } from "@mui/material"
 import FormControl from "@mui/material/FormControl"
 import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
@@ -106,7 +106,14 @@ const RegularQuestion = (props: QuestionProps) => {
                               dangerouslySetInnerHTML={{ __html: answer.description }} />
                           )}
                           {!answer.surchargeHidden && (
-                            <span>({formatPrice(answer.surcharge)})</span>
+                            <Chip
+                              className="surcharge chip"
+                              variant="outlined"
+                              label={formatPrice(answer.surcharge)}
+                              sx={{
+                              }}
+                              />
+                            // <span>({formatPrice(answer.surcharge)})</span>
                           )}
                         </Stack>
                       </MenuItem>

@@ -27,6 +27,7 @@
         "form-phone": "Phone",
         "finished": "All steps are completed.",
         "finished-email": "Below is another brief overview of your choices. Submit your request and we will contact you within 48 hours. The price is an indication and depends on the actual purchase price and (residual) BPM of the bus.",
-        "start-again-button": "Start again"
+        "start-again-button": "Start again",
+        "back-button": "Back"
     }
 }

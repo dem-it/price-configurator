@@ -52,7 +52,9 @@ const Question = (props: QuestionProps) => {
         content: <Grid container spacing={2} alignItems="center">
           <SingleRow label="Title" content={<Title {...props} />} />
           <SingleRow label="Description" content={<Description {...props} />} />
-          <SingleRow label="Variant" content={<Variant {...props} />} />
+          {getQuestion(props).type === ConfigurationQuestionType.Regular && (
+            <SingleRow label="Variant" content={<Variant {...props} />} />
+          )}
         </Grid>
       },
       {

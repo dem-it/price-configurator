@@ -104,15 +104,17 @@ const Result = (props: PreviewPropsWithAnswers) => {
                 <TableCell>
                   {question.title}
 
-                  <IconButton
-                    aria-label="info"
-                    onClick={(event) => {
-                      setAnchorEl(event.currentTarget)
-                      setPopoverContent(question.description)
-                    }}
-                  >
-                    <InfoIcon />
-                  </IconButton>
+                  {question.description && question.description.trim().length > 0 && (
+                    <IconButton
+                      aria-label="info"
+                      onClick={(event) => {
+                        setAnchorEl(event.currentTarget)
+                        setPopoverContent(question.description)
+                      }}
+                    >
+                      <InfoIcon />
+                    </IconButton>
+                  )}
                 </TableCell>
                 <TableCell>
                   {answer.openText?.answer}
@@ -131,7 +133,7 @@ const Result = (props: PreviewPropsWithAnswers) => {
             </TableCell>
             <TableCell
               style={{ fontWeight: "bold" }}>
-              <Chip color="primary" variant="outlined" label={formatPrice(getTotalPrice())} />
+              <Chip className="chip" color="primary" variant="outlined" label={formatPrice(getTotalPrice())} />
             </TableCell>
           </TableRow>
         </TableBody>

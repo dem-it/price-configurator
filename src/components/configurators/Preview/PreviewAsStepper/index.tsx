@@ -41,7 +41,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
   const isFinished = activeStep === props.data.groups.length
 
   if (isFinished)
-    return <Finished props={props} handleReset={handleReset} />
+    return <Finished props={props} handleReset={handleReset} handleBack={handleBack}/>
 
   if(!currentGroup)
     return <Loading />

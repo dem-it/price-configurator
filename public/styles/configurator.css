@@ -19,3 +19,16 @@
 .question .description p {
   margin: 0;
 }
+
+.answer.multiple .label {
+  position: relative;
+  width: 100%;
+}
+
+.answer.multiple .label .surcharge {
+  box-shadow: 8px;
+}
+
+.chip {
+  border-radius: 8px;
+}
