@@ -20,7 +20,10 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
 
   const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
   const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
-  const handleReset = () => setActiveStep(0)
+  const handleReset = () => {
+    setActiveStep(0)
+    props.setSelectedAnswers([])
+  }
 
   useEffect(() => {
     setCurrentGroup(props.data.groups[activeStep])
