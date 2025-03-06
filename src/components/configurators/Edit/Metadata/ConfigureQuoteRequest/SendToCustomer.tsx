@@ -4,7 +4,7 @@ import { GroupsProps } from "../../Properties"
 
 const SendToCustomer = (props: GroupsProps) => {
 
-  const [sendToCustomer, setSendToCustomer] = useState<boolean>(props.data.meta?.sendQuoteToCustomer || true)
+  const [sendToCustomer, setSendToCustomer] = useState<boolean>(props.data.meta?.sendQuoteToCustomer ?? true)
 
   const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.target.checked
