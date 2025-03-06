@@ -74,13 +74,13 @@ const Metadata = (props: GroupsProps) => {
             <div>
               When you want to automatically scroll to the top when the user clicks on the next or back buttons. Please add this script on your website. Please note that the id (currently <b>PriceConfigurator</b>) matches the id of your iframe.
               <Paper sx={{ padding: 2, backgroundColor: "#f5f5f5", fontFamily: "monospace" }}>
-                &lt;script type="text/javascript"&gt;
-                <Box sx={{ marginLeft: '16px' }}>
+                &lt;script type=&quot;text/javascript&quot;&gt;
+                <Box sx={{ marginLeft: "16px" }}>
                   window.onmessage = function (e) &#123;
-                  <Box sx={{ marginLeft: '16px' }}>
-                    if (e.data == 'price-configurator-step-changed') &#123;
-                    <Box sx={{ marginLeft: '16px' }}>
-                      const iframe = document.getElementById('<b>PriceConfigurator</b>')
+                  <Box sx={{ marginLeft: "16px" }}>
+                    if (e.data == &apos;price-configurator-step-changed&apos;) &#123;
+                    <Box sx={{ marginLeft: "16px" }}>
+                      const iframe = document.getElementById(&apos;<b>PriceConfigurator</b>&apos;)
                       <br />const top = iframe.getBoundingClientRect().top - document.body.getBoundingClientRect().top
                       <br />window.scrollTo(0, top)
                     </Box>

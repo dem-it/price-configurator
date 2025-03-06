@@ -35,7 +35,7 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
     //scroll to top
     window.scrollTo(0, 0)
     // post to the parent window that the step is changed
-    window.top?.postMessage('price-configurator-step-changed', '*')
+    window.top?.postMessage("price-configurator-step-changed", "*")
   }, [activeStep])
 
   useEffect(() => {
