@@ -14,6 +14,7 @@ import Template from "./Template"
 const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
   const { t } = useTranslation(["configurator"])
 
+  const [previousActiveStep, setPreviousActiveStep] = useState(0)
   const [activeStep, setActiveStep] = useState(0)
   const [currentGroup, setCurrentGroup] = useState(props.data.groups[activeStep])
   const [canGoNext, setCanGoNext] = useState(false)
@@ -26,8 +27,15 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
   }
 
   useEffect(() => {
+    //only scroll to top if the step is changed
+    if (activeStep === previousActiveStep)
+      return
+    setPreviousActiveStep(activeStep)
+
     //scroll to top
     window.scrollTo(0, 0)
+    // post to the parent window that the step is changed
+    window.top?.postMessage('price-configurator-step-changed', '*')
   }, [activeStep])
 
   useEffect(() => {

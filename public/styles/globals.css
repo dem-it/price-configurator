@@ -30,3 +30,8 @@ h2, h3 {
 .MuiButton-root {
   text-transform: none;
 }
+
+hr {
+  margin-top: 40px !important;
+  margin-bottom: 30px !important;
+}
