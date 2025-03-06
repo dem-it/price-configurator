@@ -81,7 +81,9 @@ const Metadata = (props: GroupsProps) => {
                     if (e.data == &apos;price-configurator-step-changed&apos;) &#123;
                     <Box sx={{ marginLeft: "16px" }}>
                       const iframe = document.getElementById(&apos;<b>PriceConfigurator</b>&apos;)
-                      <br />const top = iframe.getBoundingClientRect().top - document.body.getBoundingClientRect().top
+                      <br />const bodyTop = document.body.getBoundingClientRect().top
+                      <br />const iframeTop = iframe.getBoundingClientRect().top
+                      <br />const top = iframeTop - bodyTop
                       <br />window.scrollTo(0, top)
                     </Box>
                     &#125;
