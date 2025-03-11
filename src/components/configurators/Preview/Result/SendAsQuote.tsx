@@ -24,7 +24,9 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
   const adminEmail = props.data.meta?.adminEmail ?? "dennis@dem-it.nl"
   const sendEmailToCustomer = props.data.meta?.sendQuoteToCustomer ?? true
   const fromEmail = props.data.meta?.adminEmailFrom ?? "dennis@dem-it.nl"
-  const emailSubject = props.data.meta?.emailSubject ?? "Bedankt voor uw aanvraag"
+  let emailSubject = props.data.meta?.emailSubject
+  if (!emailSubject || emailSubject.trim() === "")
+    emailSubject = "Bedankt voor uw aanvraag"
 
   useEffect(() => {
     if (name && email) {

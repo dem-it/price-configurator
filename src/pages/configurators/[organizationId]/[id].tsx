@@ -16,6 +16,7 @@ const ConfiguratorPage = () => {
   useEffect(() => {
     if (!organizationId || !id)
       return
+
     const fetchData = async () => {
       const response = await fetch(`/api/tables/configurations/${id}?organizationId=${organizationId}`)
       const result = await response.json() as ConfigurationDto
@@ -29,7 +30,7 @@ const ConfiguratorPage = () => {
   }, [organizationId, id])
 
   useEffect(() => {
-    if(!document)
+    if (!document)
       return
 
     document.body.classList.add("no-template")

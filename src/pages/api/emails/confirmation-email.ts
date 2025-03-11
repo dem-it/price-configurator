@@ -90,7 +90,6 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     await sgMail.send(msg)
-    return res.status(500).json({ error: "Failed to send email temp." })
     return res.status(200).json({ message: "Email sent successfully!" })
   } catch (error: any) {
     console.error(error)
