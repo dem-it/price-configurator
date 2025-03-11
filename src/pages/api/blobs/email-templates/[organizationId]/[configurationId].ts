@@ -6,8 +6,7 @@ dotenv.config()
 
 interface InputProps {
   organizationId: string,
-  configurationId: string,
-  filename: string
+  configurationId: string
 }
 
 /**
@@ -26,10 +25,7 @@ const validateInput = (req: NextApiRequest): string | undefined => {
     return "organizationId is not defined"
 
   if (req.query.configurationId === undefined)
-    return "configurationId is not defined"
-
-  if (req.query.filename === undefined)
-    return "filename is not defined"
+    return "configuration is not defined"
 
   return undefined
 }
@@ -37,14 +33,13 @@ const validateInput = (req: NextApiRequest): string | undefined => {
 const getInputs = (req: NextApiRequest): InputProps => {
   return {
     organizationId: req.query.organizationId as string,
-    configurationId: req.query.configurationId as string,
-    filename: req.query.filename as string
+    configurationId: req.query.configurationId as string
   }
 }
 
 const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
   const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
-  const containerName = "images"
+  const containerName = "email-templates"
 
   const error = validateInput(req)
   if (error) {
@@ -84,20 +79,12 @@ const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
 const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse, containerClient: ContainerClient, payload: InputProps) => {
 
   if (!req.body) {
-    res.status(400).json({ error: "No image provided" })
+    res.status(400).json({ error: "No html provided" })
     return
   }
 
   if (req.body.length > 5 * 1024 * 1024) {
-    res.status(400).json({ error: "Image is too large, maximum 1 MB" })
-    return
-  }
-
-  const allowedFileTypes = [".jpg", ".jpeg", ".gif", ".bmp", ".tiff", ".svg", ".png"]
-  const isValidFileType = allowedFileTypes.some(type => payload.filename.endsWith(type))
-
-  if (!isValidFileType) {
-    res.status(400).json({ error: "Invalid file type, please use .png or .jpg" })
+    res.status(400).json({ error: "Html is too large, maximum 1 MB" })
     return
   }
 
@@ -105,12 +92,12 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse, cont
     const blobName = constructBlobName(payload)
     const blockBlobClient = containerClient.getBlockBlobClient(blobName)
 
-    const base64File = req.body.file
-    const buffer = Buffer.from(base64File, "base64")
+    const template = req.body.template
 
-    await blockBlobClient.uploadData(buffer)
+    const templateBuffer = Buffer.from(template, "utf-8")
+    await blockBlobClient.uploadData(templateBuffer)
 
-    res.status(201).json({ message: "Image uploaded successfully" })
+    res.status(201).json({ message: "Html uploaded successfully" })
   } catch (error: any) {
     res.status(500).json({ error: error.message })
   }
@@ -120,23 +107,15 @@ const handleGetRequest = async (req: NextApiRequest, res: NextApiResponse, conta
 
   try {
     const blockBlobClient = containerClient.getBlockBlobClient(constructBlobName(payload))
+    if(!await blockBlobClient.exists())
+    {
+      res.status(204).json({ message: "No content" })
+      return
+    }
+
     const result = await blockBlobClient.downloadToBuffer()
-
-    const filename = payload.filename
-    if (filename.endsWith(".jpg") || filename.endsWith(".jpeg"))
-      res.setHeader("Content-Type", "image/jpeg")
-    else if (filename.endsWith(".gif"))
-      res.setHeader("Content-Type", "image/gif")
-    else if (filename.endsWith(".bmp"))
-      res.setHeader("Content-Type", "image/bmp")
-    else if (filename.endsWith(".tiff"))
-      res.setHeader("Content-Type", "image/tiff")
-    else if (filename.endsWith(".svg"))
-      res.setHeader("Content-Type", "image/svg+xml")
-    else
-      res.setHeader("Content-Type", "image/png")
-
-    res.setHeader("Content-Disposition", `inline; filename="${filename}"`)
+    res.setHeader("Content-Type", "text/html")
+    res.setHeader("Content-Disposition", `inline; filename="${payload.configurationId}.html"`)
     res.setHeader("Cache-Control", "public, max-age=31536000")
     res.status(200).send(result)
 
@@ -146,7 +125,7 @@ const handleGetRequest = async (req: NextApiRequest, res: NextApiResponse, conta
 }
 
 const constructBlobName = (payload: InputProps) => {
-  return `${payload.organizationId}/${payload.configurationId}/${payload.filename}`
+  return `${payload.organizationId}/${payload.configurationId}.html`
 }
 
 export default apiroute

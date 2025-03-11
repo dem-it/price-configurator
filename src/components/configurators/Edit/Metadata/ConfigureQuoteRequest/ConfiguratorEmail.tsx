@@ -16,7 +16,7 @@ const ConfiguratorEmail = (props: GroupsProps) => {
 
   return (<>
     <p>
-      Where should the e-mails be sent to?
+      Where should the confirmation e-mails be sent to?
     </p>
     <TextField
       variant="standard"
@@ -24,6 +24,7 @@ const ConfiguratorEmail = (props: GroupsProps) => {
       onChange={(e) => setEmail(e.target.value)}
       onBlur={(e) => emailUpdated(e.target.value)}
       label="Email"
+      sx={{ width: "50%" }}
     />
   </>)
 }

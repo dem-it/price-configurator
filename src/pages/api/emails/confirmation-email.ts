@@ -24,9 +24,35 @@ const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 
-  const { name, email, message, url, phoneNumber, adminEmail, sendToCustomer } = req.body
+  const { name, fromEmail, email, message, url, phoneNumber, adminEmail, sendToCustomer, emailTemplate, subject } = req.body
   if (!name || !email || !message || !url || !adminEmail) {
     return res.status(400).json({ error: "Missing required fields" })
+  }
+
+  let dynamicTemplateData: any
+  let templateId: string
+  if (emailTemplate) {
+    const content = emailTemplate.replace("{{content}}", message)
+      .replace("{{first_name}}", name)
+      .replace("{{email}}", email)
+      .replace("{{url}}", url)
+      .replace("{{phone_number}}", phoneNumber)
+
+    dynamicTemplateData = {
+      content: content
+    }
+
+    templateId = "d-91e791a1312a45a791acd36c23ebed88"
+  }
+  else {
+    dynamicTemplateData = {
+      email: email,
+      first_name: name,
+      content: message,
+      url: url,
+      phone_number: phoneNumber
+    }
+    templateId = "d-8a655dc9a5f342789371a1abab78e604"
   }
 
   const receiverEmail = sendToCustomer ? email : adminEmail
@@ -36,7 +62,7 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
       name: "Admin Price configurator Dem IT"
     }
   ]
-  if(sendToCustomer){
+  if (sendToCustomer) {
     bcc.push(
       {
         email: adminEmail,
@@ -56,20 +82,15 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
         bcc: bcc
       }
     ],
-    from: { "email": "dennis@dem-it.nl" },
-    subject: "Bedankt voor uw aanvraag",
-    templateId: "d-8a655dc9a5f342789371a1abab78e604",
-    dynamic_template_data: {
-      email: email,
-      first_name: name,
-      content: message,
-      url: url,
-      phone_number: phoneNumber
-    },
+    from: { "email": fromEmail },
+    subject: subject,
+    templateId: templateId,
+    dynamic_template_data: dynamicTemplateData,
   }
 
   try {
     await sgMail.send(msg)
+    return res.status(500).json({ error: "Failed to send email temp." })
     return res.status(200).json({ message: "Email sent successfully!" })
   } catch (error: any) {
     console.error(error)

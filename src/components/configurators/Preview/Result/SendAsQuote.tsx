@@ -23,6 +23,8 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
 
   const adminEmail = props.data.meta?.adminEmail ?? "dennis@dem-it.nl"
   const sendEmailToCustomer = props.data.meta?.sendQuoteToCustomer ?? true
+  const fromEmail = props.data.meta?.adminEmailFrom ?? "dennis@dem-it.nl"
+  const emailSubject = props.data.meta?.emailSubject ?? "Bedankt voor uw aanvraag"
 
   useEffect(() => {
     if (name && email) {
@@ -42,14 +44,28 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
     setStatus(t("result.sending-email"))
     setShowMail(false)
 
+    const emailTemplateResponse = await fetch(`/api/blobs/email-templates/${props.configuration.partitionKey}/${props.configuration.rowKey}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+
+    let emailTemplate = ""
+    if(emailTemplateResponse.status === 200)
+      emailTemplate = await emailTemplateResponse.text()
+
     const data = {
       name: name,
       email: email,
+      fromEmail: fromEmail,
       message: constructMessage(),
       url: previewUrl,
       adminEmail: adminEmail,
       phoneNumber: phoneNumber,
-      sendToCustomer: sendEmailToCustomer
+      sendToCustomer: sendEmailToCustomer,
+      emailTemplate: emailTemplate,
+      subject: emailSubject
     }
 
     try {
