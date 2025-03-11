@@ -25,7 +25,6 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <Auth0Provider
       domain="https://dev-bha1i8wi67urwpal.eu.auth0.com"
       clientId="TBRlXGxqeLDzObi9xyytIiUre7d3h1Nf"
-      cacheLocation="localstorage"
       authorizationParams={{
         redirect_uri:
           typeof window !== "undefined" ? window.location.origin : undefined,

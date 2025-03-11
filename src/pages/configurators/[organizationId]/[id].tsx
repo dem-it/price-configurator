@@ -29,6 +29,7 @@ const ConfiguratorPage = () => {
   }, [organizationId, id])
 
   useEffect(() => {
+    console.log("Page has been loaded")
     if(!document)
       return
 
