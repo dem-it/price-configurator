@@ -11,7 +11,7 @@
         }
     },
     "resultsmall": {
-        "title": "Summary",
+        "title": "Overview of your choices",
         "selected-options": "Your selection",
         "no-options-selected": "No options selected",
         "open-text-answers": "Open text answers:",
