@@ -46,7 +46,7 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
     setStatus(t("result.sending-email"))
     setShowMail(false)
 
-    const emailTemplateResponse = await fetch(`/api/blobs/email-templates/${props.configuration.partitionKey}/${props.configuration.rowKey}`, {
+    const emailTemplateResponse = await fetch(`/api/blobs/email-templates/${props.configuration.partitionKey}/${props.configuration.rowKey}?timestamp=${Date.now()}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

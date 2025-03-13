@@ -22,7 +22,7 @@ const EmailTemplate = (props: GroupsProps) => {
 
   useEffect(() => {
 
-    fetch(`/api/blobs/email-templates/${props.configuration.partitionKey}/${props.configuration.rowKey}`, {
+    fetch(`/api/blobs/email-templates/${props.configuration.partitionKey}/${props.configuration.rowKey}?timestamp=${Date.now()}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
