@@ -40,7 +40,7 @@ const getInputs = (req: NextApiRequest): InputProps => {
 const apiroute = async (req: NextApiRequest, res: NextApiResponse) => {
   const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
   const containerName = "email-templates"
-  
+
   res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate")
 
   const error = validateInput(req)
