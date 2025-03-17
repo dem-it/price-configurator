@@ -14,6 +14,8 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
   const [canSend, setCanSend] = useState(false)
   const [showMail, setShowMail] = useState(true)
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const [phoneError, setPhoneError] = useState("")
 
   const configuration = props.configuration
 
@@ -29,16 +31,34 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
     emailSubject = "Bedankt voor uw aanvraag"
 
   useEffect(() => {
-    if (name && email) {
+    if (name && email && !emailError && !phoneError) {
       setCanSend(true)
     } else {
       setCanSend(false)
     }
-  }, [name, email])
+  }, [name, email, emailError, phoneError])
 
   const constructMessage = () => {
     const resultHtml = ReactDOMServer.renderToString(<ResultSmall {...props} />)
     return resultHtml
+  }
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      setEmailError(t("result.invalid-email"))
+    } else {
+      setEmailError("")
+    }
+  }
+
+  const validatePhoneNumber = (phoneNumber: string) => {
+    const phoneRegex = /^\+?[1-9]\d{1,14}$/
+    if (!phoneRegex.test(phoneNumber)) {
+      setPhoneError(t("result.invalid-phone"))
+    } else {
+      setPhoneError("")
+    }
   }
 
   const sendMail = async () => {
@@ -107,13 +127,23 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
         <TextField
           label={t("result.form-email")}
           value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) => {
+            setEmail(event.target.value)
+            validateEmail(event.target.value)
+          }}
+          error={!!emailError}
+          helperText={emailError}
           fullWidth
         />
         <TextField
           label={t("result.form-phone")}
           value={phoneNumber}
-          onChange={(event) => setPhoneNumber(event.target.value)}
+          onChange={(event) => {
+            setPhoneNumber(event.target.value)
+            validatePhoneNumber(event.target.value)
+          }}
+          error={!!phoneError}
+          helperText={phoneError}
           fullWidth
         />
 
