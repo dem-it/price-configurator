@@ -29,6 +29,17 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ error: "Missing required fields" })
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const phoneRegex = /^\+?[1-9]\d{1,14}$/
+
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: "Invalid email format" })
+  }
+
+  if (!phoneRegex.test(phoneNumber)) {
+    return res.status(400).json({ error: "Invalid phone number format" })
+  }
+
   let dynamicTemplateData: any
   let templateId: string
   if (emailTemplate) {
