@@ -26,13 +26,13 @@
         "sending-email": "E-mail wordt opgestuurd...",
         "email-sent-successfully": "E-mail is verstuurd.",
         "email-sent-failed": "Er ontstond een fout tijdens het sturen van de mail.",
-        "send-as-quote": "Laat je gegevens achter en wij nemen binnen 48 uur contact met je op.",
+        "send-as-quote": "Voltooi je aanvraag door je gegevens in te vullen. Wij nemen binnen 48 uur contact met je op!",
         "send-quote-button": "Verstuur",
         "form-name": "Naam",
         "form-email": "E-mail",
         "form-phone": "Telefoonnummer",
-        "finished": "Alle stappen zijn uitgevoerd.",
-        "finished-email": "Hieronder nog een beknopt overzicht van je keuzes. Verstuur je aanvraag en wij nemen binnen 48 uur contact met je op. De prijs is een indicatie en hangt van de daadwerkelijke inkoopprijs en (rest-)BPM van de bus.",
+        "finished": "",
+        "finished-email": "",
         "start-again-button": "Begin opnieuw",
         "back-button": "Terug"
       }

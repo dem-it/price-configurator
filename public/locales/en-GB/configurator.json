@@ -26,13 +26,13 @@
         "sending-email": "Sending email...",
         "email-sent-successfully": "Email sent successfully.",
         "email-sent-failed": "An unexpected error occurred while sending the mail.",
-        "send-as-quote": "Leave your details and we will contact you within 48 hours.",
+        "send-as-quote": "Complete your application by entering your information. We will contact you within 48 hours!",
         "send-quote-button": "Send",
         "form-name": "Name",
         "form-email": "Email",
         "form-phone": "Phone",
-        "finished": "All steps are completed.",
-        "finished-email": "Below is another brief overview of your choices. Submit your request and we will contact you within 48 hours. The price is an indication and depends on the actual purchase price and (residual) BPM of the bus.",
+        "finished": "",
+        "finished-email": "",
         "start-again-button": "Start again",
         "back-button": "Back"
     }
