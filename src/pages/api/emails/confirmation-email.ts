@@ -30,7 +30,7 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  const phoneRegex = /^\+?[1-9]\d{1,14}$/
+  const phoneRegex = /^(\+)?([0-9\s-]{7,20})$/
 
   if (!emailRegex.test(email)) {
     return res.status(400).json({ error: "Invalid email format" })
