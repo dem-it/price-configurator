@@ -73,16 +73,16 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
 
       {innerContent}
 
-    <Box title={canGoNext ? "" : t("common.button-disabled-message")} >
-      <Button
-        onClick={handleNext}
-        color="primary"
-        variant="contained"
-        endIcon={<ArrowRightIcon />}
-        disabled={!canGoNext}
+      <Box title={canGoNext ? "" : t("common.button-disabled-message")} >
+        <Button
+          onClick={handleNext}
+          color="primary"
+          variant="contained"
+          endIcon={<ArrowRightIcon />}
+          disabled={!canGoNext}
         >
-        {isLastStep ? t("common.button-done") : t("common.button-next")}
-      </Button>
+          {isLastStep ? t("common.button-done") : t("common.button-next")}
+        </Button>
       </Box>
     </Stack>
   }

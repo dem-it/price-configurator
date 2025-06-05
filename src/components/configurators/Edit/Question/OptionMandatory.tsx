@@ -21,18 +21,18 @@ const OptionMandatory = (props: QuestionProps) => {
     <p>
       Should this question be mandatory:
     </p>
-    
-        <FormControlLabel
-          control={
-            <Switch
-              checked={mandatory}
-              onChange={handleToggleChange}
-              name="setOptionMandatory"
-              color="primary"
-            />
-          }
-          label="Mandatory"
+
+    <FormControlLabel
+      control={
+        <Switch
+          checked={mandatory}
+          onChange={handleToggleChange}
+          name="setOptionMandatory"
+          color="primary"
         />
+      }
+      label="Mandatory"
+    />
   </>)
 }
 

@@ -61,9 +61,9 @@ const Question = (props: QuestionProps) => {
       {
         label: "Options",
         content: <Grid container spacing={2} alignItems="center">
-            <SingleRow label="Hide" content={<OptionHide {...props} />} />
-            <SingleRow label="Mandatory" content={<OptionMandatory {...props} />} />
-          </Grid>
+          <SingleRow label="Hide" content={<OptionHide {...props} />} />
+          <SingleRow label="Mandatory" content={<OptionMandatory {...props} />} />
+        </Grid>
       }
     ]
   }

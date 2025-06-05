@@ -7,11 +7,11 @@ export const calculateCanGoNext = (props: GroupProps) => {
     return false
 
   const group = getGroup(props)
-  
+
   //check if all the mandatory questions in this group are answered
   const allMandatoryAnswered = group.questions.every((question) => {
     if (question.optionMandatory)
-        return SelectedAnswerUtils.hasAnswer(props.selectedAnswers, question)
+      return SelectedAnswerUtils.hasAnswer(props.selectedAnswers, question)
     return true
   })
 

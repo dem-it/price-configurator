@@ -29,13 +29,16 @@ export const SelectedAnswerUtils =
       return false
 
     if( answer.regular !== undefined) {
-      return true //regular answers are always answered
+      //regular answers are always answered
+      return true
     }
     if( answer.multiple !== undefined) {
-      return answer.multiple.answerIds.length > 0 //multiple answers are answered if there are any answerIds
+      //multiple answers are answered if there are any answerIds
+      return answer.multiple.answerIds.length > 0
     }
     if( answer.openText !== undefined) {
-      return answer.openText.answer.trim().length > 0 //open text answers are answered if the answer is not empty
+      //open text answers are answered if the answer is not empty
+      return answer.openText.answer.trim().length > 0
     }
 
   }
