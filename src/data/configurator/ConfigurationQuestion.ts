@@ -10,4 +10,5 @@ export default interface ConfigurationQuestion {
     type: ConfigurationQuestionType;
     answers: ConfigurationAnswer[];
     optionHide?: ConfigurationOptionHide;
+    optionMandatory?: boolean;
 }

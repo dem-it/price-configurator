@@ -4,7 +4,6 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { Logo, Sidebar } from "react-mui-sidebar"
 import SidebarItems from "./SidebarItems"
-import { Upgrade } from "./Updrade"
 
 interface ItemType {
   isMobileSidebarOpen: boolean;
@@ -108,7 +107,6 @@ const MSidebar = ({
                 {/* Sidebar Items */}
                 {/* ------------------------------------------- */}
                 <SidebarItems isCollapsed={isCollapsed} />
-                {!isAuthenticated && <Upgrade />}
               </Box>
             </Sidebar >
           </Box>
@@ -156,8 +154,7 @@ const MSidebar = ({
           {/* ------------------------------------------- */}
           {/* Sidebar Items */}
           {/* ------------------------------------------- */}
-          <SidebarItems isCollapsed={isCollapsed} />
-          <Upgrade />
+          <SidebarItems isCollapsed={false} />
         </Sidebar>
       </Box>
       {/* ------------------------------------------- */}
