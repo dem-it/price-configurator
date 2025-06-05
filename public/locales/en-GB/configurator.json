@@ -35,6 +35,8 @@
         "finished": "",
         "finished-email": "",
         "start-again-button": "Start again",
-        "back-button": "Back"
+        "back-button": "Back",
+        "invalid-email": "Invalid email address",
+        "invalid-phone": "Invalid phone number"
     }
 }

@@ -35,6 +35,8 @@
         "finished": "",
         "finished-email": "",
         "start-again-button": "Begin opnieuw",
-        "back-button": "Terug"
+        "back-button": "Terug",
+        "invalid-email": "Ongeldig e-mailadres",
+        "invalid-phone": "Ongeldig telefoonnummer"
       }
 }
