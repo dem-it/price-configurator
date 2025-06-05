@@ -7,7 +7,10 @@ const Header = (props: QuestionProps) => {
 
   return (
     <Stack direction="column" spacing={2}>
-      <h2 className="title">{question.title}</h2>
+      <h2 className="title">
+        {question.title}
+        {question.optionMandatory && <span className="required" style={{ color: "black" }}>*</span>}
+      </h2>
       {question.description && <div className="description" dangerouslySetInnerHTML={{ __html: question.description }} />}
     </Stack>
   )

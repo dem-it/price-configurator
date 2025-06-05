@@ -1,7 +1,7 @@
 import Loading from "@/components/display/Loading"
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft"
 import ArrowRightIcon from "@mui/icons-material/ArrowRight"
-import { Button, Stack, Step, StepLabel, Stepper } from "@mui/material"
+import { Box, Button, Stack, Step, StepLabel, Stepper } from "@mui/material"
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -73,14 +73,17 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
 
       {innerContent}
 
-      <Button
-        onClick={handleNext}
-        color="primary"
-        variant="contained"
-        endIcon={<ArrowRightIcon />}
-        disabled={!canGoNext}>
-        {isLastStep ? t("common.button-done") : t("common.button-next")}
-      </Button>
+      <Box title={canGoNext ? "" : t("common.button-disabled-message")} >
+        <Button
+          onClick={handleNext}
+          color="primary"
+          variant="contained"
+          endIcon={<ArrowRightIcon />}
+          disabled={!canGoNext}
+        >
+          {isLastStep ? t("common.button-done") : t("common.button-next")}
+        </Button>
+      </Box>
     </Stack>
   }
 
