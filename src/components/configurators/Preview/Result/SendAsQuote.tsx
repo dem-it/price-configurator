@@ -53,8 +53,9 @@ const SendAsQuote = (props: PreviewPropsWithAnswers) => {
   }
 
   const validatePhoneNumber = (phoneNumber: string) => {
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/
-    if (!phoneRegex.test(phoneNumber)) {
+    // Allows optional +, digits, spaces, and dashes anywhere
+    const phoneRegex = /^(\+)?([0-9\s-]{7,20})$/
+    if (phoneNumber && !phoneRegex.test(phoneNumber)) {
       setPhoneError(t("result.invalid-phone"))
     } else {
       setPhoneError("")
