@@ -41,5 +41,6 @@ export const SelectedAnswerUtils =
       return answer.openText.answer.trim().length > 0
     }
 
+    return false
   }
 }
