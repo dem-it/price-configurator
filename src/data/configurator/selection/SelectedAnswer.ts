@@ -1,3 +1,4 @@
+import ConfigurationQuestion from "../ConfigurationQuestion"
 import SelectedAnswerMultiple from "./SelectedAnswerMultiple"
 import SelectedAnswerOpenText from "./SelectedAnswerOpenText"
 import SelectedAnswerRegular from "./SelectedAnswerRegular"
@@ -20,5 +21,22 @@ export const SelectedAnswerUtils =
       return answer.multiple.answerIds
     }
     return []
+  },
+  hasAnswer: (answers: SelectedAnswer[], question: ConfigurationQuestion): boolean => {
+    //check if the answers array contains an answer for the given question
+    const answer = answers.find((answer) => answer.questionId === question.id)
+    if (!answer)
+      return false
+
+    if( answer.regular !== undefined) {
+      return true //regular answers are always answered
+    }
+    if( answer.multiple !== undefined) {
+      return answer.multiple.answerIds.length > 0 //multiple answers are answered if there are any answerIds
+    }
+    if( answer.openText !== undefined) {
+      return answer.openText.answer.trim().length > 0 //open text answers are answered if the answer is not empty
+    }
+
   }
 }

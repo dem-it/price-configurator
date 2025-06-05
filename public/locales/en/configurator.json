@@ -2,7 +2,8 @@
     "common": {
         "button-next": "Next",
         "button-back": "Back",
-        "button-done": "Finish"
+        "button-done": "Finish",
+        "button-disabled-message": "Please complete all required fields to continue"
     },
     "answer": {
         "regular-dropdown": {
@@ -23,8 +24,8 @@
         "table-header-answer": "Choice",
         "table-header-price": "Price",
         "total": "Indication grand total:",
-        "sending-email": "Sending email...",
-        "email-sent-successfully": "Email sent successfully.",
+        "sending-email": "Please wait a moment, your application is being sent....",
+        "email-sent-successfully": "Thank you for your inquiry! We will contact you as soon as possible. The confirmation has been sent to you by email.",
         "email-sent-failed": "An unexpected error occurred while sending the mail.",
         "send-as-quote": "Complete your application by entering your information. We will contact you within 48 hours!",
         "send-quote-button": "Send",

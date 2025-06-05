@@ -10,6 +10,7 @@ import { QuestionProps } from "../Properties"
 import { getQuestion } from "../utils/PropertiesUtils"
 import Description from "./Description"
 import OptionHide from "./OptionHide"
+import OptionMandatory from "./OptionMandatory"
 import SingleRow from "./SingleRow"
 import { CustomTabs, CustomTabsProps } from "./Tabs"
 import Title from "./Title"
@@ -59,7 +60,10 @@ const Question = (props: QuestionProps) => {
       },
       {
         label: "Options",
-        content: <OptionHide {...props} />
+        content: <Grid container spacing={2} alignItems="center">
+            <SingleRow label="Hide" content={<OptionHide {...props} />} />
+            <SingleRow label="Mandatory" content={<OptionMandatory {...props} />} />
+          </Grid>
       }
     ]
   }
