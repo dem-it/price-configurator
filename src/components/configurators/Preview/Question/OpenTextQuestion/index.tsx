@@ -17,11 +17,11 @@ const OpenTextQuestion = (props: QuestionProps) => {
     // Track Google Analytics event
     if (props.data.meta?.googleAnalyticsId) {
       trackQuestionInteraction(
-        question.id, 
-        question.title, 
-        'input', 
-        answerText.length > 0 ? 'text_entered' : 'text_cleared'
-      );
+        question.id,
+        question.title,
+        "input",
+        answerText.length > 0 ? "text_entered" : "text_cleared"
+      )
     }
 
     const answer: SelectedAnswer = {

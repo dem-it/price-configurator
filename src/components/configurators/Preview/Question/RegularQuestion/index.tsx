@@ -27,13 +27,13 @@ const RegularQuestion = (props: QuestionProps) => {
 
     // Track Google Analytics event
     if (props.data.meta?.googleAnalyticsId) {
-      const selectedAnswerObj = question.answers.find(a => a.id === answerId);
+      const selectedAnswerObj = question.answers.find(a => a.id === answerId)
       trackQuestionInteraction(
-        question.id, 
-        question.title, 
-        'select', 
+        question.id,
+        question.title,
+        "select",
         selectedAnswerObj?.title || answerId
-      );
+      )
     }
 
     const answer: SelectedAnswer = {

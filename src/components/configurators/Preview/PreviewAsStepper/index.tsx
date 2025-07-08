@@ -21,35 +21,35 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
   const [canGoNext, setCanGoNext] = useState(false)
 
   const handleNext = () => {
-    const nextStep = activeStep + 1;
-    const nextGroup = props.data.groups[nextStep];
-    
+    const nextStep = activeStep + 1
+    const nextGroup = props.data.groups[nextStep]
+
     // Track step navigation
     if (props.data.meta?.googleAnalyticsId) {
-      trackStepNavigation(nextStep + 1, nextGroup?.title || "Finished", "next");
+      trackStepNavigation(nextStep + 1, nextGroup?.title || "Finished", "next")
     }
-    
-    setActiveStep(nextStep);
+
+    setActiveStep(nextStep)
   }
-  
+
   const handleBack = () => {
-    const prevStep = activeStep - 1;
-    const prevGroup = props.data.groups[prevStep];
-    
+    const prevStep = activeStep - 1
+    const prevGroup = props.data.groups[prevStep]
+
     // Track step navigation
     if (props.data.meta?.googleAnalyticsId) {
-      trackStepNavigation(prevStep + 1, prevGroup?.title || "Start", "back");
+      trackStepNavigation(prevStep + 1, prevGroup?.title || "Start", "back")
     }
-    
-    setActiveStep(prevStep);
+
+    setActiveStep(prevStep)
   }
-  
+
   const handleReset = () => {
     // Track reset action
     if (props.data.meta?.googleAnalyticsId) {
-      trackStepNavigation(1, props.data.groups[0]?.title || "Start", "reset");
+      trackStepNavigation(1, props.data.groups[0]?.title || "Start", "reset")
     }
-    
+
     setActiveStep(0)
     props.setSelectedAnswers([])
   }
@@ -62,15 +62,15 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
 
     // Track page view for Google Analytics
     if (props.data.meta?.googleAnalyticsId) {
-      const currentStepGroup = props.data.groups[activeStep];
-      const pageName = activeStep >= props.data.groups.length 
-        ? "configurator_finished" 
-        : `configurator_step_${activeStep + 1}`;
-      const pageTitle = activeStep >= props.data.groups.length 
-        ? "Price Configurator - Finished" 
-        : `Price Configurator - ${currentStepGroup?.title || `Step ${activeStep + 1}`}`;
-      
-      trackPageView(pageName, pageTitle);
+      const currentStepGroup = props.data.groups[activeStep]
+      const pageName = activeStep >= props.data.groups.length
+        ? "configurator_finished"
+        : `configurator_step_${activeStep + 1}`
+      const pageTitle = activeStep >= props.data.groups.length
+        ? "Price Configurator - Finished"
+        : `Price Configurator - ${currentStepGroup?.title || `Step ${activeStep + 1}`}`
+
+      trackPageView(pageName, pageTitle)
     }
 
     //scroll to top

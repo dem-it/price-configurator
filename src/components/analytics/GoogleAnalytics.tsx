@@ -9,16 +9,18 @@ interface GoogleAnalyticsProps {
 const GoogleAnalytics: React.FC<GoogleAnalyticsProps> = ({ measurementId, initialPageName = "configurator_start" }) => {
   useEffect(() => {
     if (measurementId && measurementId.trim() !== "") {
-      initializeGoogleAnalytics(measurementId);
-      
+      initializeGoogleAnalytics(measurementId)
+
       // Track initial page view
       setTimeout(() => {
-        trackPageView(initialPageName, "Price Configurator - Start");
-      }, 500); // Small delay to ensure gtag is loaded
+        trackPageView(initialPageName, "Price Configurator - Start")
+        // Small delay to ensure gtag is loaded
+      }, 500)
     }
-  }, [measurementId, initialPageName]);
+  }, [measurementId, initialPageName])
 
-  return null; // This component doesn't render anything visible
-};
+  // This component doesn't render anything visible
+  return null
+}
 
-export default GoogleAnalytics;
+export default GoogleAnalytics

@@ -62,11 +62,11 @@ const MultipleQuestion = (props: QuestionProps) => {
             // Track Google Analytics event
             if (props.data.meta?.googleAnalyticsId) {
               trackQuestionInteraction(
-                question.id, 
-                question.title, 
-                'select', 
-                `${answer.title} (${event.target.checked ? 'checked' : 'unchecked'})`
-              );
+                question.id,
+                question.title,
+                "select",
+                `${answer.title} (${event.target.checked ? "checked" : "unchecked"})`
+              )
             }
 
             answersUpdated(answers)

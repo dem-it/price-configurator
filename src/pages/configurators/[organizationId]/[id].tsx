@@ -43,7 +43,7 @@ const ConfiguratorPage = () => {
   if (!configuration || !data)
     return <Loading />
 
-  const googleAnalyticsId = data.meta?.googleAnalyticsId;
+  const googleAnalyticsId = data.meta?.googleAnalyticsId
 
   return (
     <>
