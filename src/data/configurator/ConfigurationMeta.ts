@@ -6,5 +6,6 @@ export default interface ConfigurationMeta {
     language?: string;
     css?: string;
     sendQuoteToCustomer?: boolean;
+    googleAnalyticsId?: string;
 }
 

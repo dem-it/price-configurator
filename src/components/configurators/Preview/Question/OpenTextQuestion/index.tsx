@@ -1,4 +1,5 @@
 import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
+import { trackQuestionInteraction } from "@/utils/googleAnalytics"
 import { Stack, TextField } from "@mui/material"
 import { useEffect, useState } from "react"
 import { QuestionProps } from "../../Properties"
@@ -11,8 +12,17 @@ const OpenTextQuestion = (props: QuestionProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | undefined>(undefined)
 
   const answerSelected = (answerText: string) => {
-
     setSelectedAnswer(answerText)
+
+    // Track Google Analytics event
+    if (props.data.meta?.googleAnalyticsId) {
+      trackQuestionInteraction(
+        question.id, 
+        question.title, 
+        'input', 
+        answerText.length > 0 ? 'text_entered' : 'text_cleared'
+      );
+    }
 
     const answer: SelectedAnswer = {
       questionId: question.id,

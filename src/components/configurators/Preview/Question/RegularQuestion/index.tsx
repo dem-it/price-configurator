@@ -1,6 +1,7 @@
 import { VariantType } from "@/components/configurators/Edit/Question/Variant"
 import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import { formatPrice } from "@/utils/format"
+import { trackQuestionInteraction } from "@/utils/googleAnalytics"
 import { Chip, Grid, Paper, Stack } from "@mui/material"
 import FormControl from "@mui/material/FormControl"
 import InputLabel from "@mui/material/InputLabel"
@@ -22,8 +23,18 @@ const RegularQuestion = (props: QuestionProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
 
   const answerSelected = (answerId: string) => {
-
     setSelectedAnswer(answerId)
+
+    // Track Google Analytics event
+    if (props.data.meta?.googleAnalyticsId) {
+      const selectedAnswerObj = question.answers.find(a => a.id === answerId);
+      trackQuestionInteraction(
+        question.id, 
+        question.title, 
+        'select', 
+        selectedAnswerObj?.title || answerId
+      );
+    }
 
     const answer: SelectedAnswer = {
       questionId: question.id,

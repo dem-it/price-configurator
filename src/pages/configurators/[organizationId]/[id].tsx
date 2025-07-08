@@ -1,5 +1,6 @@
 "use client"
 import { ConfigurationDto } from "@/api/tables/ConfigurationDto"
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics"
 import Preview from "@/components/configurators/Preview"
 import Loading from "@/components/display/Loading"
 import ConfigurationData from "@/data/configurator/ConfigurationData"
@@ -42,7 +43,16 @@ const ConfiguratorPage = () => {
   if (!configuration || !data)
     return <Loading />
 
-  return <Preview configuration={configuration} data={data} />
+  const googleAnalyticsId = data.meta?.googleAnalyticsId;
+
+  return (
+    <>
+      {googleAnalyticsId && (
+        <GoogleAnalytics measurementId={googleAnalyticsId} />
+      )}
+      <Preview configuration={configuration} data={data} />
+    </>
+  )
 }
 
 export default ConfiguratorPage

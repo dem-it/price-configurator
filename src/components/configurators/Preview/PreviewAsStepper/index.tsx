@@ -1,4 +1,5 @@
 import Loading from "@/components/display/Loading"
+import { trackPageView, trackStepNavigation } from "@/utils/googleAnalytics"
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft"
 import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import { Box, Button, Stack, Step, StepLabel, Stepper } from "@mui/material"
@@ -19,9 +20,36 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
   const [currentGroup, setCurrentGroup] = useState(props.data.groups[activeStep])
   const [canGoNext, setCanGoNext] = useState(false)
 
-  const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1)
-  const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  const handleNext = () => {
+    const nextStep = activeStep + 1;
+    const nextGroup = props.data.groups[nextStep];
+    
+    // Track step navigation
+    if (props.data.meta?.googleAnalyticsId) {
+      trackStepNavigation(nextStep + 1, nextGroup?.title || "Finished", "next");
+    }
+    
+    setActiveStep(nextStep);
+  }
+  
+  const handleBack = () => {
+    const prevStep = activeStep - 1;
+    const prevGroup = props.data.groups[prevStep];
+    
+    // Track step navigation
+    if (props.data.meta?.googleAnalyticsId) {
+      trackStepNavigation(prevStep + 1, prevGroup?.title || "Start", "back");
+    }
+    
+    setActiveStep(prevStep);
+  }
+  
   const handleReset = () => {
+    // Track reset action
+    if (props.data.meta?.googleAnalyticsId) {
+      trackStepNavigation(1, props.data.groups[0]?.title || "Start", "reset");
+    }
+    
     setActiveStep(0)
     props.setSelectedAnswers([])
   }
@@ -32,11 +60,24 @@ const PreviewAsStepper = (props: PreviewPropsWithAnswers) => {
       return
     setPreviousActiveStep(activeStep)
 
+    // Track page view for Google Analytics
+    if (props.data.meta?.googleAnalyticsId) {
+      const currentStepGroup = props.data.groups[activeStep];
+      const pageName = activeStep >= props.data.groups.length 
+        ? "configurator_finished" 
+        : `configurator_step_${activeStep + 1}`;
+      const pageTitle = activeStep >= props.data.groups.length 
+        ? "Price Configurator - Finished" 
+        : `Price Configurator - ${currentStepGroup?.title || `Step ${activeStep + 1}`}`;
+      
+      trackPageView(pageName, pageTitle);
+    }
+
     //scroll to top
     window.scrollTo(0, 0)
     // post to the parent window that the step is changed
     window.top?.postMessage("price-configurator-step-changed", "*")
-  }, [activeStep])
+  }, [activeStep, props.data.meta?.googleAnalyticsId, props.data.groups])
 
   useEffect(() => {
     setCurrentGroup(props.data.groups[activeStep])

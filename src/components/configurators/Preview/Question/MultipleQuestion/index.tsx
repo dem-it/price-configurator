@@ -1,5 +1,6 @@
 import SelectedAnswer from "@/data/configurator/selection/SelectedAnswer"
 import { formatPrice } from "@/utils/format"
+import { trackQuestionInteraction } from "@/utils/googleAnalytics"
 import { Checkbox, Chip, FormControlLabel, Stack } from "@mui/material"
 import { useEffect, useState } from "react"
 import { QuestionProps } from "../../Properties"
@@ -56,6 +57,16 @@ const MultipleQuestion = (props: QuestionProps) => {
             const answers = selectedAnswers.filter(x => x !== answer.id)
             if (event.target.checked) {
               answers.push(answer.id)
+            }
+
+            // Track Google Analytics event
+            if (props.data.meta?.googleAnalyticsId) {
+              trackQuestionInteraction(
+                question.id, 
+                question.title, 
+                'select', 
+                `${answer.title} (${event.target.checked ? 'checked' : 'unchecked'})`
+              );
             }
 
             answersUpdated(answers)

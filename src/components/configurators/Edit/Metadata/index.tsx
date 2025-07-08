@@ -2,6 +2,7 @@ import { Box, Grid, Link, Paper, Tab, Tabs } from "@mui/material"
 import Stack from "@mui/material/Stack"
 import { useState } from "react"
 import { GroupsProps } from "../Properties"
+import ConfiguratorGoogleAnalytics from "./ConfiguratorGoogleAnalytics"
 import ConfiguratorLanguage from "./ConfiguratorLanguage"
 import ConfiguratorStyle from "./ConfiguratorStyle"
 import ConfigureQuoteRequest from "./ConfigureQuoteRequest"
@@ -96,7 +97,11 @@ const Metadata = (props: GroupsProps) => {
           </Stack>
         )}
         {tabIndex === TabIndexes.Settings.Index && (
-          <ConfiguratorLanguage {...props} />
+          <Stack spacing={3}>
+            <ConfiguratorLanguage {...props} />
+            <hr />
+            <ConfiguratorGoogleAnalytics {...props} />
+          </Stack>
         )}
         {tabIndex === TabIndexes.RequestAQuote.Index && (
           <ConfigureQuoteRequest {...props} />
