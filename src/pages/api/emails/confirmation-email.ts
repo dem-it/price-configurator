@@ -90,8 +90,9 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse, brev
     await client.transactionalEmails.sendTransacEmail(msg)
     return res.status(200).json({ message: "Email sent successfully!" })
   } catch (error: any) {
+    const errorMessage = error.response?.body?.message  + " ___ " + error.message
     console.error("Brevo send failed:", error.response?.body ?? error)
-    return res.status(500).json({ error: "Failed to send email." })
+    return res.status(500).json({ error: "Failed to send email. " + errorMessage })
   }
 }
 
