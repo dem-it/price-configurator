@@ -43,7 +43,7 @@ const handlePostRequest = async (req: NextApiRequest, res: NextApiResponse, brev
   const msg: any = {
     sender: {
       email: fromEmail,
-      name: "Vanqo"
+      name: "VANQO camperbouw"
     },
     to: [
       {
